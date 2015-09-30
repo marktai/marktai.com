@@ -1,6 +1,8 @@
 # This is a TOML document. Boom.
 
 title = "Test2"
+subtitle = "Bacon Ipsum"
+author = "GunGeekATX"
 created = 1978-05-27T07:32:00-08:00 # First class dates? Why not
 modified = 1979-05-27T07:32:00-08:00 # First class dates? Why not?
 content = [

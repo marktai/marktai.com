@@ -1,0 +1,10 @@
+# This is a TOML document. Boom.
+
+title = "Writing a Website"
+subtitle = "It was a bit harder than I thought it was"
+author = "Mark Tai"
+created = 2015-09-30T15:38:17-08:00# First class dates? Why not
+modified = 2015-09-30T15:38:17-08:00 # First class dates? Why not?
+content = [
+  "This is the first project I've done pretty much entirely by myself.  I chose the whole stack that I used and made all the large decisions.  This is cool.",
+]

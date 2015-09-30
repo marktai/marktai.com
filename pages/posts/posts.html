@@ -1,13 +1,13 @@
 <!-- Page Header -->
 <!-- Set your background image for this header on the line below. -->
-<header class="intro-header" style="background-image: url('img/contact-bg.jpg')">
+<header class="intro-header" style="background-image: url('img/post-bg.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="page-heading">
-                    <h1>Contact Me</h1>
+                    <h1 ng-bind="postData['Title']"></h1>
                     <hr class="small">
-                    <span class="subheading">Have questions?</span>
+                    <span class="subheading" ng-bind="postData['Subtitle']"></span>
                 </div>
             </div>
         </div>
@@ -15,10 +15,16 @@
 </header>
 
 <!-- Main Content -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <p>You can email me at me(at)marktai(dot)com, or click on the buttons below.</p>
+
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div ng-repeat = "paragraph in postData['Content']">
+                        <p>{{paragraph}}</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
+    </article>

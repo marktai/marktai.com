@@ -12,11 +12,25 @@ import (
 	"time"
 )
 
+type PostInfo struct {
+	Title    string
+	Subtitle string
+	Author   string
+	Created  time.Time
+	Modified time.Time
+}
+
 type Post struct {
 	Title    string
+	Subtitle string
+	Author   string
 	Created  time.Time
 	Modified time.Time
 	Content  []string
+}
+
+func (p Post) Info() PostInfo {
+	return PostInfo{p.Title, p.Subtitle, p.Author, p.Created, p.Modified}
 }
 
 type postSlice []*Post
@@ -26,7 +40,7 @@ func (p postSlice) Len() int {
 }
 
 func (p postSlice) Less(i, j int) bool {
-	return p[i].Created.Before(p[j].Created)
+	return p[i].Created.After(p[j].Created)
 }
 
 func (p postSlice) Swap(i, j int) {
