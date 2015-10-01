@@ -1,7 +1,7 @@
 # This is a TOML document. Boom.
 
 title = "Writing a Website"
-subtitle = "It was a bit harder than I thought it was"
+subtitle = "It was a bit harder than I thought it would be"
 author = "Mark Tai"
 created = 2015-09-30T15:38:17-08:00# First class dates? Why not
 modified = 2015-09-30T15:38:17-08:00 # First class dates? Why not?

@@ -65,7 +65,7 @@ func GetPostList() []string {
 		i += 1
 	}
 
-	sort.Sort(posts)
+	sort.Stable(posts)
 
 	postTitles := make([]string, len(posts))
 	for i, post := range posts {

@@ -11,5 +11,19 @@ myapp.controller("PostsCtl", ["$scope", "$rootScope", "$http", "$location", func
 		})
 	}
 
+	$scope.generateTag = function() {
+		var retStr = "Posted"
+		if ($scope.postData["Author"] !== "") {
+			retStr += " by " + $scope.postData["Author"]
+		}
+		if ($scope.postData["Created"] !== "") {
+			retStr += " on " + new Date($scope.postData["Created"]).toDateString()
+		}
+		if (retStr == "Posted") {
+			return ""
+		}
+		return retStr
+	}
+
 	getPost($scope.post)
 }])
