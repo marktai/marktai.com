@@ -22,10 +22,10 @@ myapp.config(function($routeProvider, $locationProvider) {
       controller : "PostsCtl"
     })
 
-    // .when('/about', {
-    //   templateUrl : '/pages/about/about.html',
-    //   controller : "HomeCtl"
-    // })
+    .when('/about', {
+         templateUrl : '/pages/about/about.html',
+         controller : "AboutCtl"
+    })
 
     .when('/contact', {
       templateUrl : '/pages/contact/contact.html',
