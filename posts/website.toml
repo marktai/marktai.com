@@ -1,10 +1,9 @@
-# This is a TOML document. Boom.
-
-title = "Writing a Website"
-subtitle = "It was a bit harder than I thought it would be"
+title = "Making a Website"
+subtitle = "It was a bit harder than I thought"
 author = "Mark Tai"
-created = 2015-09-30T15:38:17-08:00# First class dates? Why not
-modified = 2015-09-30T15:38:17-08:00 # First class dates? Why not?
+created = 2015-09-30T15:38:17-08:00
+modified = 2015-09-30T15:38:17-08:00
 content = [
-  "This is the first project I've done pretty much entirely by myself.  I chose the whole stack that I used and made all the large decisions.  This is cool.",
+  "This is by far the largest adventure I've ever started by myself.  Typically, I work with partners and we decide together on the stack and the major implementation parts.  This time, only I decided which cool features I wanted and which corners I cut.  I had total authority to prioritize setting up the email server before an actual website, so I could use me@marktai.com as soon as possible.  Doing things by myself was both daunting and exhilarating.  ",
+  "I learned how to build a modern website this summer (2015) during my summer internship at Ooyala.  My first few weeks I was flailing around and just trying to get a simple HTTP login to work.  Over time, "
 ]

@@ -26,4 +26,7 @@ myapp.controller("PostsCtl", ["$scope", "$rootScope", "$http", "$location", func
 	}
 
 	getPost($scope.post)
+
+
+	console.log($scope.postData)
 }])

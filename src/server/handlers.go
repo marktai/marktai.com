@@ -49,5 +49,5 @@ func getInfo(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	info := (*post).Info()
-	WriteJson(w, map[string]posts.PostInfo{vars["Title"]: info})
+	WriteJson(w, map[string]posts.PostInfo{"Info": info})
 }
