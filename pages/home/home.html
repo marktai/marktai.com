@@ -1,6 +1,4 @@
-
 <!-- Page Header -->
-<!-- Set your background image for this header on the line below. -->
 <header class="intro-header" style="background-image: url('img/home-bg.jpg')">
     <div class="container">
         <div class="row">
@@ -32,7 +30,7 @@
                     </a>
                     <p class="post-meta">{{generateTag(post)}}</p>
                 </div>
-                <hr>
+                <hr ng-hide = "post === posts[posts.length-1]">
             </div>
 
         </div>
