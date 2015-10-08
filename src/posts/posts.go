@@ -14,6 +14,7 @@ import (
 
 type PostInfo struct {
 	Title    string
+	Ignore   bool
 	Subtitle string
 	Author   string
 	Created  time.Time
@@ -22,15 +23,17 @@ type PostInfo struct {
 
 type Post struct {
 	Title    string
+	Ignore   bool
 	Subtitle string
 	Author   string
+	Image    string
 	Created  time.Time
 	Modified time.Time
 	Content  []string
 }
 
 func (p Post) Info() PostInfo {
-	return PostInfo{p.Title, p.Subtitle, p.Author, p.Created, p.Modified}
+	return PostInfo{p.Title, p.Ignore, p.Subtitle, p.Author, p.Created, p.Modified}
 }
 
 type postSlice []*Post
@@ -123,12 +126,15 @@ func readFolder(path string) error {
 	}
 
 	for _, file := range files {
-		if !strings.HasSuffix(file.Name(), ".toml") || file.IsDir() {
+		if !strings.HasSuffix(file.Name(), ".toml") || file.IsDir() || file.Name()[0] == '.' {
 			continue
 		}
 		post, err := readPostFile(path + "/" + file.Name())
 		if err != nil {
 			log.Println(err)
+			continue
+		}
+		if post.Ignore {
 			continue
 		}
 		if _, ok := tempPostMap[post.Title]; !ok {
