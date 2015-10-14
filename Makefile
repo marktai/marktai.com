@@ -10,4 +10,4 @@ update:
 
 server: init
 	go build -o bin/main src/main/main.go 
-	bin/main > Log.txt
+	bin/main >> log.txt

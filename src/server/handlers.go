@@ -6,6 +6,7 @@ import (
 	_ "log"
     "desktopIP"
 	"net/http"
+    "net"
 	"posts"
 	"strconv"
 )
@@ -57,6 +58,9 @@ func getInfo(w http.ResponseWriter, r *http.Request) {
 func getIP(w http.ResponseWriter, r *http.Request) {
 	
 	ip := desktopIP.Get()
+    if ip == nil {
+        ip = net.ParseIP("0.0.0.0")
+    }
 	fmt.Fprint(w, ip.String())
 }
 
