@@ -20,8 +20,12 @@ func Run(port uint16) {
 	r := mux.NewRouter()
 	r.HandleFunc("/posts", getPostList)
 	r.HandleFunc("/posts/{Title}", getPost)
-	r.HandleFunc("/posts/{Title}/paragraph/{id:[0-9]+}", getParagraph)
-	r.HandleFunc("/posts/{Title}/info", getInfo)
+	r.HandleFunc("/posts/{Title}/paragraph/{id:[0-9]+}", getParagraph).Methods("GET")
+	r.HandleFunc("/posts/{Title}/info", getInfo).Methods("GET")
+    r.HandleFunc("/desktopIP", getIP).Methods("GET")
+    r.HandleFunc("/desktopIP", setIP).Methods("POST")
+    r.HandleFunc("/desktopIP", clearIP).Methods("DELETE")
+
 	for {
 		log.Printf("Running at 0.0.0.0:%d\n", port)
 		log.Println(http.ListenAndServe(fmt.Sprintf("0.0.0.0:%d", port), r))
