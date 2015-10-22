@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"github.com/gorilla/mux"
 	_ "log"
+    "desktopIP"
 	"net/http"
+    "net"
 	"posts"
 	"strconv"
 )
@@ -50,4 +52,25 @@ func getInfo(w http.ResponseWriter, r *http.Request) {
 	}
 	info := (*post).Info()
 	WriteJson(w, map[string]posts.PostInfo{"Info": info})
+}
+
+
+func getIP(w http.ResponseWriter, r *http.Request) {
+	
+	ip := desktopIP.Get()
+    if ip == nil {
+        ip = net.ParseIP("0.0.0.0")
+    }
+	fmt.Fprint(w, ip.String())
+}
+
+func setIP(w http.ResponseWriter, r *http.Request) {
+    stringIP := r.FormValue("IP")
+    desktopIP.Set(stringIP)
+    fmt.Fprint(w, "Set")
+}
+
+func clearIP(w http.ResponseWriter, r *http.Request) {
+    desktopIP.Clear()
+    fmt.Fprint(w, "Cleared")
 }
