@@ -1,13 +1,17 @@
 export GOPATH := $(shell pwd)
-default: server
+default: build
 
 init:
-	rm bin/main
-	cd src/main && go get
+	@rm -f bin/main
+	@cd src/main && go get
 
 update: 
 	ssh ubuntu@$(INSTANCE) cd /opt/www/marktai.com && git pull && make server
 
-server: init
-	go build -o bin/main src/main/main.go 
-	go run src/main/main.go
+
+build: init
+	@go build -o bin/main src/main/main.go 
+
+run: build
+	bin/main
+
