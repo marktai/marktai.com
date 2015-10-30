@@ -1,2 +1,5 @@
 pkg
 github.com
+bin/*
+upload
+log.txt
