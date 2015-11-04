@@ -66,7 +66,7 @@ func getIP(w http.ResponseWriter, r *http.Request) {
 func setIP(w http.ResponseWriter, r *http.Request) {
 	stringIP := r.FormValue("IP")
 	desktopIP.Set(stringIP)
-	fmt.Fprint(w, "Set")
+	fmt.Fprint(w, stringIP)
 }
 
 func clearIP(w http.ResponseWriter, r *http.Request) {
