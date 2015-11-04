@@ -1,20 +1,30 @@
 package desktopIP
 
-import(
-    "net"
+import (
+	"net"
 )
 
-var desktopIP net.IP
+var desktopIPs [5]net.IP
+var cur = -1
 
 func Set(stringIP string) {
-    desktopIP = net.ParseIP(stringIP)
+	desktopIPs[cur+1] = net.ParseIP(stringIP)
+	cur = (cur + 1) % 5
 }
 
 func Get() net.IP {
-    return desktopIP
+	return desktopIPs[cur]
 }
 
 func Clear() {
-    desktopIP = nil
+	for i, _ := range desktopIPs {
+		desktopIPs[i] = nil
+	}
 }
 
+func Revert() {
+	cur = cur - 1
+	if cur < 0 {
+		cur += 5
+	}
+}

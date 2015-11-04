@@ -1,12 +1,12 @@
 package server
 
 import (
+	"desktopIP"
 	"fmt"
 	"github.com/gorilla/mux"
 	_ "log"
-    "desktopIP"
+	"net"
 	"net/http"
-    "net"
 	"posts"
 	"strconv"
 )
@@ -54,23 +54,27 @@ func getInfo(w http.ResponseWriter, r *http.Request) {
 	WriteJson(w, map[string]posts.PostInfo{"Info": info})
 }
 
-
 func getIP(w http.ResponseWriter, r *http.Request) {
-	
+
 	ip := desktopIP.Get()
-    if ip == nil {
-        ip = net.ParseIP("0.0.0.0")
-    }
+	if ip == nil {
+		ip = net.ParseIP("0.0.0.0")
+	}
 	fmt.Fprint(w, ip.String())
 }
 
 func setIP(w http.ResponseWriter, r *http.Request) {
-    stringIP := r.FormValue("IP")
-    desktopIP.Set(stringIP)
-    fmt.Fprint(w, "Set")
+	stringIP := r.FormValue("IP")
+	desktopIP.Set(stringIP)
+	fmt.Fprint(w, "Set")
 }
 
 func clearIP(w http.ResponseWriter, r *http.Request) {
-    desktopIP.Clear()
-    fmt.Fprint(w, "Cleared")
+	desktopIP.Clear()
+	fmt.Fprint(w, "Cleared")
+}
+
+func revertIP(w http.ResponseWriter, r *http.Request) {
+	desktopIP.Revert()
+	fmt.Fprint(w, "Reverted")
 }
