@@ -63,8 +63,13 @@ func getIP(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, ip.String())
 }
 
-func setIP(w http.ResponseWriter, r *http.Request) {
+func postIP(w http.ResponseWriter, r *http.Request) {
 	stringIP := r.FormValue("IP")
+	if stringIP == "-1" {
+		desktopIP.Revert()
+		fmt.Fprint(w, "Reverted")
+		return
+	}
 	desktopIP.Set(stringIP)
 	fmt.Fprint(w, stringIP)
 }
@@ -72,9 +77,4 @@ func setIP(w http.ResponseWriter, r *http.Request) {
 func clearIP(w http.ResponseWriter, r *http.Request) {
 	desktopIP.Clear()
 	fmt.Fprint(w, "Cleared")
-}
-
-func revertIP(w http.ResponseWriter, r *http.Request) {
-	desktopIP.Revert()
-	fmt.Fprint(w, "Reverted")
 }

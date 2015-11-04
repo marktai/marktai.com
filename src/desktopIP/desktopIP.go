@@ -5,7 +5,7 @@ import (
 )
 
 var desktopIPs [5]net.IP
-var cur = -1
+var cur = 0
 
 func Set(stringIP string) {
 	desktopIPs[cur+1] = net.ParseIP(stringIP)
