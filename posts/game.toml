@@ -4,7 +4,7 @@ subtitle = "Tic Tac Toe Squared, T9 for short"
 author = "Mark Tai"
 image = "img/bacon-bg.jpg"
 created = 2015-11-25T15:36:00-08:00
-modified = 2015-11-25T015:36:00-08:00
+modified = 2015-11-25T15:36:00-08:00
 content = [
   "I was paying $70 a year for AWS and my website wasn't really doing much with it.  I used it for some small things, like storing my desktop's IP address so I could SSH into it and hosting my resume, but I wasn't really using it much beyond static files.  I wanted to get more into databases and how to interact with them, so I implemented one of my favorite simple turn based games.  Meta Tic Tac Toe, Tic Tac Toe Squared, or T9 as I named it in my source files is an adaptation of Tic Tac Toe where it adds a larger board.  Below is a sample game: ",
   "%img",
