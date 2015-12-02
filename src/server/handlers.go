@@ -104,8 +104,6 @@ func renderImage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.WriteHeader(302)
-	w.Header().Add("Location", "http://www.marktai.com/upload/"+name)
 	WriteJson(w, map[string]interface{}{"StdOut": stdOut, "StdErr": stdErr})
 
 }
@@ -132,8 +130,10 @@ func renderImageGet(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.WriteHeader(302)
-	w.Header().Add("Location", "http://www.marktai.com/upload/"+name)
-	WriteJson(w, map[string]interface{}{"StdOut": stdOut, "StdErr": stdErr})
+	http.Redirect(w, r, "http://www.marktai.com/upload/"+name, 302)
+
+	// w.WriteHeader(302)
+	// w.Header().Add("Location", "http://www.marktai.com/upload/"+name)
+	// WriteJson(w, map[string]interface{}{"StdOut": stdOut, "StdErr": stdErr})
 
 }
