@@ -101,6 +101,7 @@ func renderImage(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.WriteHeader(500)
 		WriteJson(w, map[string]interface{}{"StdOut": stdOut, "StdErr": stdErr, "Error": err.Error()})
+		return
 	}
 
 	w.WriteHeader(302)
@@ -128,6 +129,7 @@ func renderImageGet(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		w.WriteHeader(500)
 		WriteJson(w, map[string]interface{}{"StdOut": stdOut, "StdErr": stdErr, "Error": err.Error()})
+		return
 	}
 
 	w.WriteHeader(302)
