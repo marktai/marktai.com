@@ -95,7 +95,7 @@ func renderImage(w http.ResponseWriter, r *http.Request) {
 	}
 	name := nameSlice[0]
 
-	filePath := "/home/mark/repos/marktai.com/upload/" + name
+	filePath := "/home/ubuntu/repos/marktai.com/upload/" + name
 
 	stdOut, stdErr, err := render.Image(inputUrl, filePath)
 	if err != nil {
@@ -103,5 +103,35 @@ func renderImage(w http.ResponseWriter, r *http.Request) {
 		WriteJson(w, map[string]interface{}{"StdOut": stdOut, "StdErr": stdErr, "Error": err.Error()})
 	}
 
+	w.WriteHeader(302)
+	w.Header().Add("Location", "http://www.marktai.com/upload/"+name)
 	WriteJson(w, map[string]interface{}{"StdOut": stdOut, "StdErr": stdErr})
+
+}
+
+func renderImageGet(w http.ResponseWriter, r *http.Request) {
+	inputUrl := r.FormValue("URL")
+	if inputUrl == "" {
+		WriteError(w, "No URL query provided", 400)
+		return
+	}
+
+	name := r.FormValue("Name")
+	if name == "" {
+		WriteError(w, "No Name query provided", 400)
+		return
+	}
+
+	filePath := "/home/ubuntu/repos/marktai.com/upload/" + name
+
+	stdOut, stdErr, err := render.Image(inputUrl, filePath)
+	if err != nil {
+		w.WriteHeader(500)
+		WriteJson(w, map[string]interface{}{"StdOut": stdOut, "StdErr": stdErr, "Error": err.Error()})
+	}
+
+	w.WriteHeader(302)
+	w.Header().Add("Location", "http://www.marktai.com/upload/"+name)
+	WriteJson(w, map[string]interface{}{"StdOut": stdOut, "StdErr": stdErr})
+
 }
