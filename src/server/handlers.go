@@ -112,13 +112,13 @@ func renderImage(w http.ResponseWriter, r *http.Request) {
 func renderImageGet(w http.ResponseWriter, r *http.Request) {
 	inputUrl := r.FormValue("URL")
 	if inputUrl == "" {
-		WriteError(w, "No URL query provided", 400)
+		WriteErrorString(w, "No URL query provided", 400)
 		return
 	}
 
 	name := r.FormValue("Name")
 	if name == "" {
-		WriteError(w, "No Name query provided", 400)
+		WriteErrorString(w, "No Name query provided", 400)
 		return
 	}
 
