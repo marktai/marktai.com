@@ -4,10 +4,10 @@ import (
 	"desktopIP"
 	"fmt"
 	"github.com/gorilla/mux"
-	_ "log"
 	"net"
 	"net/http"
 	"posts"
+	"render"
 	"strconv"
 )
 
@@ -77,4 +77,31 @@ func postIP(w http.ResponseWriter, r *http.Request) {
 func clearIP(w http.ResponseWriter, r *http.Request) {
 	desktopIP.Clear()
 	fmt.Fprint(w, "Cleared")
+}
+
+func renderImage(w http.ResponseWriter, r *http.Request) {
+	urlSlice, ok := r.Header["Url"]
+	if !ok || urlSlice == nil || len(urlSlice) == 0 {
+		WriteErrorString(w, "No URL header provided", 400)
+		return
+	}
+	inputUrl := urlSlice[0]
+
+	nameSlice, ok := r.Header["Name"]
+	if !ok || nameSlice == nil || len(nameSlice) == 0 {
+		// nameSlice = []string{inputUrl}
+		WriteErrorString(w, "No Name header provided", 400)
+		return
+	}
+	name := nameSlice[0]
+
+	filePath := "/home/mark/repos/marktai.com/upload/" + name
+
+	stdOut, stdErr, err := render.Image(inputUrl, filePath)
+	if err != nil {
+		w.WriteHeader(500)
+		WriteJson(w, map[string]interface{}{"StdOut": stdOut, "StdErr": stdErr, "Error": err.Error()})
+	}
+
+	WriteJson(w, map[string]interface{}{"StdOut": stdOut, "StdErr": stdErr})
 }

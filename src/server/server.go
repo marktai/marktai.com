@@ -18,13 +18,15 @@ func Run(port uint16) {
 	//log.Println("Took %s", time.Now().Sub(start))
 	//log.Println(post)
 	r := mux.NewRouter()
-	r.HandleFunc("/posts", getPostList)
-	r.HandleFunc("/posts/{Title}", getPost)
+	r.HandleFunc("/posts", getPostList).Methods("GET")
+	r.HandleFunc("/posts/{Title}", getPost).Methods("GET")
 	r.HandleFunc("/posts/{Title}/paragraph/{id:[0-9]+}", getParagraph).Methods("GET")
 	r.HandleFunc("/posts/{Title}/info", getInfo).Methods("GET")
 	r.HandleFunc("/desktopIP", getIP).Methods("GET")
 	r.HandleFunc("/desktopIP", postIP).Methods("POST")
 	r.HandleFunc("/desktopIP", clearIP).Methods("DELETE")
+
+	r.HandleFunc("/renderImage", renderImage).Methods("POST")
 
 	for {
 		log.Printf("Running at 0.0.0.0:%d\n", port)
