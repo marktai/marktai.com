@@ -27,7 +27,7 @@ func Image(url, filePath string, height, width int) (string, string, error) {
 
 	defer f.Close()
 
-	line := url + " took " + elapsed.String()
+	line := url + " took " + elapsed.String() + "\n"
 
 	_, _ = f.WriteString(line)
 	return stdOut.String(), stdErr.String(), err
