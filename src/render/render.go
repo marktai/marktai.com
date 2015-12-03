@@ -2,8 +2,10 @@ package render
 
 import (
 	"bytes"
+	"os"
 	"os/exec"
 	"strconv"
+	"time"
 )
 
 func Image(url, filePath string, height, width int) (string, string, error) {
@@ -12,7 +14,21 @@ func Image(url, filePath string, height, width int) (string, string, error) {
 	var stdErr bytes.Buffer
 	cmd.Stdout = &stdOut
 	cmd.Stderr = &stdErr
+
+	start := time.Now()
 	err := cmd.Run()
 
+	elapsed := start.Sub(time.Now())
+
+	f, err := os.Create("/home/ubuntu/repos/marktai.com/upload/timings")
+	if err != nil {
+		return stdOut.String(), stdErr.String(), err
+	}
+
+	defer f.Close()
+
+	line := url + " took " + elapsed.String()
+
+	_, _ = f.WriteString(line)
 	return stdOut.String(), stdErr.String(), err
 }
