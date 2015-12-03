@@ -9,7 +9,9 @@ import (
 )
 
 func Image(url, filePath string, height, width int) (string, string, error) {
-	cmd := exec.Command("/usr/local/bin/wkhtmltoimage", "--height", strconv.Itoa(height), "--width", strconv.Itoa(width), url, filePath)
+	heightString := strconv.Itoa(height)
+	widthString := strconv.Itoa(width)
+	cmd := exec.Command("/usr/local/bin/wkhtmltoimage", "--height", heightString, "--width", widthString, url, filePath)
 	var stdOut bytes.Buffer
 	var stdErr bytes.Buffer
 	cmd.Stdout = &stdOut
@@ -27,7 +29,7 @@ func Image(url, filePath string, height, width int) (string, string, error) {
 
 	defer f.Close()
 
-	line := url + " took " + elapsed.String() + "\n"
+	line := url + "@" + widthString + "x" + heightString + " took " + elapsed.String() + "\n"
 
 	_, _ = f.WriteString(line)
 	return stdOut.String(), stdErr.String(), err
