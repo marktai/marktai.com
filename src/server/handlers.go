@@ -95,7 +95,7 @@ func clearIP(w http.ResponseWriter, r *http.Request) {
 // 	}
 // 	name := nameSlice[0]
 
-// 	filePath := "/home/ubuntu/repos/marktai.com/upload/" + name
+// 	filePath := "/home/ubuntu/repos/marktai.com/upload/screenshots/" + name
 
 // 	stdOut, stdErr, err := render.Image(inputUrl, filePath)
 // 	if err != nil {
@@ -130,7 +130,7 @@ func renderImageGet(w http.ResponseWriter, r *http.Request) {
 		width = 0
 	}
 
-	filePath := "/home/ubuntu/repos/marktai.com/upload/" + name
+	filePath := "/home/ubuntu/repos/marktai.com/upload/screenshots/" + name
 
 	stdOut, stdErr, err := render.Image(inputUrl, filePath, height, width)
 	if err != nil {
@@ -139,7 +139,7 @@ func renderImageGet(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	http.Redirect(w, r, "http://www.marktai.com/upload/"+name, 302)
+	http.Redirect(w, r, "http://www.marktai.com/upload/screenshots/"+name, 302)
 
 	// w.WriteHeader(302)
 	// w.Header().Add("Location", "http://www.marktai.com/upload/"+name)
