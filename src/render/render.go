@@ -20,7 +20,7 @@ func Image(url, filePath string, height, width int) (string, string, error) {
 
 	elapsed := time.Now().Sub(start)
 
-	f, err := os.OpenFile("/home/ubuntu/repos/marktai.com/upload/timings.txt", , os.O_APPEND|os.O_WRONLY, 0666)
+	f, err := os.OpenFile("/home/ubuntu/repos/marktai.com/upload/timings.txt", os.O_APPEND|os.O_WRONLY, 0666)
 	if err != nil {
 		return stdOut.String(), stdErr.String(), err
 	}
