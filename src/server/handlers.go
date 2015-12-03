@@ -130,7 +130,7 @@ func renderImageGet(w http.ResponseWriter, r *http.Request) {
 		width = 0
 	}
 
-	filePath := "/home/mark/repos/marktai.com/upload/" + name
+	filePath := "/home/ubuntu/repos/marktai.com/upload/" + name
 
 	stdOut, stdErr, err := render.Image(inputUrl, filePath, height, width)
 	if err != nil {
