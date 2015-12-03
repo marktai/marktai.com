@@ -26,7 +26,7 @@ func Run(port uint16) {
 	r.HandleFunc("/desktopIP", postIP).Methods("POST")
 	r.HandleFunc("/desktopIP", clearIP).Methods("DELETE")
 
-	r.HandleFunc("/renderImage", renderImage).Methods("POST")
+	// r.HandleFunc("/renderImage", renderImage).Methods("POST")
 	r.HandleFunc("/renderImage", renderImageGet).Methods("GET")
 
 	for {
