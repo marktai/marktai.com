@@ -18,7 +18,7 @@ func Image(url, filePath string, height, width int) (string, string, error) {
 	start := time.Now()
 	err := cmd.Run()
 
-	elapsed := start.Sub(time.Now())
+	elapsed := time.Now().Sub(start)
 
 	f, err := os.Create("/home/ubuntu/repos/marktai.com/upload/timings.txt")
 	if err != nil {
