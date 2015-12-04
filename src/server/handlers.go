@@ -108,6 +108,35 @@ func clearIP(w http.ResponseWriter, r *http.Request) {
 
 // }
 
+func renderPDFGet(w http.ResponseWriter, r *http.Request) {
+	inputUrl := r.FormValue("URL")
+	if inputUrl == "" {
+		WriteErrorString(w, "No URL query provided", 400)
+		return
+	}
+
+	name := r.FormValue("Name")
+	if name == "" {
+		WriteErrorString(w, "No Name query provided", 400)
+		return
+	}
+
+	filePath := "/home/ubuntu/repos/marktai.com/upload/screenshots/" + name
+
+	stdOut, stdErr, err := render.PDF(inputUrl, filePath)
+	if err != nil {
+		w.WriteHeader(500)
+		WriteJson(w, map[string]interface{}{"StdOut": stdOut, "StdErr": stdErr, "Error": err.Error()})
+		return
+	}
+
+	http.Redirect(w, r, "http://www.marktai.com/upload/screenshots/"+name, 302)
+
+	// w.WriteHeader(302)
+	// w.Header().Add("Location", "http://www.marktai.com/upload/"+name)
+	// WriteJson(w, map[string]interface{}{"StdOut": stdOut, "StdErr": stdErr})
+
+}
 func renderImageGet(w http.ResponseWriter, r *http.Request) {
 	inputUrl := r.FormValue("URL")
 	if inputUrl == "" {
