@@ -1,0 +1,13 @@
+title = "Jess is Awesome"
+ignore = false
+subtitle = "She's totally gonna ace her finals then ace harvey mudd then just ace everything"
+author = "Mark Tai"
+image = "upload/awesome.jpg"
+created = 2015-12-13T07:46:00-08:00
+modified = 2000-05-27T07:32:00-08:00
+content = [
+  "See this girl here?",
+  "<img src='upload/jess_and_mark.jpg'>",
+  "She is awesome.  And for some reason the guy on her right is lucky enough to have her.",
+  "She has no need to worry about grades or that bullcrap because she's going to do well no matter what happens in school."
+]
