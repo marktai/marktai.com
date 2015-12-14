@@ -8,7 +8,7 @@ myapp.controller("PostsCtl", ["$scope", "$rootScope", "$http", "$location", "$sc
 	var getPost = function(post) {
 		$http.get('/api/posts/' + post).then(function(result){ 
 			$scope.postData = result.data["Post"]
-            for (var par in $scope.postData.Content) {
+            for (var par of $scope.postData.Content) {
                 $scope.pars.push($sce.trustAsHtml(par))
             }
 
