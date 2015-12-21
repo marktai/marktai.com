@@ -2,15 +2,12 @@ export GOPATH := $(shell pwd)
 default: build
 
 init:
-update: 
-	ssh ubuntu@$(INSTANCE) cd /opt/www/marktai.com && git pull && make server &
+	rm -f bin/server bin/main bin/api
+	@cd src/main && go get
 
 build: init
-	@go build -o bin/main src/main/main.go 
+	go build -o bin/api src/main/main.go 
 
 run: build
-	bin/main
-server: init
-	go build -o bin/main src/main/main.go 
-	bin/main >> log.txt
-
+	@-pkill api
+	bin/api>log.txt 2>&1 &
