@@ -1,8 +1,21 @@
 package main
+
 import (
-    "server"
+	"flag"
+	"game"
+	"server"
 )
 
-func main(){
-    server.Run(8080)
+func main() {
+
+	var port int
+
+	flag.IntVar(&port, "Port", 8080, "Port the server listens to")
+
+	flag.Parse()
+
+	game.Open()
+	defer game.Close()
+	server.Run(port)
+
 }
