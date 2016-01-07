@@ -32,6 +32,11 @@ myapp.config(function($routeProvider, $locationProvider) {
       controller : "HomeCtl"
     })
 
+	.when('/login', {
+			templateUrl : '/pages/login/login.html',
+			controller : 'LoginCtl',
+	})
+
     // causes no path to go to default page
     .when('', {
       redirectTo : function () {

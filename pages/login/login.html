@@ -1,0 +1,44 @@
+<script src="https://crypto-js.googlecode.com/svn/tags/3.0.2/build/rollups/hmac-sha256.js"></script>
+<script src="https://crypto-js.googlecode.com/svn/tags/3.0.2/build/components/enc-base64-min.js"></script>
+<!-- Page Header -->
+<!-- Set your background image for this header on the line below. -->
+<header class="intro-header" style="background-image: url('img/lock-bg.png')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="page-heading">
+                    <h1 ng-bind="postData['Title']"></h1>
+                    <hr class="small">
+                    <span class="subheading" ng-bind="postData['Subtitle']"></span>
+                    <p class="post-meta">{{generateTag(post)}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+					<form>
+							<div class="form-group" ng-submit="login()">
+								<label for="usr">Username:</label>
+								<input type="text" ng-model="usr" class="form-control" id="usr">
+							</div>
+							<div class="form-group" ng-submit="login()">
+								<label for="pwd">Password:</label>
+								<input type="password" ng-model="pwd" class="form-control" id="pwd">
+							</div>
+					</form>
+					
+					<button ng-click="login()" >Login</button>
+					<button ng-click="verifySecret()" >Verify Secret</button>
+
+
+					<div ng-bind='out'></div>
+            </div>
+        </div>
+    </div>
+</article>
