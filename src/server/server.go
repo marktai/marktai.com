@@ -3,6 +3,7 @@ package server
 import (
 	"fmt"
 	"github.com/gorilla/mux"
+	"ipCircBuffer"
 	"log"
 	"net/http"
 	"posts"
@@ -12,6 +13,9 @@ import (
 func Run(port uint16) {
 	//start := time.Now()
 	err := posts.Init("posts")
+
+	ipCircBuffer.Init()
+
 	if err != nil {
 		log.Println(err)
 	}
