@@ -42,6 +42,7 @@ func NewIPCircBuffer() *IPCircBuffer {
 	temp.ips = make([]net.IP, 5)
 	temp.cur = 0
 	temp.length = 5
+	return &temp
 }
 
 func Init() {
