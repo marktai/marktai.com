@@ -5,8 +5,9 @@ import (
 )
 
 type IPCircBuffer struct {
-	ips [5]net.IP
-	cur int
+	ips    []net.IP
+	cur    int
+	length int
 }
 
 var (
@@ -15,8 +16,8 @@ var (
 )
 
 func (i *IPCircBuffer) Set(stringIP string) {
-	i.ips[i.cur+1] = net.ParseIP(stringIP)
-	i.cur = (i.cur + 1) % 5
+	i.cur = (i.cur + 1) % i.length
+	i.ips[i.cur] = net.ParseIP(stringIP)
 }
 
 func (i *IPCircBuffer) Get() net.IP {
@@ -32,12 +33,15 @@ func (i *IPCircBuffer) Clear() {
 func (i *IPCircBuffer) Revert() {
 	i.cur = i.cur - 1
 	if i.cur < 0 {
-		i.cur += 5
+		i.cur += i.length
 	}
 }
 
 func NewIPCircBuffer() *IPCircBuffer {
-	return &IPCircBuffer{}
+	temp := &IPCircBuffer{}
+	temp.ips = make([]net.IP, 5)
+	temp.cur = 0
+	temp.length = 5
 }
 
 func Init() {
