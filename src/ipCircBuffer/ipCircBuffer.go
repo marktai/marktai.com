@@ -38,7 +38,7 @@ func (i *IPCircBuffer) Revert() {
 }
 
 func NewIPCircBuffer() *IPCircBuffer {
-	temp := &IPCircBuffer{}
+	temp := IPCircBuffer{}
 	temp.ips = make([]net.IP, 5)
 	temp.cur = 0
 	temp.length = 5
