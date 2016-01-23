@@ -1,5 +1,5 @@
 title = "Bacon Ipsum"
-ignore = true
+ignore = false
 subtitle = "Better than that Lorem nonsense"
 author = "Mark Tai"
 image = "img/bacon-bg.jpg"
@@ -7,6 +7,10 @@ created = 2000-07-27T07:32:00-08:00
 modified = 2000-05-27T07:32:00-08:00
 content = [
   "Bacon ipsum dolor amet pig cupim corned beef, leberkas tri-tip shankle shoulder shank prosciutto t-bone pork. Short ribs biltong drumstick, pancetta rump hamburger spare ribs sirloin flank. T-bone tenderloin fatback doner cupim turducken ground round corned beef hamburger tri-tip frankfurter swine meatloaf tongue. Pig leberkas ham hock hamburger andouille pork.",
+
+  "Here is some more bacon:",
+
+  "<img src='https://upload.wikimedia.org/wikipedia/commons/3/31/Made20bacon.png'>",
 
   "Pastrami swine hamburger pork belly capicola short loin turducken. Jowl hamburger landjaeger, drumstick kevin beef boudin capicola doner shoulder ball tip beef ribs. Corned beef pork loin pork alcatra filet mignon pig t-bone turkey. Drumstick ham hock pork belly, kevin ground round ham turducken bacon.",
 
