@@ -114,5 +114,9 @@ myapp.controller("LoginCtl", ["$scope", "$rootScope", "$http", "$location", "$sc
     	makeMove($scope.game, $scope.player, $scope.box, $scope.square);
     }
 
+    $scope.canvasClicked = function(a, b) {
+    	console.log(a + ", " + b);
+    }
+
 	$scope.getGame();
 }])

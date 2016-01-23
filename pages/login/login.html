@@ -69,4 +69,21 @@
 
         <div ng-bind="error"> </div>
     </div>
+    <div class="container">
+        <div class = "row">
+            <div class = "col-sm-12">
+                <div ng-repeat = "i in [0,1,2]">
+                    <div ng-repeat = "j in [0,1,2]">
+                        <span ng-repeat = "k in [0,1,2]">
+                            <span ng-repeat = "m in [0,1,2]">
+                                <canvas id = "box1-{{m}}"  width="50" height="50" style="border:1px solid {{( (3*i + k) % 2) ? 'blue' : 'red'}}" ng-click="canvasClicked({{3*i + k}}, {{3*j + m}})"></canvas>
+                            </span>
+                            <span ng-bind="$last ? '' : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'"></span>
+                        </span>
+                    </div>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
 </article>
