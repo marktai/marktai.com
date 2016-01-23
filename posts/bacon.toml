@@ -1,5 +1,5 @@
 title = "Bacon Ipsum"
-ignore = false
+ignore = true
 subtitle = "Better than that Lorem nonsense"
 author = "Mark Tai"
 image = "img/bacon-bg.jpg"

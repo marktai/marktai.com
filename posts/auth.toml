@@ -1,5 +1,5 @@
 title = "Developing an Authentication System"
-ignore = true
+ignore = false 
 subtitle = "Not a Plaintext Password Offender"
 author = "Mark Tai"
 image = "img/bacon-bg.jpg"
