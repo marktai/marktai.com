@@ -1,4 +1,4 @@
-myapp.controller("LoginCtl", ["$scope", "$rootScope", "$http", "$location", "$sce",  function($scope, $rootScope, $http, $location, $sce) {
+myapp.controller("LoginCtl", ["$scope", "$rootScope", "$http", "$location", "$sce", "$q",  function($scope, $rootScope, $http, $location, $sce, $q) {
 	$rootScope.page = "login";
 	
 	$scope.usr = '';
@@ -7,6 +7,39 @@ myapp.controller("LoginCtl", ["$scope", "$rootScope", "$http", "$location", "$sc
 	$scope.out = '';
 	$scope.id = 0;
 	$scope.secret = '';
+
+
+	$scope.game = $location.hash()
+
+	$scope.gameData = {}
+    $scope.board = ""
+    $scope.boardArray = []
+
+    $scope.players = []
+    $scope.boxes = []
+    $scope.squares = []
+
+
+
+    for (var i = 0; i < 9; i++) {
+		var box = {
+			'Owned' : 0,
+			'Squares': []
+		};
+    	for (var j = 0; j < 9; j++) {
+    		box['Squares'].push(0);
+    	}
+    	$scope.boardArray.push(box)
+    	$scope.boxes.push('' + i)
+    	$scope.squares.push('' + i)
+    }
+
+    $scope.player = ''
+    $scope.box = $scope.boxes[0]
+    $scope.square = $scope.squares[0]
+
+        var xImg;
+        var oImg; 
 
 
 	var login = function(user, pass) {
@@ -42,6 +75,14 @@ myapp.controller("LoginCtl", ["$scope", "$rootScope", "$http", "$location", "$sc
             for (line of boardArray) {
                 $scope.board += line + "\n"
             }
+		})
+		$http.get('/T9/games/' + gameID + '/board').then(function(result){ 
+			$scope.boardArray = result.data["Board"]
+			for (var i = 0; i < 9; i++){
+				for (var j = 0; j < 9; j++) {
+					$scope.loadIcon(i, j);
+				}
+			}
 		})
 		$http.get('/T9/games/' + gameID).then(function(result){ 
 			$scope.gameData = result.data["Game"]
@@ -88,24 +129,6 @@ myapp.controller("LoginCtl", ["$scope", "$rootScope", "$http", "$location", "$sc
 	}
 
 
-	$scope.game = $location.hash()
-
-	$scope.gameData = {}
-    $scope.board = ""
-
-    $scope.players = []
-    $scope.boxes = []
-    $scope.squares = []
-
-    for (var i = 0; i < 9; i++) {
-    	$scope.boxes.push('' + i)
-    	$scope.squares.push('' + i)
-    }
-
-    $scope.player = ''
-    $scope.box = $scope.boxes[0]
-    $scope.square = $scope.squares[0]
-
 	$scope.getGame = function() {
 		getGame($scope.game);
 	}
@@ -116,7 +139,52 @@ myapp.controller("LoginCtl", ["$scope", "$rootScope", "$http", "$location", "$sc
 
     $scope.canvasClicked = function(a, b) {
     	console.log(a + ", " + b);
+		$scope.boardArray[a].Squares[b] += 1
+		if ($scope.boardArray[a].Squares[b] > 2) {
+			$scope.boardArray[a].Squares[b] = 0
+		}
+		$scope.loadIcon(a, b);
+    }
+
+    $scope.loadIcon = function (a, b) {
+		var canvas  = document.getElementById("box"+a+"-"+b);
+		var context = canvas.getContext("2d");
+		console.log(a + ", " + b + "=" + $scope.boardArray[a].Squares[b]);
+    	if ($scope.boardArray[a].Squares[b] == 0) {
+			context.clearRect(0, 0, canvas.width, canvas.height);
+		} else if ($scope.boardArray[a].Squares[b] == 1) {
+			xImg.then(function(image){
+				context.drawImage(image, 0, 0);
+			}, function(error){
+				console.log("x failed to load")
+			})
+		} else if ($scope.boardArray[a].Squares[b] == 2) {
+			oImg.then(function(image){
+				context.drawImage(image, 0, 0);
+			}, function(error){
+				console.log("o failed to load")
+			})
+		}
+    }
+
+    function loadImage(src) {
+        return $q(function(resolve,reject) {
+            var image = new Image();
+            image.src = src;
+            image.onload = function() {
+              console.log("loaded image: "+src);
+              resolve(image);
+            };
+            image.onerror = function(e) {
+              reject(e);
+            };
+        })
     }
 
 	$scope.getGame();
+
+    xImg = loadImage("https://www.marktai.com/img/x.png");
+    
+    oImg = loadImage("https://www.marktai.com/img/o.jpg");
+
 }])

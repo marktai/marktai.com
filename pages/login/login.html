@@ -1,5 +1,7 @@
 <script src="https://crypto-js.googlecode.com/svn/tags/3.0.2/build/rollups/hmac-sha256.js"></script>
 <script src="https://crypto-js.googlecode.com/svn/tags/3.0.2/build/components/enc-base64-min.js"></script>
+
+
 <!-- Page Header -->
 <!-- Set your background image for this header on the line below. -->
 <header class="intro-header" style="background-image: url('img/lock-bg.png')">
@@ -69,14 +71,19 @@
 
         <div ng-bind="error"> </div>
     </div>
-    <div class="container">
+    <div class="container"
+        style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" 
+        unselectable="on"
+        onselectstart="return false;" 
+        onmousedown="return false;"
+    >
         <div class = "row">
             <div class = "col-sm-12">
                 <div ng-repeat = "i in [0,1,2]">
-                    <div ng-repeat = "j in [0,1,2]">
+                    <div ng-repeat = "j in [0,1,2]"> 
                         <span ng-repeat = "k in [0,1,2]">
                             <span ng-repeat = "m in [0,1,2]">
-                                <canvas id = "box1-{{m}}"  width="50" height="50" style="border:1px solid {{( (3*i + k) % 2) ? 'blue' : 'red'}}" ng-click="canvasClicked({{3*i + k}}, {{3*j + m}})"></canvas>
+                                <canvas id = "box{{3*i + k}}-{{3*j + m}}"  width="50" height="50" style="border:1px solid {{( (3*i + k) % 2) ? 'blue' : 'red'}}" ng-click="canvasClicked({{3*i + k}}, {{3*j + m}})"></canvas>
                             </span>
                             <span ng-bind="$last ? '' : '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'"></span>
                         </span>
