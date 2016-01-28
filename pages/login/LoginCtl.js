@@ -5,7 +5,7 @@ myapp.controller("LoginCtl", ["$scope", "$rootScope", "$http", "$location", "$sc
 	$scope.pwd = '';
 
 	$scope.out = '';
-	$scope.id = 0;
+	$scope.id = -1;
 	$scope.secret = '';
 
 
@@ -38,8 +38,10 @@ myapp.controller("LoginCtl", ["$scope", "$rootScope", "$http", "$location", "$sc
     $scope.box = $scope.boxes[0]
     $scope.square = $scope.squares[0]
 
-        var xImg;
-        var oImg; 
+    var xImg;
+    var oImg; 
+    var tealxImg;
+    var redoImg; 
 
 
 	var login = function(user, pass) {
@@ -139,10 +141,30 @@ myapp.controller("LoginCtl", ["$scope", "$rootScope", "$http", "$location", "$sc
 
     $scope.canvasClicked = function(a, b) {
     	console.log(a + ", " + b);
-		$scope.boardArray[a].Squares[b] += 1
-		if ($scope.boardArray[a].Squares[b] > 2) {
-			$scope.boardArray[a].Squares[b] = 0
+		// $scope.boardArray[a].Squares[b] += 1
+		// if ($scope.boardArray[a].Squares[b] > 4) {
+		// 	$scope.boardArray[a].Squares[b] = 0
+		// }
+
+		if ($scope.id == $scope.gameData.Players[0]) {
+			if($scope.boardArray[a].Squares[b] == 0) {
+				$scope.boardArray[a].Squares[b] = 3;
+			}
+			else if ($scope.boardArray[a].Squares[b] == 3) {
+				$scope.boardArray[a].Squares[b] = 1;
+	    		makeMove($scope.game, $scope.gameData.Players[0], a, b);
+			}
 		}
+		if ($scope.id == $scope.gameData.Players[1]) {
+			if($scope.boardArray[a].Squares[b] == 0) {
+				$scope.boardArray[a].Squares[b] = 4;
+			}
+			else if ($scope.boardArray[a].Squares[b] == 4) {
+				$scope.boardArray[a].Squares[b] = 2;
+	    		makeMove($scope.game, $scope.gameData.Players[1], a, b);
+			}
+		}
+
 		$scope.loadIcon(a, b);
     }
 
@@ -163,6 +185,18 @@ myapp.controller("LoginCtl", ["$scope", "$rootScope", "$http", "$location", "$sc
 				context.drawImage(image, 0, 0);
 			}, function(error){
 				console.log("o failed to load")
+			})
+		} else if ($scope.boardArray[a].Squares[b] == 3) {
+			tealxImg.then(function(image){
+				context.drawImage(image, 0, 0);
+			}, function(error){
+				console.log("tealx failed to load")
+			})
+		} else if ($scope.boardArray[a].Squares[b] == 4) {
+			redoImg.then(function(image){
+				context.drawImage(image, 0, 0);
+			}, function(error){
+				console.log("redo failed to load")
 			})
 		}
     }
@@ -186,5 +220,7 @@ myapp.controller("LoginCtl", ["$scope", "$rootScope", "$http", "$location", "$sc
     xImg = loadImage("https://www.marktai.com/img/x.png");
     
     oImg = loadImage("https://www.marktai.com/img/o.jpg");
+    tealxImg = loadImage("https://www.marktai.com/img/tealx.png");
+    redoImg = loadImage("https://www.marktai.com/img/redo.jpg");
 
 }])
