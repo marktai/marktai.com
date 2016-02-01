@@ -1,4 +1,4 @@
-myapp.controller("PostsCtl", ["$scope", "$rootScope", "$http", "$location", "$sce",  function($scope, $rootScope, $http, $location, $sce) {
+marktai.controller("PostsCtl", ["$scope", "$rootScope", "$http", "$location", "$sce",  function($scope, $rootScope, $http, $location, $sce) {
 	$rootScope.page = "posts";
 
 	$scope.post = $location.hash()

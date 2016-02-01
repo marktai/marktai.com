@@ -1,4 +1,4 @@
-myapp.controller("LoginCtl", ["$scope", "$rootScope", "$http", "$location", "$sce", "$q", "$websocket", function($scope, $rootScope, $http, $location, $sce, $q, $websocket) {
+marktai.controller("LoginCtl", ["$scope", "$rootScope", "$http", "$location", "$sce", "$q", "$websocket", function($scope, $rootScope, $http, $location, $sce, $q, $websocket) {
 	$rootScope.page = "login";
 	
 	$scope.usr = '';

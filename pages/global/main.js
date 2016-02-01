@@ -1,10 +1,10 @@
 var defaultPage = "home";
 
-var myapp = new angular.module("myapp", ["ngTouch","ngResource", 'ngRoute', "ngSanitize", "ngWebsocket"]);
+var marktai = new angular.module("marktai", ["ngTouch","ngResource", 'ngRoute', "ngSanitize", "ngWebsocket"]);
 
 
 // Sets up default page to be login and redirects every other one to 
-myapp.config(function($routeProvider, $locationProvider) {
+marktai.config(function($routeProvider, $locationProvider) {
   $routeProvider
 
     .when('/404', {
@@ -66,7 +66,7 @@ myapp.config(function($routeProvider, $locationProvider) {
 
 
 // enables attribute ng-enter which calls a function when enter is pressed
-myapp.directive('ngEnter', function () {
+marktai.directive('ngEnter', function () {
     return function (scope, element, attrs) {
         element.bind("keydown keypress", function (event) {
             if(event.which === 13) {
@@ -82,7 +82,7 @@ myapp.directive('ngEnter', function () {
 
 
 // inject the $resource dependency here
-myapp.controller("MainCtl", ["$scope", "$rootScope", "$resource", "$location",  function($scope, $rootScope, $resource, $location){
+marktai.controller("MainCtl", ["$scope", "$rootScope", "$resource", "$location",  function($scope, $rootScope, $resource, $location){
 
   $rootScope.info = "";
   $rootScope.error = "";
