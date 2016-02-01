@@ -1,4 +1,4 @@
-myapp.controller("404Ctl", ["$scope", "$rootScope", "$resource", "$location", function($scope, $rootScope, $resource, $location) {
+marktai.controller("404Ctl", ["$scope", "$rootScope", "$resource", "$location", function($scope, $rootScope, $resource, $location) {
   $rootScope.info = ""
   $rootScope.error = ""
 

@@ -1,4 +1,4 @@
-myapp.controller("HomeCtl", ["$scope", "$rootScope", "$http", "$location", function($scope, $rootScope, $http, $location) {
+marktai.controller("HomeCtl", ["$scope", "$rootScope", "$http", "$location", function($scope, $rootScope, $http, $location) {
 	$rootScope.info = ""
 	$rootScope.error = ""
 	$rootScope.page = "home";
