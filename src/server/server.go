@@ -32,6 +32,7 @@ func Run(port uint16) {
 	r.HandleFunc("/raspberryIP", getRaspberryIP).Methods("GET")
 	r.HandleFunc("/raspberryIP", postRaspberryIP).Methods("POST")
 	r.HandleFunc("/raspberryIP", clearRaspberryIP).Methods("DELETE")
+	r.HandleFunc("/requestCount", get24HourRequests).Methods("GET")
 
 	for {
 		log.Printf("Running at 0.0.0.0:%d\n", port)
