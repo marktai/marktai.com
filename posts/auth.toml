@@ -2,8 +2,8 @@ title = "Developing an Authentication System"
 ignore = false 
 subtitle = "Not a Plaintext Password Offender"
 author = "Mark Tai"
-image = "img/bacon-bg.jpg"
-created = 2016-01-22-T20:36:00-08:00
+image = "img/lock-bg.png"
+created = 2016-01-22T20:36:00-08:00
 modified = 2016-01-22T20:36:00-08:00
 content = [
   "Once I had wet my feet into databases with the game server for T9, I knew that I wanted to have a more sophisiticated user system.  I have always been interested in network security and the battle of white hat and black hat, but I never implemented my own user authentication system.  I knew from just random security articles that a password should always be hashed and salted before touching a disk, but things like OAuth went over my head.",
