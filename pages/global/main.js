@@ -29,7 +29,7 @@ marktai.config(function($routeProvider, $locationProvider) {
 
     .when('/contact', {
       templateUrl : '/pages/contact/contact.html',
-      controller : "HomeCtl"
+      controller : "ContactCtl"
     })
 
 	.when('/login', {
