@@ -25,6 +25,7 @@ type PostInfo struct {
 // Post (PostInfo and the actual text content)
 type Post struct {
 	PostInfo
+	Image   string
 	Content []string
 }
 
