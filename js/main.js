@@ -1,6 +1,6 @@
 var defaultPage = "home";
 
-var myapp = new angular.module("myapp", ["ngTouch","ngResource", 'ngRoute', "ngSanitize"]);
+var myapp = new angular.module("myapp", ["ngTouch","ngResource", 'ngRoute', "ngSanitize", "ngWebsocket"]);
 
 
 // Sets up default page to be login and redirects every other one to 

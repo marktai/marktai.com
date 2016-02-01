@@ -1,15 +1,15 @@
-myapp.controller("LoginCtl", ["$scope", "$rootScope", "$http", "$location", "$sce", "$q",  function($scope, $rootScope, $http, $location, $sce, $q) {
+myapp.controller("LoginCtl", ["$scope", "$rootScope", "$http", "$location", "$sce", "$q", "$websocket", function($scope, $rootScope, $http, $location, $sce, $q, $websocket) {
 	$rootScope.page = "login";
 	
 	$scope.usr = '';
 	$scope.pwd = '';
 
 	$scope.out = '';
-	$scope.id = -1;
+	$scope.userid = -1;
 	$scope.secret = '';
 
 
-	$scope.game = $location.hash()
+	$scope.gameid = $location.hash()
 
 	$scope.gameData = {}
     $scope.board = ""
@@ -47,11 +47,10 @@ myapp.controller("LoginCtl", ["$scope", "$rootScope", "$http", "$location", "$sc
 	var login = function(user, pass) {
 		var creds = {"User":user, "Password":pass};
 		$http.post('/T9/login', creds).then(function(result){ 
-			console.log(result);
 			var data = result.data;
-			$scope.id = data['UserID'];
+			$scope.userid = data['UserID'];
 			$scope.secret = data['Secret'];
-			$scope.out = "ID: " + $scope.id + "| Secret: " + $scope.secret;
+			$scope.out = "ID: " + $scope.userid + "| Secret: " + $scope.secret;
 		}, function(error){
 			$scope.out = "Login failed.";
 		});
@@ -60,11 +59,10 @@ myapp.controller("LoginCtl", ["$scope", "$rootScope", "$http", "$location", "$sc
 	var verifySecret = function(user, secret) {
 		var creds = {"User":user, "Secret":secret};
 		$http.post('/T9/verifySecret', creds).then(function(result){ 
-			console.log(result);
 			var data = result.data;
-			$scope.id = data['UserID'];
+			$scope.userid = data['UserID'];
 			$scope.secret = data['Secret'];
-			$scope.out = "Verified| ID: " + $scope.id + "| Secret: " + $scope.secret;
+			$scope.out = "Verified| ID: " + $scope.userid + "| Secret: " + $scope.secret;
 		}, function(error){
 			$scope.out = "Verification failed.";
 		});
@@ -115,7 +113,7 @@ myapp.controller("LoginCtl", ["$scope", "$rootScope", "$http", "$location", "$sc
 			}
 		}
         $http.post(url, data, config).then(function(result){
-                $scope.getGame($scope.game)
+                $scope.getGame($scope.gameid)
         }, function(error) {
                 $scope.error = error.data["Error"]
         })
@@ -132,67 +130,61 @@ myapp.controller("LoginCtl", ["$scope", "$rootScope", "$http", "$location", "$sc
 
 
 	$scope.getGame = function() {
-		getGame($scope.game);
+		getGame($scope.gameid);
 	}
 
     $scope.makeMove = function(game, player, box, square) {
-    	makeMove($scope.game, $scope.player, $scope.box, $scope.square);
+    	makeMove($scope.gameid, $scope.player, $scope.box, $scope.square);
     }
 
-    $scope.canvasClicked = function(a, b) {
-    	console.log(a + ", " + b);
-		// $scope.boardArray[a].Squares[b] += 1
-		// if ($scope.boardArray[a].Squares[b] > 4) {
-		// 	$scope.boardArray[a].Squares[b] = 0
-		// }
+    $scope.canvasClicked = function(box, square) {
 
-		if ($scope.id == $scope.gameData.Players[0]) {
-			if($scope.boardArray[a].Squares[b] == 0) {
-				$scope.boardArray[a].Squares[b] = 3;
+		if ($scope.userid == $scope.gameData.Players[0] && ($scope.gameData.Turn == box || $scope.gameData.Turn == 9)) {
+			if($scope.boardArray[box].Squares[square] == 0) {
+				$scope.boardArray[box].Squares[square] = 3;
 			}
-			else if ($scope.boardArray[a].Squares[b] == 3) {
-				$scope.boardArray[a].Squares[b] = 1;
-	    		makeMove($scope.game, $scope.gameData.Players[0], a, b);
+			else if ($scope.boardArray[box].Squares[square] == 3) {
+				$scope.boardArray[box].Squares[square] = 1;
+	    		makeMove($scope.gameid, $scope.gameData.Players[0], box, square);
 			}
 		}
-		if ($scope.id == $scope.gameData.Players[1]) {
-			if($scope.boardArray[a].Squares[b] == 0) {
-				$scope.boardArray[a].Squares[b] = 4;
+		if ($scope.userid == $scope.gameData.Players[1] && ($scope.gameData.Turn == 10 + box || $scope.gameData.Turn == 19)) {
+			if($scope.boardArray[box].Squares[square] == 0) {
+				$scope.boardArray[box].Squares[square] = 4;
 			}
-			else if ($scope.boardArray[a].Squares[b] == 4) {
-				$scope.boardArray[a].Squares[b] = 2;
-	    		makeMove($scope.game, $scope.gameData.Players[1], a, b);
+			else if ($scope.boardArray[box].Squares[square] == 4) {
+				$scope.boardArray[box].Squares[square] = 2;
+	    		makeMove($scope.gameid, $scope.gameData.Players[1], box, square);
 			}
 		}
 
-		$scope.loadIcon(a, b);
+		$scope.loadIcon(box, square);
     }
 
-    $scope.loadIcon = function (a, b) {
-		var canvas  = document.getElementById("box"+a+"-"+b);
+    $scope.loadIcon = function (box, square) {
+		var canvas  = document.getElementById("box"+box+"-"+square);
 		var context = canvas.getContext("2d");
-		console.log(a + ", " + b + "=" + $scope.boardArray[a].Squares[b]);
-    	if ($scope.boardArray[a].Squares[b] == 0) {
+    	if ($scope.boardArray[box].Squares[square] == 0) {
 			context.clearRect(0, 0, canvas.width, canvas.height);
-		} else if ($scope.boardArray[a].Squares[b] == 1) {
+		} else if ($scope.boardArray[box].Squares[square] == 1) {
 			xImg.then(function(image){
 				context.drawImage(image, 0, 0);
 			}, function(error){
 				console.log("x failed to load")
 			})
-		} else if ($scope.boardArray[a].Squares[b] == 2) {
+		} else if ($scope.boardArray[box].Squares[square] == 2) {
 			oImg.then(function(image){
 				context.drawImage(image, 0, 0);
 			}, function(error){
 				console.log("o failed to load")
 			})
-		} else if ($scope.boardArray[a].Squares[b] == 3) {
+		} else if ($scope.boardArray[box].Squares[square] == 3) {
 			tealxImg.then(function(image){
 				context.drawImage(image, 0, 0);
 			}, function(error){
 				console.log("tealx failed to load")
 			})
-		} else if ($scope.boardArray[a].Squares[b] == 4) {
+		} else if ($scope.boardArray[box].Squares[square] == 4) {
 			redoImg.then(function(image){
 				context.drawImage(image, 0, 0);
 			}, function(error){
@@ -214,6 +206,21 @@ myapp.controller("LoginCtl", ["$scope", "$rootScope", "$http", "$location", "$sc
             };
         })
     }
+
+    var ws = $websocket.$new('wss://www.marktai.com/T9/games/' + $scope.gameid + "/ws"); // instance of ngWebsocket, handled by $websocket service
+
+    ws.$on('$open', function () {
+    });
+
+    ws.$on('Change', function (data) {
+        console.log(data);
+        $scope.getGame();
+
+    })
+
+    ws.$on('$close', function () {
+        ws.$close();
+    });
 
 	$scope.getGame();
 

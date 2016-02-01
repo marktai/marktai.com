@@ -9,10 +9,10 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="page-heading">
-                    <h1>Login Test</h1>
+                    <h1>Meta Tic Tac Toe</h1>
                     <hr class="small">
-                    <span class="subheading">This is a test</span>
-                    <p class="post-meta">The testiest</p>
+                    <span class="subheading">こんにちは</span>
+                    <p class="post-meta"></p>
                 </div>
             </div>
         </div>
@@ -24,22 +24,22 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-					<form>
-						<div class="form-group" ng-submit="login()">
-							<label for="usr">Username:</label>
-							<input type="text" ng-model="usr" class="form-control" ng-enter="login()" id="usr">
-						</div>
-						<div class="form-group" ng-submit="login()">
-							<label for="pwd">Password:</label>
-							<input type="password" ng-model="pwd" class="form-control" ng-enter="login()" id="pwd">
-						</div>
-					</form>
-					
-					<button ng-click="login()" class="btn btn-default">Login</button>
-					<button ng-click="verifySecret()" class="btn btn-default">Verify Secret</button>
+				<form>
+					<div class="form-group" ng-submit="login()">
+						<label for="usr">Username:</label>
+						<input type="text" ng-model="usr" class="form-control" ng-enter="login()" id="usr">
+					</div>
+					<div class="form-group" ng-submit="login()">
+						<label for="pwd">Password:</label>
+						<input type="password" ng-model="pwd" class="form-control" ng-enter="login()" id="pwd">
+					</div>
+				</form>
+				
+				<button ng-click="login()" class="btn btn-default">Login</button>
+				<button ng-click="verifySecret()" class="btn btn-default">Verify Secret</button>
 
 
-                    <p style = "white-space:pre-wrap; word-wrap: break-word" ng-bind='out'></p>
+				<p style = "white-space:pre-wrap; word-wrap: break-word" ng-bind='out'></p>
             </div>
         </div>
         <div class="row" ng-hide = "id == -1">
@@ -67,16 +67,16 @@
                 <button ng-click='getGame()' class="btn btn-default">Update Game</button>
                 <button ng-click='makeMove()' class="btn btn-default">Make Move</button>
             </div>
-        </div>
+		</div>
 
         <div ng-bind="error"> </div>
-    </div>
+	</div> 
     <div class="container"
         style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" 
         unselectable="on"
         onselectstart="return false;" 
         onmousedown="return false;"
-        ng-hide = "id == -1"
+        ng-hide = "userid == -1"
     >
         <div class = "row">
             <div class = "col-sm-12">
