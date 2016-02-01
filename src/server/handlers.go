@@ -4,11 +4,12 @@ import (
 	"fmt"
 	"github.com/gorilla/mux"
 	"ipCircBuffer"
-	_ "log"
 	"net"
 	"net/http"
+	"nginxParser"
 	"posts"
 	"strconv"
+	"time"
 )
 
 func getPost(w http.ResponseWriter, r *http.Request) {
@@ -102,4 +103,9 @@ func postRaspberryIP(w http.ResponseWriter, r *http.Request) {
 func clearRaspberryIP(w http.ResponseWriter, r *http.Request) {
 	ipCircBuffer.RaspberryIP.Clear()
 	fmt.Fprint(w, "Cleared")
+}
+
+func get24HourRequests(w http.ResponseWriter, r *http.Request) {
+	requests, err := nginxParser.GetRequests(24*time.Hour, "/var/log/nginx/access.log")
+	WriteOutputError(w, map[string]int{"Requests": requests}, err)
 }
