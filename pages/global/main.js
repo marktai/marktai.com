@@ -32,21 +32,23 @@ marktai.config(function($routeProvider, $locationProvider) {
       controller : "ContactCtl"
     })
 
+    // old url
 	.when('/login', {
-			templateUrl : '/pages/login/login.html',
-			controller : 'LoginCtl',
+			
+      controller : function() {
+        window.location.replace('/meta-tic-tac-toe');
+      },
+      template : "<div></div>"
 	})
 
     // causes no path to go to default page
     .when('', {
       redirectTo : function () {
-        console.log("empty")
         return "/" + defaultPage
       }
     })
     .when('/', {
       redirectTo : function () {
-        console.log("empty")
         return "/" + defaultPage
       }
     })
@@ -80,7 +82,6 @@ marktai.directive('ngEnter', function () {
     };
 });
 
-
 // inject the $resource dependency here
 marktai.controller("MainCtl", ["$scope", "$rootScope", "$resource", "$location",  function($scope, $rootScope, $resource, $location){
 
@@ -89,48 +90,4 @@ marktai.controller("MainCtl", ["$scope", "$rootScope", "$resource", "$location",
   $rootScope.infoDiv = "";
   $rootScope.firstHit = true;
   $rootScope.oldPage = "";
-
-  // does nothing if on a page besides login
-  // if on login, sends to default page
-  $rootScope.SendToPage = function() {
-    page = $rootScope.oldPage;
-    hash = $rootScope.oldHash;
-    if ($rootScope.page == "login") {
-      $rootScope.page = page;
-      $location.path(page);
-      $rootScope.info = "";
-      // console.log("reset in sendtopage")
-      $location.hash(hash);
-    }
-
-  }
-
-
-
-  // returns html bold tezt
-  $rootScope.boldText = function(text) {
-    return "<strong>" + text + "</strong>";
-  }
-  
-
-  // returns path==viewlocation
-  $rootScope.isActive = function (viewLocation) { 
-    return viewLocation === $location.path();
-  }
-
-  // returns true if there is a user in local storage
-  // user is cleared whenever logged out
-  $rootScope.loggedIn = function () {
-    return localStorage.getItem('User') !== null;
-  }
-
-  // returns input if logged in
-  // used to disable the links
-  $rootScope.ifLoggedIn = function (str){
-    if ($rootScope.loggedIn()) return str;
-    return "";
-  }
-
- 
-
 }]);
