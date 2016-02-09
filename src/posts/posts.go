@@ -12,6 +12,7 @@ import (
 	"time"
 )
 
+// Info of a post
 type PostInfo struct {
 	Title    string
 	Ignore   bool
@@ -21,21 +22,19 @@ type PostInfo struct {
 	Modified time.Time
 }
 
+// Post (PostInfo and the actual text content)
 type Post struct {
-	Title    string
-	Ignore   bool
-	Subtitle string
-	Author   string
-	Image    string
-	Created  time.Time
-	Modified time.Time
-	Content  []string
+	PostInfo
+	Image   string
+	Content []string
 }
 
+// Returns just info of a post
 func (p Post) Info() PostInfo {
-	return PostInfo{p.Title, p.Ignore, p.Subtitle, p.Author, p.Created, p.Modified}
+	return p.PostInfo
 }
 
+// for sorting
 type postSlice []*Post
 
 func (p postSlice) Len() int {
@@ -52,6 +51,7 @@ func (p postSlice) Swap(i, j int) {
 
 var postMap map[string]*Post
 
+// Gets post by title
 func GetPost(id string) (*Post, error) {
 	post, ok := postMap[id]
 	if !ok {
@@ -60,6 +60,7 @@ func GetPost(id string) (*Post, error) {
 	return post, nil
 }
 
+// Returns a list of all the posts sorted by time modified
 func GetPostList() []string {
 	posts := make(postSlice, len(postMap))
 	i := 0
@@ -78,6 +79,9 @@ func GetPostList() []string {
 	return postTitles
 }
 
+// Reads the folder and parses all the posts
+// Also sets up a watcher so the posts will automatically
+//   be updated if any of the files change
 func Init(path string) error {
 	err := readFolder(path)
 	if err != nil {
@@ -116,6 +120,7 @@ func Init(path string) error {
 	return nil
 }
 
+// Reads the folder and parses all the files into posts
 func readFolder(path string) error {
 
 	tempPostMap := make(map[string]*Post)
@@ -150,6 +155,7 @@ func readFolder(path string) error {
 	return nil
 }
 
+// Reads a file and returns a post
 func readPostFile(path string) (*Post, error) {
 	f, err := os.Open(path)
 	if err != nil {

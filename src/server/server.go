@@ -3,6 +3,7 @@ package server
 import (
 	"fmt"
 	"github.com/gorilla/mux"
+	"ipCircBuffer"
 	"log"
 	"net/http"
 	"posts"
@@ -12,6 +13,9 @@ import (
 func Run(port uint16) {
 	//start := time.Now()
 	err := posts.Init("posts")
+
+	ipCircBuffer.Init()
+
 	if err != nil {
 		log.Println(err)
 	}
@@ -22,9 +26,13 @@ func Run(port uint16) {
 	r.HandleFunc("/posts/{Title}", getPost)
 	r.HandleFunc("/posts/{Title}/paragraph/{id:[0-9]+}", getParagraph).Methods("GET")
 	r.HandleFunc("/posts/{Title}/info", getInfo).Methods("GET")
-	r.HandleFunc("/desktopIP", getIP).Methods("GET")
-	r.HandleFunc("/desktopIP", postIP).Methods("POST")
-	r.HandleFunc("/desktopIP", clearIP).Methods("DELETE")
+	r.HandleFunc("/desktopIP", getDesktopIP).Methods("GET")
+	r.HandleFunc("/desktopIP", postDesktopIP).Methods("POST")
+	r.HandleFunc("/desktopIP", clearDesktopIP).Methods("DELETE")
+	r.HandleFunc("/raspberryIP", getRaspberryIP).Methods("GET")
+	r.HandleFunc("/raspberryIP", postRaspberryIP).Methods("POST")
+	r.HandleFunc("/raspberryIP", clearRaspberryIP).Methods("DELETE")
+	r.HandleFunc("/requestCount", get24HourRequests).Methods("GET")
 
 	for {
 		log.Printf("Running at 0.0.0.0:%d\n", port)

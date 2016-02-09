@@ -1,8 +1,18 @@
 package main
+
 import (
-    "server"
+	"flag"
+	"server"
 )
 
-func main(){
-    server.Run(8080)
+func main() {
+
+	var port int
+
+	flag.IntVar(&port, "Port", 8080, "Port the server listens to")
+
+	flag.Parse()
+
+	server.Run(uint16(port))
+
 }

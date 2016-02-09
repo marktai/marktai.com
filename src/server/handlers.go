@@ -1,14 +1,15 @@
 package server
 
 import (
-	"desktopIP"
 	"fmt"
 	"github.com/gorilla/mux"
-	_ "log"
+	"ipCircBuffer"
 	"net"
 	"net/http"
+	"nginxParser"
 	"posts"
 	"strconv"
+	"time"
 )
 
 func getPost(w http.ResponseWriter, r *http.Request) {
@@ -54,27 +55,57 @@ func getInfo(w http.ResponseWriter, r *http.Request) {
 	WriteJson(w, map[string]posts.PostInfo{"Info": info})
 }
 
-func getIP(w http.ResponseWriter, r *http.Request) {
+func getDesktopIP(w http.ResponseWriter, r *http.Request) {
 
-	ip := desktopIP.Get()
+	ip := ipCircBuffer.DesktopIP.Get()
 	if ip == nil {
 		ip = net.ParseIP("0.0.0.0")
 	}
 	fmt.Fprint(w, ip.String())
 }
 
-func postIP(w http.ResponseWriter, r *http.Request) {
+func postDesktopIP(w http.ResponseWriter, r *http.Request) {
 	stringIP := r.FormValue("IP")
 	if stringIP == "-1" {
-		desktopIP.Revert()
+		ipCircBuffer.DesktopIP.Revert()
 		fmt.Fprint(w, "Reverted")
 		return
 	}
-	desktopIP.Set(stringIP)
+	ipCircBuffer.DesktopIP.Set(stringIP)
 	fmt.Fprint(w, stringIP)
 }
 
-func clearIP(w http.ResponseWriter, r *http.Request) {
-	desktopIP.Clear()
+func clearDesktopIP(w http.ResponseWriter, r *http.Request) {
+	ipCircBuffer.RaspberryIP.Clear()
 	fmt.Fprint(w, "Cleared")
+}
+
+func getRaspberryIP(w http.ResponseWriter, r *http.Request) {
+
+	ip := ipCircBuffer.RaspberryIP.Get()
+	if ip == nil {
+		ip = net.ParseIP("0.0.0.0")
+	}
+	fmt.Fprint(w, ip.String())
+}
+
+func postRaspberryIP(w http.ResponseWriter, r *http.Request) {
+	stringIP := r.FormValue("IP")
+	if stringIP == "-1" {
+		ipCircBuffer.RaspberryIP.Revert()
+		fmt.Fprint(w, "Reverted")
+		return
+	}
+	ipCircBuffer.RaspberryIP.Set(stringIP)
+	fmt.Fprint(w, stringIP)
+}
+
+func clearRaspberryIP(w http.ResponseWriter, r *http.Request) {
+	ipCircBuffer.RaspberryIP.Clear()
+	fmt.Fprint(w, "Cleared")
+}
+
+func get24HourRequests(w http.ResponseWriter, r *http.Request) {
+	requests, err := nginxParser.GetRequests(24*time.Hour, "/var/log/nginx/access.log")
+	WriteOutputError(w, map[string]int{"Requests": requests}, err)
 }
