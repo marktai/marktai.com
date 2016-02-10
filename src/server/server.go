@@ -34,6 +34,9 @@ func Run(port uint16) {
 	r.HandleFunc("/raspberryIP", clearRaspberryIP).Methods("DELETE")
 	r.HandleFunc("/requestCount", get24HourRequests).Methods("GET")
 
+	r.HandleFunc("/base3/decode", base3Decode).Methods("GET")
+	r.HandleFunc("/base3/encode", base3Encode).Methods("GET")
+
 	for {
 		log.Printf("Running at 0.0.0.0:%d\n", port)
 		log.Println(http.ListenAndServe(fmt.Sprintf("0.0.0.0:%d", port), r))

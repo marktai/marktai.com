@@ -1,6 +1,7 @@
 package server
 
 import (
+	"base3"
 	"fmt"
 	"github.com/gorilla/mux"
 	"ipCircBuffer"
@@ -108,4 +109,24 @@ func clearRaspberryIP(w http.ResponseWriter, r *http.Request) {
 func get24HourRequests(w http.ResponseWriter, r *http.Request) {
 	requests, err := nginxParser.GetRequests(24*time.Hour, "/var/log/nginx/access.log")
 	WriteOutputError(w, map[string]int{"Requests": requests}, err)
+}
+
+func base3Decode(w http.ResponseWriter, r *http.Request) {
+	encodedString := r.FormValue("encoded")
+	encoded, err := base3.ParseString(encodedString)
+	if err != nil {
+		WriteError(w, err, 400)
+		return
+	}
+	WriteJson(w, map[string]uint{"Decoded": encoded.Decode()})
+}
+
+func base3Encode(w http.ResponseWriter, r *http.Request) {
+	valueString := r.FormValue("value")
+	value, err := strconv.Atoi(valueString)
+	if err != nil {
+		WriteError(w, err, 400)
+		return
+	}
+	WriteJson(w, map[string]string{"Encoded": base3.New(uint(value)).String()})
 }

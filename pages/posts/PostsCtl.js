@@ -6,7 +6,7 @@ marktai.controller("PostsCtl", ["$scope", "$rootScope", "$http", "$location", "$
 	$scope.postData = {}
 
 	var getPost = function(post) {
-		$http.get('/api/posts/' + post).then(function(result){ 
+		$http.get('/apiBeta/posts/' + post).then(function(result){ 
 			$scope.postData = result.data["Post"]
             for (var par of $scope.postData.Content) {
                 $scope.pars.push($sce.trustAsHtml(par))
