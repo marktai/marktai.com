@@ -2,6 +2,7 @@ package server
 
 import (
 	"base3"
+	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
 	"ipCircBuffer"
@@ -9,6 +10,7 @@ import (
 	"net/http"
 	"nginxParser"
 	"posts"
+	"shortlink"
 	"strconv"
 	"time"
 )
@@ -129,4 +131,54 @@ func base3Encode(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	WriteJson(w, map[string]string{"Encoded": base3.New(uint(value)).String()})
+}
+
+func redirectToShortlink(w http.ResponseWriter, r *http.Request) {
+	http.Redirect(w, r, "/beta#shortlink", 302)
+}
+
+func makeShortlink(w http.ResponseWriter, r *http.Request) {
+
+	parsedJson := make(map[string]string)
+	decoder := json.NewDecoder(r.Body)
+	err := decoder.Decode(&parsedJson)
+	if err != nil {
+		WriteErrorString(w, err.Error()+" in parsing POST body (JSON)", 400)
+		return
+	}
+
+	link, ok := parsedJson["Link"]
+	if !ok {
+		WriteErrorString(w, "'Link' not in JSON body", 400)
+		return
+	}
+
+	newID, err := shortlink.Add(link)
+	if err != nil {
+		WriteError(w, err, 400)
+		return
+	}
+	WriteJson(w, map[string]string{"ID": newID})
+}
+
+func getShortlink(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	linkID := vars["linkID"]
+	if linkID == "" {
+		http.Redirect(w, r, "/beta#shortlink", 302)
+		//WriteErrorString(w, "link ID empty", 400)
+		return
+	}
+
+	//pads front with 0
+	for len(linkID) < 4 {
+		linkID = "0" + linkID
+	}
+	link, err := shortlink.Get(linkID)
+	if err != nil {
+		WriteError(w, err, 400)
+		return
+	}
+	http.Redirect(w, r, link, 302)
+
 }

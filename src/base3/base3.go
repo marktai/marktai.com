@@ -45,7 +45,7 @@ func (b *Base3Uint) Decode() uint {
 func ParseString(s string) (*Base3Uint, error) {
 	var b Base3Uint
 	for _, char := range s {
-		if !('0' < char && char < '3') {
+		if !('0' <= char && char < '3') {
 			return nil, errors.New(fmt.Sprintf("Invalid character at %c", char))
 		}
 		b.addDigit(uint(char - '0'))

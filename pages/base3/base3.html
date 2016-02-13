@@ -1,0 +1,47 @@
+<!-- Page Header -->
+<header class="intro-header" style="background-image: url('img/corgi-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading">
+                    <h1>Base 3 Converter</h1>
+                    <hr class="small">
+                    <span class="subheading">Please don't be mad at me</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="form-horizontal">
+                <label>Decimal</label>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <textarea ng-enter="convertToBase3()"ng-model = "decimal" class="form-control" rows="3" placeholder="Decimal" required></textarea>
+                    </div>
+                    <div class="col-md-2">
+                        <button ng-click="convertToBase3()" style = "height:'100%'" class="btn btn-default">Convert to Base 3</button>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="form-horizontal">
+                <label>Base 3</label>
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <textarea ng-enter="convertToDecimal()" ng-model = "base3" class="form-control" rows="3" placeholder="Base 3" required></textarea>
+                    </div>
+                    <div class="col-md-2">
+                        <button ng-click="convertToDecimal()" style = "height:'100%'" class="btn btn-default">Convert to Decimal</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
