@@ -44,10 +44,6 @@ func Run(port uint16) {
 	r.HandleFunc("/raspberryIP", Log(postRaspberryIP)).Methods("POST")
 	r.HandleFunc("/raspberryIP", Log(clearRaspberryIP)).Methods("DELETE")
 	r.HandleFunc("/requestCount", Log(get24HourRequests)).Methods("GET")
-
-	r.HandleFunc("/base3/decode", Log(base3Decode)).Methods("GET")
-	r.HandleFunc("/base3/encode", Log(base3Encode)).Methods("GET")
-
 	r.HandleFunc("/shortlink", Log(redirectToShortlink)).Methods("GET")
 	r.HandleFunc("/shortlink/", Log(redirectToShortlink)).Methods("GET")
 	r.HandleFunc("/shortlink", Log(makeShortlink)).Methods("POST")

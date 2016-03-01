@@ -32,10 +32,11 @@ marktai.config(function($routeProvider, $locationProvider) {
       controller : "ContactCtl"
     })
 
-    .when('/base3', {
-      templateUrl : './pages/base3/base3.html',
-      controller : "Base3Ctl"
+	.when('/shortlink', {
+      templateUrl : './pages/shortlink/shortlink.html',
+      controller : "ShortlinkCtl"
     })
+
 
     // old url
 	.when('/login', {

@@ -8,45 +8,51 @@ import (
 )
 
 // checks if a id already exists in the database
-func checkIDConflict(id uint) (bool, error) {
+func checkIDConflict(id string) (bool, error) {
 	collision := 1
 	err := db.Db.QueryRow("SELECT EXISTS(SELECT 1 FROM links WHERE id=?)", id).Scan(&collision)
 	return collision != 0, err
 }
 
 // gets a unique id for a new game
-func getUniqueID() (uint, error) {
+func getUniqueID() (string, error) {
 	var count uint
 	var scale uint
 	var addConst uint
 	var newID uint
+	var idString string
 
 	conflict := true
 	err := db.Db.QueryRow("SELECT count, scale, addConst FROM count WHERE type='links'").Scan(&count, &scale, &addConst)
 	if err != nil {
-		return 0, err
+		return "", err
 	}
 
 	for conflict {
 		count += 1
 		newID = (count*scale + addConst) % 65536
-		conflict, err = checkIDConflict(newID)
+		idString = fmt.Sprintf("%x", newID)
+		// makes 4 wide
+		for len(idString) < 4 {
+			idString = "0" + idString
+		}
+		conflict, err = checkIDConflict(idString)
 		if err != nil {
-			return 0, err
+			return "", err
 		}
 	}
 
 	updateCount, err := db.Db.Prepare("UPDATE count SET count=? WHERE type='links'")
 	if err != nil {
-		return newID, err
+		return idString, err
 	}
 
 	_, err = updateCount.Exec(count)
 	if err != nil {
-		return newID, err
+		return idString, err
 	}
 
-	return newID, nil
+	return idString, nil
 }
 
 // adds the game into the database
@@ -56,17 +62,9 @@ func Add(link string) (string, error) {
 		return "", err
 	}
 
-	idInt, err := getUniqueID()
-
+	idString, err := getUniqueID()
 	if err != nil {
 		return "", err
-	}
-
-	idString := fmt.Sprintf("%x", idInt)
-
-	// makes 4 wide
-	for len(idString) < 4 {
-		idString = " " + idString
 	}
 
 	addLink, err := db.Db.Prepare("INSERT INTO links VALUES(?, ?)")

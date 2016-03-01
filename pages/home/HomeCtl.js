@@ -7,10 +7,10 @@ marktai.controller("HomeCtl", ["$scope", "$rootScope", "$http", "$location", fun
 
 
 	var getPosts = function() {
-		$http.get('/apiBeta/posts').then(function(result){
+		$http.get('/api/posts').then(function(result){
 			$scope.posts = result.data["Posts"]
 			_ = function(post) {
-				$http.get('/apiBeta/posts/' + post).then(function(result){ 
+				$http.get('/api/posts/' + post).then(function(result){ 
 					$scope.postsMap[post] = result.data["Post"]
 				})
 			}

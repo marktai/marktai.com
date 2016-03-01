@@ -1,5 +1,5 @@
 title = "Jess is Awesome"
-ignore = false
+ignore = true
 subtitle = "She's also pretty cute"
 author = "Mark Tai"
 image = "upload/awesome.jpg"
