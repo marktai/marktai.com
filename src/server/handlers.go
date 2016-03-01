@@ -112,7 +112,7 @@ func get24HourRequests(w http.ResponseWriter, r *http.Request) {
 	WriteOutputError(w, map[string]int{"Requests": requests}, err)
 }
 func redirectToShortlink(w http.ResponseWriter, r *http.Request) {
-	http.Redirect(w, r, "/beta#shortlink", 302)
+	http.Redirect(w, r, "/#shortlink", 302)
 }
 
 func makeShortlink(w http.ResponseWriter, r *http.Request) {
