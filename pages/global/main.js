@@ -96,4 +96,11 @@ marktai.controller("MainCtl", ["$scope", "$rootScope", "$resource", "$location",
   $rootScope.infoDiv = "";
   $rootScope.firstHit = true;
   $rootScope.oldPage = "";
+
+  if ($location.absUrl().indexOf("/beta") != -1) {
+     $rootScope.apiLocation = "/apiBeta"
+  } else {
+
+	$rootScope.apiLocation = "/api"
+  }
 }]);

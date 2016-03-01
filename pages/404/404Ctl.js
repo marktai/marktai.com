@@ -6,5 +6,4 @@ marktai.controller("404Ctl", ["$scope", "$rootScope", "$resource", "$location", 
   $scope.badAbs = $location.absUrl().replace($location.url(), $scope.badPath)
   $rootScope.page = "404";
 
-  // $rootScope.CheckCredentials();
 }])
