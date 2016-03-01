@@ -64,7 +64,7 @@ marktai.config(function($routeProvider, $locationProvider) {
     // redirects to login if not logged in
     .otherwise({
       redirectTo : function (a, b, c) {
-        return "/404#"+b;
+        return "/404#/#"+b;
       }
     })
 
