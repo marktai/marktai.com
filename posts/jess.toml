@@ -1,0 +1,14 @@
+title = "Jess is Awesome"
+ignore = true
+subtitle = "She's also pretty cute"
+author = "Mark Tai"
+image = "upload/awesome.jpg"
+created = 2015-12-13T07:46:00-08:00
+modified = 2000-05-27T07:32:00-08:00
+content = [
+  "See this girl here?",
+  "<img class='img-responsive' src='upload/jess_and_mark.jpg'>",
+  "She is awesome.  And for some reason the guy on her right is lucky enough to have her.",
+  "She has no need to worry about grades or that nonsense because she's going to do well no matter what happens in school.",
+  "Also she has dumplings.  I am jealous."
+]
