@@ -13,8 +13,8 @@ buildBeta: build
 
 run: build
 	@-pkill api
-	bin/api>log.txt 2>&1 &
+	bin/api>>log.txt 2>&1 &
 
 runBeta: buildBeta
 	@-pkill apiBeta
-	bin/apiBeta -Port=8082 >log.txt 2>&1 &
+	bin/apiBeta -Port=8082 >>log.txt 2>&1 &
