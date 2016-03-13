@@ -37,6 +37,25 @@ marktai.config(function($routeProvider, $locationProvider) {
       controller : "ShortlinkCtl"
     })
 
+	.when('/urbDic', {
+      redirectTo : function () {
+        return "/urban_dictionary" 
+      }
+    })
+	
+	.when('/urbandictionary', {
+      redirectTo : function () {
+        return "/urban_dictionary" 
+      }
+    })
+
+	.when('/urban_dictionary', {
+      templateUrl : './pages/urbDic/urbDic.html',
+      controller : "UrbDicCtl",
+	  reloadOnSearch : false
+    })
+
+
 
     // old url
 	.when('/login', {

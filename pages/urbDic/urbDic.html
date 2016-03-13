@@ -1,0 +1,45 @@
+<!-- Page Header -->
+<header class="intro-header" style="background-image: url('img/shortlink-bg.png')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading">
+                    <h1>Urban Dictionary Term Tookup</h1>
+                    <hr class="small">
+                    <span class="subheading">Hi Jess</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+			<div class="form-horizontal row">
+				<label >Term:</label>
+				<div class="form-group">
+					<div class="col-md-8">
+					  <input ng-enter="lookupTerm()" ng-model = "term" class="form-control" type="text" class="form-control" placeholder="term"> 
+					</div>
+					<div class="col-md-4">
+						<button ng-click="lookupTerm()" style = "height:'100%'" class="btn btn-default">Lookup Term</button>
+					</div>
+				</div>
+			</div>
+			<div ng-repeat = "item in results">
+				<div class = "row">
+					<h2> {{item.word}} </h2>
+					<div class="col-md-6">
+						<p> {{item.definition}} </p>
+					</div>
+					<div class="col-md-6">
+						<p> {{item.example}} </p>
+					</div>
+				</div>	
+			</div>
+			<p ng-show = "error"> Error: {{error}} </p>
+        </div>
+    </div>
+</div>
