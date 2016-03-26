@@ -12,9 +12,9 @@ buildBeta: build
 	mv bin/api bin/apiBeta
 
 run: build
-	@-pkill api
+	@-pkill api || :
 	bin/api>>log.txt 2>&1 &
 
 runBeta: buildBeta
-	@-pkill apiBeta
+	@-pkill apiBeta || : 
 	bin/apiBeta -Port=8082 >>log.txt 2>&1 &
