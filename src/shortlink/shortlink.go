@@ -5,6 +5,7 @@ import (
 	"db"
 	"errors"
 	"fmt"
+	"regexp"
 )
 
 // checks if a id already exists in the database
@@ -80,6 +81,12 @@ func Get(id string) (string, error) {
 	err := db.Db.Ping()
 	if err != nil {
 		return "", err
+	}
+
+	if bad, err := regexp.MatchString("[^a-f0-9]", id); err != nil {
+		return "", err
+	} else if bad {
+		return "", errors.New("Invalid link ID")
 	}
 
 	var link string
