@@ -1,0 +1,10 @@
+title = "Setting up mark@marktai.com"
+ignore = false 
+subtitle = "Google doesn't seem to like me"
+author = "Mark Tai"
+image = "img/mail-bg.png"
+created = 2016-03-26T17:36:00-08:00
+modified = 2016-03-26T17:36:00-08:00
+content = [
+	"This is a temporary post",
+  ]
