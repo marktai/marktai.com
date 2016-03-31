@@ -11,12 +11,19 @@ import (
 	"posts"
 	"shortlink"
 	"strconv"
+	"strings"
 	"time"
 )
 
 func getPost(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	post, err := posts.GetPost(vars["Title"])
+	if err != nil {
+		if strings.Contains(err.Error(), "not found") {
+			WriteError(w, err, 404)
+			return
+		}
+	}
 	WriteOutputError(w, map[string]*posts.Post{"Post": post}, err)
 }
 
