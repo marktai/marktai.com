@@ -12,6 +12,15 @@ marktai.controller("PostsCtl", ["$scope", "$rootScope", "$http", "$location", "$
                 $scope.pars.push($sce.trustAsHtml(par))
             }
 
+		}, function(error) {
+			if (error.status === 404) {
+
+				var url = "/#" + $location.url();
+				console.log(url)
+				$location.path("/404");
+				$location.hash(url);
+			}
+				
 		})
 	}
 
