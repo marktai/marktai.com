@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"regexp"
+	"strings"
 )
 
 // checks if a id already exists in the database
@@ -82,6 +83,8 @@ func Get(id string) (string, error) {
 	if err != nil {
 		return "", err
 	}
+
+	id = strings.ToLower(id)
 
 	if bad, err := regexp.MatchString("[^a-f0-9]", id); err != nil {
 		return "", err
