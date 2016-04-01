@@ -2,10 +2,13 @@ export GOPATH := $(shell pwd)
 default: build
 
 init:
-	rm -f bin/server bin/main bin/api
-	@cd src/main && go get
+	bower install
+	cd src/main && go get
 
-build: init
+clean:
+	rm -f bin/server bin/main bin/api
+
+build: init clean
 	go build -o bin/api src/main/main.go 
 
 buildBeta: build
