@@ -1,0 +1,39 @@
+<link href="./pages/upload/upload.css" rel="stylesheet" type="text/css">
+
+<!-- Page Header -->
+<header class="intro-header" style="background-image: url('img/shortlink-bg.png')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading">
+                    <h1>Upload</h1>
+                    <hr class="small">
+                    <span class="subheading">Please don't abuse it</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+			<button class="btn btn-default"  ngf-multiple="true" ng-model="files">Select File(s)</button>
+			<div ngf-drop ngf-select ng-model="files" class="drop-box" 
+				ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
+				accept="image/*,application/pdf" 
+				ngf-pattern="'image/*,application/pdf'">Drop files here or click to upload</div>
+			<div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+			
+			<br>
+
+			<h3>Files:</h3>
+			<ul>
+				<li ng-repeat="f in totalFiles" style="font:smaller">{{f.name}} {{fileProgress[f]}}% {{f.$error}} {{f.$errorParam}}</li>
+			</ul>
+			<button class="btn btn-danger" ng-click="clear()">Clear</button>
+			<button class="btn btn-default" ng-click="upload()">Upload</button>	
+        </div>
+    </div>
+</div>
