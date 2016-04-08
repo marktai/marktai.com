@@ -48,6 +48,7 @@ func Run(port uint16) {
 	r.HandleFunc("/shortlink/", Log(redirectToShortlink)).Methods("GET")
 	r.HandleFunc("/shortlink", Log(makeShortlink)).Methods("POST")
 	r.HandleFunc("/shortlink/{linkID}", Log(getShortlink)).Methods("GET")
+	r.HandleFunc("/upload", Log(upload)).Methods("POST")
 	// r.HandleFunc("/shortlink/{linkID}", deleteShortlink).Methods("DELETE")
 
 	for {

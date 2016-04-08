@@ -1,6 +1,6 @@
 var defaultPage = "home";
 
-var marktai = new angular.module("marktai", ["ngTouch","ngResource", 'ngRoute', "ngSanitize", "ngWebsocket"]);
+var marktai = new angular.module("marktai", ["ngTouch","ngResource", 'ngRoute', "ngSanitize", 'ngFileUpload']);
 
 
 // Sets up default page to be login and redirects every other one to 
@@ -37,6 +37,10 @@ marktai.config(function($routeProvider, $locationProvider) {
       controller : "ShortlinkCtl"
     })
 
+	.when('/upload', {
+      templateUrl : './pages/upload/upload.html',
+      controller : "UploadCtl"
+    })
 
     // old url
 	.when('/login', {

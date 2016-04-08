@@ -4,10 +4,12 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
+	"io"
 	"ipCircBuffer"
 	"net"
 	"net/http"
 	"nginxParser"
+	"os"
 	"posts"
 	"shortlink"
 	"strconv"
@@ -166,4 +168,23 @@ func getShortlink(w http.ResponseWriter, r *http.Request) {
 	}
 	http.Redirect(w, r, link, 302)
 
+}
+
+// upload logic
+func upload(w http.ResponseWriter, r *http.Request) {
+	r.ParseMultipartForm(32 << 20)
+	file, handler, err := r.FormFile("file")
+	if err != nil {
+		WriteError(w, err, 500)
+		return
+	}
+	defer file.Close()
+	fmt.Fprintf(w, "%v", handler.Header)
+	f, err := os.OpenFile("./upload/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0664)
+	if err != nil {
+		WriteError(w, err, 500)
+		return
+	}
+	defer f.Close()
+	io.Copy(f, file)
 }
