@@ -5,8 +5,15 @@
     margin: 10px;
 	min-height: 100px;
 	min-width: 100px;
-	vertical-align:middle;
+	line-height: 100px;
 }
+
+.drop-box-text {
+	display: inline-block;
+	vertical-align: middle;
+	line-height: normal;
+} 
+
 .dragover {
     border: 5px dashed blue;
 }

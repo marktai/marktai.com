@@ -19,19 +19,29 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-			<button class="btn btn-default"  ngf-multiple="true" ng-model="files">Select File(s)</button>
+			<button class="btn btn-default" ngf-select ngf-multiple="true" ng-model="files">Select File(s)</button>
 			<div ngf-drop ngf-select ng-model="files" class="drop-box" 
 				ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
-				accept="image/*,application/pdf" 
-				ngf-pattern="'image/*,application/pdf'">Drop files here or click to upload</div>
+				accept="*" 
+				ngf-pattern="'*'">
+				<span class="drop-box-text">Drop files here or click to upload</span>
+			</div>
 			<div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
 			
 			<br>
 
-			<h3>Files:</h3>
-			<ul>
-				<li ng-repeat="f in totalFiles" style="font:smaller">{{f.name}} {{fileProgress[f]}}% {{f.$error}} {{f.$errorParam}}</li>
-			</ul>
+			<div ng-show="totalFiles.length">
+				<h3>Files:</h3>
+				<ul>
+					<li ng-repeat="f in totalFiles" style="font:smaller">{{f.name}} {{fileProgress[f.name]}} {{f.$error}} {{f.$errorParam}}</li>
+				</ul>
+			</div>
+			<div ng-show="doneFiles.length">
+				<h4>Uploaded Files:</h3>
+				<ul>
+					<li ng-repeat="f in doneFiles" style="font:smaller"><a ng-href="{{fileLinks[f.name]}}" ng-bind="f.name"></a></li>
+				</ul>
+			</div>
 			<button class="btn btn-danger" ng-click="clear()">Clear</button>
 			<button class="btn btn-default" ng-click="upload()">Upload</button>	
         </div>

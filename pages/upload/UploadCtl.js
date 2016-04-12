@@ -4,18 +4,24 @@ marktai.controller("UploadCtl", ["$scope", "$rootScope", "$http", "$location", "
 	$rootScope.page = "home";
 
 	$scope.files = [];
+	$scope.doneFiles = [];
 	$scope.totalFiles = [];
 	$scope.fileProgress = {};
+	$scope.fileLinks = {};
 
 	$scope.$watch('files', function() {
 		if ($scope.files && $scope.files.length) {
 			$scope.totalFiles = $scope.totalFiles.concat($scope.files);
 			for (var i = 0; i < $scope.files.length; i++) {
-				$scope.fileProgress[$scope.files[i]] = "N/A";
+				$scope.fileProgress[$scope.files[i].name] = "";
 			}
 			$scope.files = []
 		}
 	});
+
+	var generateFileLink = function(file) {
+		return "./upload/" + file.name;
+	}	
 
 
     $scope.upload = function () {
@@ -24,7 +30,7 @@ marktai.controller("UploadCtl", ["$scope", "$rootScope", "$http", "$location", "
 			  var file = $scope.totalFiles[i];
               if (!file.$error) {
 				  var _ = function(file) {
-					$scope.fileProgress[file] = 0;
+					$scope.fileProgress[file.name] = "0%";
 					Upload.upload({
 						url: $rootScope.apiLocation + "/upload",
 						data: {
@@ -36,11 +42,14 @@ marktai.controller("UploadCtl", ["$scope", "$rootScope", "$http", "$location", "
 							$scope.totalFiles.splice(index, 1);
 						}
 						delete $scope.fileProgress[file];
+						$scope.fileLinks[file.name] = generateFileLink(file);
+						$scope.doneFiles.push(file);
+
 					}, function(error){
 						console.log(error);
 					}, function (evt) {
 						var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-						$scope.fileProgress[file] = progressPercentage;
+						$scope.fileProgress[file.name] = progressPercentage + "%";
 					});
 				  }
 
