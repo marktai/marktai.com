@@ -29,13 +29,15 @@ marktai.controller("UploadCtl", ["$scope", "$rootScope", "$http", "$location", "
             for (var i = 0; i < $scope.totalFiles.length; i++) {
 			  var file = $scope.totalFiles[i];
               if (!file.$error) {
+				  authHeaders = {};
 				  var _ = function(file) {
 					$scope.fileProgress[file.name] = "0%";
 					Upload.upload({
 						url: $rootScope.apiLocation + "/upload",
 						data: {
 						  file: file, 
-						}
+						},
+						headers: authHeaders,
 					}).then(function (resp) {
 						var index = $scope.totalFiles.indexOf(file);
 						if (index >= 0) {
