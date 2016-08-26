@@ -1,6 +1,7 @@
 package server
 
 import (
+	"auth"
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
@@ -172,6 +173,22 @@ func getShortlink(w http.ResponseWriter, r *http.Request) {
 
 // upload logic
 func upload(w http.ResponseWriter, r *http.Request) {
+	userID, timeInt, path, messageHMACString, encoding, err := auth.ExtractAuthParams(r)
+	if err != nil {
+		WriteError(w, err, 400)
+		return
+	}
+
+	authed, err := auth.CheckAuthParams(userID, timeInt, path, messageHMACString, encoding)
+	if err != nil {
+		WriteError(w, err, 500)
+		return
+	}
+
+	if !authed {
+
+	}
+
 	r.ParseMultipartForm(32 << 20)
 	file, handler, err := r.FormFile("file")
 	if err != nil {

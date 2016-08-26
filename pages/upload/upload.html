@@ -1,4 +1,5 @@
 <link href="./pages/upload/upload.css" rel="stylesheet" type="text/css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/hmac-sha256.js"></script>
 
 <!-- Page Header -->
 <header class="intro-header" style="background-image: url('img/shortlink-bg.png')">
@@ -19,31 +20,53 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
-			<button class="btn btn-default" ngf-select ngf-multiple="true" ng-model="files" accept="*">Select File(s)</button>
-			<div ngf-drop ngf-select ng-model="files" class="drop-box" 
-				ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
-				accept="*" 
-				ngf-pattern="'*'">
-				<span class="drop-box-text">Drop files here or click to upload</span>
-			</div>
-			<div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
-			
-			<br>
+			<h1>Login</h1>
+			<form>
+				<div class="form-group" ng-submit="login()">
+					<label for="usr">Username:</label>
+					<input type="text" ng-model="username" class="form-control" ng-enter="login()" id="usr">
+				</div>
+				<div class="form-group" ng-submit="login()">
+					<label for="pwd">Password:</label>
+					<input type="password" ng-model="password" class="form-control" ng-enter="login()" id="pwd">
+				</div>
 
-			<div ng-show="totalFiles.length">
-				<h3>Files:</h3>
-				<ul>
-					<li ng-repeat="f in totalFiles" style="font:smaller">{{f.name}} {{fileProgress[f.name]}} {{f.$error}} {{f.$errorParam}}</li>
-				</ul>
+				<div class="checkbox">
+					<label>
+					<input type="checkbox" ng-model="stayLoggedIn"> Stay logged in
+					</label>
+				</div>
+			</form>
+			<button ng-click="login()" class="btn btn-default">Login</button>
+
+        	<div ng-hide="userID === -1">
+        		<hr>
+				<button class="btn btn-default" ngf-select ngf-multiple="true" ng-model="files" accept="*">Select File(s)</button>
+				<div ngf-drop ngf-select ng-model="files" class="drop-box" 
+					ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
+					accept="*" 
+					ngf-pattern="'*'">
+					<span class="drop-box-text">Drop files here or click to upload</span>
+				</div>
+				<div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
+				
+				<br>
+
+				<div ng-show="totalFiles.length">
+					<h3>Files:</h3>
+					<ul>
+						<li ng-repeat="f in totalFiles" style="font:smaller">{{f.name}} {{fileProgress[f.name]}} {{f.$error}} {{f.$errorParam}}</li>
+					</ul>
+				</div>
+				<div ng-show="doneFiles.length">
+					<h4>Uploaded Files:</h4>
+					<ul>
+						<li ng-repeat="f in doneFiles" style="font:smaller"><a ng-href="{{fileLinks[f.name]}}" ng-bind="f.name"></a></li>
+					</ul>
+				</div>
+				<button class="btn btn-danger" ng-click="clear()">Clear</button>
+				<button class="btn btn-default" ng-click="upload()">Upload</button>
 			</div>
-			<div ng-show="doneFiles.length">
-				<h4>Uploaded Files:</h3>
-				<ul>
-					<li ng-repeat="f in doneFiles" style="font:smaller"><a ng-href="{{fileLinks[f.name]}}" ng-bind="f.name"></a></li>
-				</ul>
-			</div>
-			<button class="btn btn-danger" ng-click="clear()">Clear</button>
-			<button class="btn btn-default" ng-click="upload()">Upload</button>	
         </div>
     </div>
 </div>

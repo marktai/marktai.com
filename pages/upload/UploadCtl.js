@@ -1,4 +1,4 @@
-marktai.controller("UploadCtl", ["$scope", "$rootScope", "$http", "$location", "$q", "Upload", function($scope, $rootScope, $http, $location, $q, Upload) {
+marktai.controller("UploadCtl", ["$scope", "$rootScope", "$http", "$location", "$q", "Upload", "LoginService", function($scope, $rootScope, $http, $location, $q, Upload, LoginService) {
 	$rootScope.info = ""
 	$rootScope.error = ""
 	$rootScope.page = "home";
@@ -8,6 +8,13 @@ marktai.controller("UploadCtl", ["$scope", "$rootScope", "$http", "$location", "
 	$scope.totalFiles = [];
 	$scope.fileProgress = {};
 	$scope.fileLinks = {};
+
+	$scope.username = "";
+	$scope.password = "";
+	$scope.stayLoggedIn = false;
+
+	$scope.userID = -1;
+	$scope.secret = "";
 
 	$scope.$watch('files', function() {
 		if ($scope.files && $scope.files.length) {
@@ -21,19 +28,35 @@ marktai.controller("UploadCtl", ["$scope", "$rootScope", "$http", "$location", "
 
 	var generateFileLink = function(file) {
 		return "./upload/" + file.name;
-	}	
+	}
 
+	$scope.setCreds = function(creds) {
+		$scope.userID = creds['UserID'];
+		$scope.secret = creds['Secret'];
+		$scope.username = creds['Username'];
+	};
+
+	$scope.login = function() {
+		LoginService.login($scope.username, $scope.password, $scope.stayLoggedIn).then(function(creds) {
+			$scope.setCreds(creds);
+		}, function(error) {
+			console.log(error);
+		});
+		$scope.password = "";
+	}
 
     $scope.upload = function () {
         if ($scope.totalFiles && $scope.totalFiles.length) {
             for (var i = 0; i < $scope.totalFiles.length; i++) {
 			  var file = $scope.totalFiles[i];
               if (!file.$error) {
-				  authHeaders = {};
+				  var urlWithoutRoot = "/upload";
+				  var authHeaders = LoginService.genAuthHeaders(urlWithoutRoot, $scope.secret);
+				  authHeaders['UserID'] = $scope.userID;
 				  var _ = function(file) {
 					$scope.fileProgress[file.name] = "0%";
 					Upload.upload({
-						url: $rootScope.apiLocation + "/upload",
+						url: $rootScope.apiLocation + urlWithoutRoot,
 						data: {
 						  file: file, 
 						},
@@ -48,7 +71,7 @@ marktai.controller("UploadCtl", ["$scope", "$rootScope", "$http", "$location", "
 						$scope.doneFiles.push(file);
 
 					}, function(error){
-						console.log(error);
+						$scope.fileProgress[file.name] = "Error: " + error.data.Error;
 					}, function (evt) {
 						var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
 						$scope.fileProgress[file.name] = progressPercentage + "%";
@@ -64,7 +87,16 @@ marktai.controller("UploadCtl", ["$scope", "$rootScope", "$http", "$location", "
 	$scope.clear = function() {
 		$scope.totalFiles = [];
 		$scope.files = [];
-	}
+	};
 	
+	$scope.init = function() {
+		LoginService.checkLocalStorageLogin().then(function(creds) {
+			$scope.setCreds(creds);
+		}, function(error) {
+			console.log(error);
+		});
+	};
+
+	$scope.init();
 
 }])

@@ -1,6 +1,6 @@
 var defaultPage = "home";
 
-var marktai = new angular.module("marktai", ["ngTouch","ngResource", 'ngRoute', "ngSanitize", 'ngFileUpload']);
+var marktai = new angular.module("marktai", ["ngTouch","ngResource", 'ngRoute', "ngSanitize", 'ngFileUpload', "ngStorage"]);
 
 
 // Sets up default page to be login and redirects every other one to 
