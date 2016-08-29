@@ -27,6 +27,9 @@ marktai.controller("UploadCtl", ["$scope", "$rootScope", "$http", "$location", "
 	});
 
 	var generateFileLink = function(file) {
+		if ($scope.userID > 0) {
+			return "./upload/" + $scope.userID + "/" + file.name;
+		}
 		return "./upload/" + file.name;
 	}
 

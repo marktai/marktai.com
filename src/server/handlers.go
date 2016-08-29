@@ -7,6 +7,7 @@ import (
 	"github.com/gorilla/mux"
 	"io"
 	"ipCircBuffer"
+	"log"
 	"net"
 	"net/http"
 	"nginxParser"
@@ -180,13 +181,12 @@ func upload(w http.ResponseWriter, r *http.Request) {
 	}
 
 	authed, err := auth.CheckAuthParams(userID, timeInt, path, messageHMACString, encoding)
-	if err != nil {
-		WriteError(w, err, 500)
+	if !authed || err != nil {
+		if err != nil {
+			log.Println(err)
+		}
+		WriteErrorString(w, "Not authorized request", 400)
 		return
-	}
-
-	if !authed {
-
 	}
 
 	r.ParseMultipartForm(32 << 20)
@@ -196,12 +196,27 @@ func upload(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	defer file.Close()
-	fmt.Fprintf(w, "%v", handler.Header)
-	f, err := os.OpenFile("./upload/"+handler.Filename, os.O_WRONLY|os.O_CREATE, 0664)
+	filename := handler.Filename
+
+	// strip leading periods
+	for len(filename) > 0 && filename[0] == '.' {
+		filename = filename[1:]
+	}
+	filename = strings.Replace(filename, "/", "", -1)
+	if len(filename) == 0 {
+		WriteErrorString(w, "Invalid filename", 400)
+	}
+
+	err = os.MkdirAll(fmt.Sprintf("./upload/%d", userID), 0774)
+	if err != nil {
+		WriteError(w, err, 500)
+	}
+	f, err := os.OpenFile(fmt.Sprintf("./upload/%d/%s", userID, filename), os.O_WRONLY|os.O_CREATE, 0664)
 	if err != nil {
 		WriteError(w, err, 500)
 		return
 	}
 	defer f.Close()
 	io.Copy(f, file)
+	fmt.Fprintf(w, "%v", handler.Header)
 }
