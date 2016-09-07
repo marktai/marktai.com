@@ -1,0 +1,20 @@
+.drop-box {
+    background: #F8F8F8;
+    border: 5px dashed #DDD;
+    text-align: center;
+    margin: 10px;
+	min-height: 100px;
+	min-width: 100px;
+	line-height: 100px;
+}
+
+.drop-box-text {
+	display: inline-block;
+	vertical-align: middle;
+	line-height: normal;
+} 
+
+.dragover {
+    border: 5px dashed blue;
+}
+
