@@ -12,6 +12,7 @@ import (
 	"net/http"
 	"nginxParser"
 	"os"
+	"path"
 	"posts"
 	"shortlink"
 	"strconv"
@@ -174,13 +175,13 @@ func getShortlink(w http.ResponseWriter, r *http.Request) {
 
 // upload logic
 func upload(w http.ResponseWriter, r *http.Request) {
-	userID, timeInt, path, messageHMACString, encoding, err := auth.ExtractAuthParams(r)
+	userID, timeInt, requestPath, messageHMACString, encoding, err := auth.ExtractAuthParams(r)
 	if err != nil {
 		WriteError(w, err, 400)
 		return
 	}
 
-	authed, err := auth.CheckAuthParams(userID, timeInt, path, messageHMACString, encoding)
+	authed, err := auth.CheckAuthParams(userID, timeInt, requestPath, messageHMACString, encoding)
 	if !authed || err != nil {
 		if err != nil {
 			log.Println(err)
@@ -202,7 +203,7 @@ func upload(w http.ResponseWriter, r *http.Request) {
 	for len(filename) > 0 && filename[0] == '.' {
 		filename = filename[1:]
 	}
-	filename = strings.Replace(filename, "/", "", -1)
+	filename = path.Clean(filename)
 	if len(filename) == 0 {
 		WriteErrorString(w, "Invalid filename", 400)
 	}
