@@ -41,8 +41,8 @@
 
         	<div ng-hide="userID === -1">
         		<hr>
-				<button class="btn btn-default" ngf-select ngf-multiple="true" ng-model="files" accept="*">Select File(s)</button>
-				<div ngf-drop ngf-select ng-model="files" class="drop-box" 
+				<button class="btn btn-default" ngf-select="upload()" ngf-multiple="true" ng-model="files" accept="*">Select File(s)</button>
+				<div ngf-drop ngf-select="upload()" ng-model="files" class="drop-box" 
 					ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
 					accept="*" 
 					ngf-pattern="'*'">
@@ -64,8 +64,8 @@
 						<li ng-repeat="f in doneFiles" style="font:smaller"><a ng-href="{{fileLinks[f.name]}}" ng-bind="f.name"></a></li>
 					</ul>
 				</div>
-				<button class="btn btn-danger" ng-click="clear()">Clear</button>
-				<button class="btn btn-default" ng-click="upload()">Upload</button>
+<!-- 				<button class="btn btn-danger" ng-click="clear()">Clear</button>
+				<button class="btn btn-default" ng-click="upload()">Upload</button> -->
 			</div>
         </div>
     </div>
