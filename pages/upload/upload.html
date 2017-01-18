@@ -20,6 +20,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
+		<div ng-show="userID===-1">
 			<h1>Login</h1>
 			<form>
 				<div class="form-group" ng-submit="login()">
@@ -38,7 +39,8 @@
 				</div>
 			</form>
 			<button ng-click="login()" class="btn btn-default">Login</button>
-
+			<p>New here? <a href="https://www.marktai.com/meta-tic-tac-toe/#/register">Register</a></p>
+		</div>
         	<div ng-hide="userID === -1">
         		<hr>
 				<button class="btn btn-default" ngf-select="upload()" ngf-multiple="true" ng-model="files" accept="*">Select File(s)</button>
@@ -59,7 +61,7 @@
 					</ul>
 				</div>
 				<div ng-show="doneFiles.length">
-					<h4>Uploaded Files:</h4>
+					<h4>Uploaded Files (Links): </h4>
 					<ul>
 						<li ng-repeat="f in doneFiles" style="font:smaller"><a ng-href="{{fileLinks[f.name]}}" ng-bind="f.name"></a></li>
 					</ul>

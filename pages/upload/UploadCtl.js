@@ -91,12 +91,22 @@ marktai.controller("UploadCtl", ["$scope", "$rootScope", "$http", "$location", "
 		$scope.totalFiles = [];
 		$scope.files = [];
 	};
+
+	$scope.checkAutoLogin = function(){
+	    var hash = $location.hash()
+	    if (hash === "?autologin=true") {
+		$scope.username = "you";
+		$scope.password = "password";
+		$scope.login();
+	    }
+	};
 	
 	$scope.init = function() {
 		LoginService.checkLocalStorageLogin().then(function(creds) {
 			$scope.setCreds(creds);
 		}, function(error) {
 			console.log(error);
+			$scope.checkAutoLogin();
 		});
 	};
 
