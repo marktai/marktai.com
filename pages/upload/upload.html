@@ -60,7 +60,7 @@
 						<li ng-repeat="f in totalFiles" style="font:smaller">{{f.name}} {{fileProgress[f.name]}} {{f.$error}} {{f.$errorParam}}</li>
 					</ul>
 				</div>
-				<div ng-show="doneFiles.length">
+				<div ng-show="doneFiles.length" class="file-links">
 					<h4>Uploaded Files (Links): </h4>
 					<ul>
 						<li ng-repeat="f in doneFiles" style="font:smaller"><a ng-href="{{fileLinks[f.name]}}" ng-bind="f.name"></a></li>

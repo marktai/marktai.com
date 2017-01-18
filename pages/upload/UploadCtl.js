@@ -94,7 +94,7 @@ marktai.controller("UploadCtl", ["$scope", "$rootScope", "$http", "$location", "
 
 	$scope.checkAutoLogin = function(){
 	    var hash = $location.hash()
-	    if (hash === "?autologin=true") {
+	    if (hash === "autologin") {
 		$scope.username = "you";
 		$scope.password = "password";
 		$scope.login();
