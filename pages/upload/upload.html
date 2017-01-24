@@ -43,8 +43,9 @@
 		</div>
         	<div ng-hide="userID === -1">
         		<hr>
-				<button class="btn btn-default" ngf-select="upload()" ngf-multiple="true" ng-model="files" accept="*">Select File(s)</button>
-				<div ngf-drop ngf-select="upload()" ng-model="files" class="drop-box" 
+				<button class="btn btn-default" ngf-select="upload()"  ngf-multiple="true" ng-model="files" accept="*">Select File(s)</button>
+				<div ngf-select="upload()" 
+				ngf-drop="upload()" ng-model="files" class="drop-box" 
 					ngf-drag-over-class="'dragover'" ngf-multiple="true" ngf-allow-dir="true"
 					accept="*" 
 					ngf-pattern="'*'">
