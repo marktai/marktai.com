@@ -32,6 +32,11 @@ marktai.config(function($routeProvider, $locationProvider) {
       controller : "ContactCtl"
     })
 
+    .when('/corgis', {
+      templateUrl : './pages/corgis/corgis.html',
+      controller : "CorgisCtl"
+    })
+
 	.when('/shortlink', {
       templateUrl : './pages/shortlink/shortlink.html',
       controller : "ShortlinkCtl"
