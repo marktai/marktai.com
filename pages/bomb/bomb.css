@@ -20,3 +20,16 @@
 								height: 10vh;
 				}
 }
+
+.navbar-fixed-top {
+	display: none;
+}
+
+.navbar-fixed-top.is-visible {
+	display: block;
+}
+
+footer {
+	display: none;
+}
+
