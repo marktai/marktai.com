@@ -1,0 +1,22 @@
+
+.pdf, .notes {
+				width: 100%;
+}
+
+/* I have no idea why it works this way :( */
+
+@media (min-width: 769px) {
+				.pdf, .notes {
+							 	height: 100vh;
+				}
+}
+
+@media (max-width: 768px) {
+				.pdf {
+							 	height: 85vh;
+				}
+
+				.notes {
+								height: 10vh;
+				}
+}

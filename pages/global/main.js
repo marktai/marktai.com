@@ -37,6 +37,12 @@ marktai.config(function($routeProvider, $locationProvider) {
       controller : "CorgisCtl"
     })
 
+    .when('/bomb', {
+      templateUrl : './pages/bomb/bomb.html',
+      controller : "BombCtl"
+    })
+
+
 	.when('/shortlink', {
       templateUrl : './pages/shortlink/shortlink.html',
       controller : "ShortlinkCtl"
