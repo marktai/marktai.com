@@ -37,6 +37,17 @@ marktai.config(function($routeProvider, $locationProvider) {
       controller : "CorgisCtl"
     })
 
+    .when('/bomb2/password', {
+      templateUrl : './pages/password/password.html',
+      controller : "PasswordCtl"
+    })
+
+    .when('/bom3/morse', {
+      templateUrl : './pages/morse/morse.html',
+      controller : "MorseCtl"
+    })
+
+
     .when('/bomb', {
       templateUrl : './pages/bomb/bomb.html',
       controller : "BombCtl"
