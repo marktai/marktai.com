@@ -1,0 +1,14 @@
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+
+            <div ng-show="error != ''">{{error}}</div>
+
+            <ul>
+                <li ng-repeat="l in alphabet"><button class="btn btn-default" ng-click="press_letter(l)">{{l}}</button></li>
+            </ul>
+
+        </div>
+    </div>
+</div>

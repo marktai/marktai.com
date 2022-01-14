@@ -1,6 +1,7 @@
 
 .pdf, .notes {
 				width: 100%;
+				font-size: 14px;
 }
 
 /* I have no idea why it works this way :( */
@@ -33,3 +34,7 @@ footer {
 	display: none;
 }
 
+:focus {
+  outline-color: transparent;
+  outline-style: none;
+}

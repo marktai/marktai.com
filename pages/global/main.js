@@ -5,9 +5,7 @@ var marktai = new angular.module("marktai", ["ngTouch","ngResource", 'ngRoute', 
 
 // Sets up default page to be login and redirects every other one to 
 marktai.config(function($routeProvider, $locationProvider) {
-  $routeProvider
-
-    .when('/404', {
+  $routeProvider .when('/404', {
       templateUrl : './pages/404/404.html',
       controller : "404Ctl"
     })
@@ -47,12 +45,15 @@ marktai.config(function($routeProvider, $locationProvider) {
       controller : "MorseCtl"
     })
 
-
     .when('/bomb', {
       templateUrl : './pages/bomb/bomb.html',
       controller : "BombCtl"
     })
 
+    .when('/d', {
+      templateUrl : './pages/decrypto/decrypto.html',
+      controller : "DecryptoCtl"
+    })
 
 	.when('/shortlink', {
       templateUrl : './pages/shortlink/shortlink.html',
@@ -63,6 +64,17 @@ marktai.config(function($routeProvider, $locationProvider) {
       templateUrl : './pages/upload/upload.html',
       controller : "UploadCtl"
     })
+
+    .when('/where_is', {
+      templateUrl : './pages/where_is/where_is.html',
+      controller : "WhereIsCtl"
+    })
+
+    .when('/fischer', {
+      templateUrl : './pages/fischer/fischer.html',
+      controller : "FischerCtl"
+    })
+
 
     // old url
 	.when('/login', {

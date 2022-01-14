@@ -1,0 +1,14 @@
+title = "0b101 years update"
+ignore = false
+subtitle = "Is this thing on?"
+author = "Mark Tai"
+image = "https://www.marktai.com/download/update.jpg"
+created = 2021-09-30T02:18:00-08:00
+modified = 2021-09-30T02:18:00-08:00
+content = [
+	"When I first made this website 6 years ago, I was just a college sophomore who had just learned how to make a website in my internship. I was newly equipped with an understanding of Linux, Go backends, and AngularJS frontend, and I felt like I could make anything that I could dream of. ",
+	"Looking back, I’m surprised how much hasn’t changed. I’ve been keeping a morbid curiosity in how quickly my webstack would be outdated, but as frontend frameworks seemed to have changed with the wind, much of my stack is still relevant. Linux will probably stay forever, but x86 (for now), Ubuntu, nginx, a RESTful go backend, and docker are still plenty in vogue, and perfectly fine choices to start a new project in. ",
+	"As for me, I feel quite the opposite. I’ve come to develop a significantly broader and deeper understanding of the industry and how technology is just one component of how to make a product. No longer do I feel like a young kid that needs to prove himself to the world, but now a young kid who feels like he’s fooled at least one company and team into believing they can call him a senior engineer. I’ve been exploring a lot of my passions outside of tech, such as board games, cocktails, traveling, traditional jazz, model trains, and more, and I only really work on side projects when it happens to relate to one of my other passions. Looking back, it seems like an obvious shift in interests given that I have a day job in tech, but I really felt like I would be doing weekend CS projects for my entire life once upon a time. ",
+	"One upcoming project that I’m currently excited about is using a 3 color (including white as a color) e-ink display for my cocktail menu so people can queue cocktail requests from me. I’ll also eventually get around to adding polish + finishing touches to the board game I’ve been working on in the pandemic to finally get it printed professionally, then take it online, but that might be more of a multiyear project that I’m pacing myself on. ",
+	"Anyways, that’s about it for this post. I thought it would just be fun to update the top google link for “mark tai website” after I added 33% more life experience since I started. I’ll add a post later for my cocktail menu project including a link to all my cocktails I’ve been working on that you can look forward to!"
+]
