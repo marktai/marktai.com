@@ -65,14 +65,19 @@ marktai.config(function($routeProvider, $locationProvider) {
       controller : "UploadCtl"
     })
 
-    .when('/where_is', {
-      templateUrl : './pages/where_is/where_is.html',
-      controller : "WhereIsCtl"
-    })
+    // .when('/where_is', {
+    //   templateUrl : './pages/where_is/where_is.html',
+    //   controller : "WhereIsCtl"
+    // })
 
     .when('/fischer', {
       templateUrl : './pages/fischer/fischer.html',
       controller : "FischerCtl"
+    })
+
+    .when('/menu', {
+      templateUrl : './pages/menu/menu.html',
+      controller : "MenuCtl"
     })
 
 
