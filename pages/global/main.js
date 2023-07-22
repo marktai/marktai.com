@@ -80,6 +80,11 @@ marktai.config(function($routeProvider, $locationProvider) {
       controller : "MenuCtl"
     })
 
+    .when('/mootropolis', {
+      templateUrl : './pages/mootropolis/mootropolis.html',
+      controller : "MootropolisCtl"
+    })
+
 
     // old url
 	.when('/login', {
