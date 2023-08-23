@@ -1,5 +1,5 @@
 title = "Sisetas not necessary"
-ignore = false
+ignore = true
 subtitle = ""
 author = "Mark Tai"
 image = "https://www.marktai.com/download/update.jpg"

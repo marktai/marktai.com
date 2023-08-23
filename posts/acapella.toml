@@ -1,0 +1,16 @@
+title = "One, two, you know what to do"
+ignore = false
+subtitle = "This delightful phrase is how I count off music"
+author = "Mark Tai"
+image = "https://www.marktai.com/download/54689/Oliver-Creole-Jazz-Band-Chicago-1923.jpg"
+created = 2023-08-20T09:00:00+02:00
+modified = 2023-08-20T09:00:00+02:00
+content = [
+                "<video controls autoplay name='media' width='100%'><source src='https://www.marktai.com/download/me/music/dykwimt_miss_new_orleans.mp4' type='video/mp4'>Your browser does not support this video</video>",
+
+								"I, Mark, love New Orleans jazz, but I haven't been able to play in a New Orleans jazz band in years. So I decided to turn my family into one!",
+								
+								"I arranged (not composed) <a href='https://www.marktai.com/download/me/music/Miss_New_Orleans_a_capella.pdf'>this 5 part a capella piece</a> for my family, gave brief private + group lessons, and then we recorded this video in our Seattle family vacation when we finally all congregated! It's by no means a perfect performance, but I'm really happy with how each singer has individually improved (most of the family has literally no singing experience), as well as learned to sing together as a group. I'm hoping we can practice more and eventually do a performance for an audience one day!"
+
+]
+
