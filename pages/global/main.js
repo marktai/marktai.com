@@ -85,6 +85,11 @@ marktai.config(function($routeProvider, $locationProvider) {
       controller : "MootropolisCtl"
     })
 
+    .when('/interviewing', {
+      templateUrl : './pages/interviewing/interviewing.html',
+      controller : "InterviewingCtl"
+    })
+
 
     // old url
 	.when('/login', {
