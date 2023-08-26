@@ -90,6 +90,11 @@ marktai.config(function($routeProvider, $locationProvider) {
       controller : "InterviewingCtl"
     })
 
+    .when('/index', {
+      templateUrl : './pages/markieverse/markieverse.html',
+      controller : "MarkieverseCtl"
+    })
+
 
     // old url
 	.when('/login', {
