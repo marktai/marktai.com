@@ -1,4 +1,4 @@
-var defaultPage = "home";
+let defaultPage = () => window.location.hostname === '52.11.108.65' ? 'index' : 'home';
 
 var marktai = new angular.module("marktai", ["ngTouch","ngResource", 'ngRoute', "ngSanitize", 'ngFileUpload', "ngStorage"]);
 
@@ -103,12 +103,12 @@ marktai.config(function($routeProvider, $locationProvider) {
     // causes no path to go to default page
     .when('', {
       redirectTo : function () {
-        return "/" + defaultPage
+        return "/" + defaultPage();
       }
     })
     .when('/', {
       redirectTo : function () {
-        return "/" + defaultPage
+        return "/" + defaultPage();
       }
     })
 
