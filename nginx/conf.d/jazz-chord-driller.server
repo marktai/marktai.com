@@ -1,0 +1,31 @@
+
+
+server {              
+        listen 80;    
+        server_name jazz-driller.marktai.com jazz-chord-driller.marktai.com jazz_driller.marktai.com jazz_chord_driller.marktai.com chord.marktai.com chords.marktai.com;    
+
+        location / {  
+            root /home/mtai/repos/jazz-chord-driller/static/;
+            autoindex on;
+            #     proxy_pass http://localhost:12432/;                                  
+            #     proxy_http_version 1.1;      
+            #     proxy_set_header Upgrade $http_upgrade;                                   
+            #     proxy_set_header Connection $connection_upgrade;                          
+        }             
+}                     
+
+server {              
+        listen 80;    
+        server_name chords-beta.marktai.com;    
+        gzip off;     
+
+        location / {  
+            proxy_pass http://localhost:12432/;                                  
+            proxy_http_version 1.1;      
+            proxy_set_header Upgrade $http_upgrade;                                   
+            proxy_set_header Connection $connection_upgrade;                          
+        }             
+
+}                     
+
+

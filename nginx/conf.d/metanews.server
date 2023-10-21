@@ -1,0 +1,19 @@
+server {
+	listen 80;
+	server_name metanews.marktai.com;
+  location / {
+			proxy_pass http://127.0.0.1:8001/;
+			proxy_http_version 1.1;
+			proxy_set_header Upgrade $http_upgrade;
+			proxy_set_header Connection $connection_upgrade;
+			proxy_redirect default;
+			proxy_set_header X-Real-IP $remote_addr;
+      
+      location /docs/ {
+           alias /home/mtai/130/CS130/src/build/html/;
+      }
+      location /website/ {
+           alias /home/mtai/130/CS130/src/frontend/;
+      }
+	}
+}	

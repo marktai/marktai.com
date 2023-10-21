@@ -1,0 +1,181 @@
+location /CS174A/hw1 {
+	alias /home/mtai/repos/CS-174A-Project1;
+
+	location = /CS174A/hw1/{
+		rewrite ^ https://www.marktai.com/CS174A/hw1/WebGL_Template/;
+	}
+
+	include /etc/nginx/conf.d/cors.conf;
+}
+
+location /CS174A/hw2 {
+	alias /home/mtai/repos/CS-174A-Project2/templates;
+	location = /CS174A/hw2/{
+		rewrite ^ https://www.marktai.com/CS174A/hw2/WebGL_Template/;
+	}
+	
+	include /etc/nginx/conf.d/cors.conf;
+}
+
+location ~ ^/github(.com)?$ {
+	rewrite ^ https://github.com/marktai;
+}
+
+
+
+location ~ ^/curveball/?$ { 
+	rewrite ^ https://play.google.com/store/apps/details?id=com.curveBall.curveBall&hl=en;
+}
+
+location ~ ^/hangouts/?$ {
+	rewrite ^ https://hangouts.google.com/u/1/call/ZgppEwB6e0GzDrGXWMiMACEE?no_rdu;
+}
+
+location ~ ^/meet/?$ {
+	rewrite ^ https://meet.google.com/vfp-bixt-qvk;
+}
+
+location ~ ^/codenames/?$ {
+	rewrite ^ https://codenames.game/room/gas-cold-degree;
+}
+
+location ~ ^/upload/?$ {
+	rewrite ^ https://www.marktai.com/#upload/;
+}
+
+location ~ ^/interview(ing)?/?$ {
+	rewrite ^ https://www.marktai.com/#interviewing/;
+}
+
+location ~ ^/bomb/?$ {
+	rewrite ^ https://www.marktai.com/#bomb/;
+}
+
+location ~ ^/open/?$ {
+	rewrite ^ https://www.marktai.com/download/open_laptop.sh;
+}
+
+location ~ ^/laptop/?$ {
+	rewrite ^ https://www.marktai.com/download/open_laptop.sh;
+}
+
+location ~ ^/unlocked/?$ {
+	rewrite ^ https://www.marktai.com/download/open_laptop.sh;
+}
+
+location ~ ^/dots/?$ {
+	rewrite ^ https://www.marktai.com/download/dots.png;
+}
+
+location ~ ^/music/?$ {
+	rewrite ^ https://www.marktai.com/download/me/music/;
+}
+
+location ~ ^/mootropolis/?$ {
+	#rewrite ^ https://www.figma.com/file/tusfaXEL2YVVAI4TvsslZo/Cocktail-Board-Game-Menu?node-id=0%3A1;
+	# rewrite ^ https://www.marktai.com/download/menu.pdf;
+	rewrite ^ https://www.marktai.com/#/mootropolis;
+}
+
+location ~ ^/menu/?$ {
+	#rewrite ^ https://www.figma.com/file/tusfaXEL2YVVAI4TvsslZo/Cocktail-Board-Game-Menu?node-id=0%3A1;
+	# rewrite ^ https://www.marktai.com/download/menu.pdf;
+	rewrite ^ https://www.marktai.com/#/menu;
+}
+
+
+location ~ ^/recipes?/?$ {
+	rewrite ^ https://docs.google.com/spreadsheets/d/1oi8oWk5rlZKVmyDZlH7RbgC91E7mKBzrVDhZ5F_9gP8/edit?usp=sharing;
+}
+
+location ~ ^/guadalajara/?$ {
+	rewrite ^ https://www.marktai.com/download/guadalajara.html;
+}
+
+location ~ ^/guadelajara/?$ {
+	rewrite ^ https://www.marktai.com/download/guadalajara.html;
+}
+
+location ~ ^/guadelejara/?$ {
+	rewrite ^ https://www.marktai.com/download/guadalajara.html;
+}
+
+location ~ ^/burrito/?$ {
+	rewrite ^ https://www.marktai.com/download/guadalajara.html;
+}
+
+location ~ ^/chicken/?$ {
+	rewrite ^ https://www.marktai.com/download/guadalajara.html;
+}
+
+location ~ ^/c0ffee/?$ {
+	rewrite ^ https://www.marktai.com/download/c0ffee.html;
+}
+
+location ~ ^/DECODED/?$ {
+	rewrite ^ https://www.rapidtables.com/convert/number/hex-to-decimal.html;
+}
+
+location ~ ^/wordle/?$ {
+	rewrite ^ http://nossl.marktai.com/download/wordle/;
+}
+
+location ~ ^/speakeasy/?$ {
+	rewrite ^ http://nossl.marktai.com/download/wordle/;
+}
+location ~ ^/burger/?$ {
+	rewrite ^ https://www.marktai.com/download/me/burger.html;
+}
+
+location ~ ^/mantu/?$ {
+	rewrite ^ https://www.marktai.com/download/me/mantu.html;
+}
+
+location ~ ^/pork[-\s_]?shoulder/?$ {
+	rewrite ^ https://www.marktai.com/download/me/porkshoulder;
+}
+
+location ~ ^/pisco[-\s_]?sour/?$ {
+	rewrite ^ https://www.marktai.com/download/me/pisco_sour.png;
+}
+
+location ~ ^/pizza[-\s_]?sour/?$ {
+	rewrite ^ https://www.marktai.com/download/me/pisco_sour.png;
+}
+
+location ~ ^/haircut/?$ {
+	rewrite ^ https://www.marktai.com/download/me/haircut.jpg;
+}
+
+location ~ ^/perm/?$ {
+	rewrite ^ https://www.marktai.com/download/me/perm.jpg;
+}
+
+location ~ ^/24-hour-limes/?$ {
+	rewrite ^ http://menu.marktai.com;
+}
+
+location ~ ^/diving/?$ {
+	rewrite ^ https://www.marktai.com/download/me/diving;
+}
+
+location ~ ^/schedule/?$ {
+	rewrite ^ https://koalendar.com/e/meet-with-mark-tai;
+}
+
+location ~ ^/schedule[-\s_]meeting/?$ {
+	rewrite ^ https://koalendar.com/e/meet-with-mark-tai;
+}
+            
+
+location ~ ^/clocktower/?$ {
+	rewrite ^ https://docs.google.com/document/d/1beiRzKeuoXST8Ogsd0Ds_shWuNoEjSV2LzrfKIGQgWw/edit;
+}
+
+location ~ ^/slack/?$ {
+	rewrite ^ https://join.slack.com/t/interviewcoac-uq18250/shared_invite/zt-216te4hs0-k6d~8Qgh5kI5fXVKj5~kFQ;
+}
+
+location ~ ^/family-acapella/?$ {
+	rewrite ^ https://www.marktai.com/#/posts#One,%20two,%20you%20know%20what%20to%20do;
+}

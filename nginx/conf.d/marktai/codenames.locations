@@ -1,0 +1,32 @@
+# location = /code_names {
+#     rewrite ^ https://www.marktai.com/codenames;
+# }
+# 
+# location = /code-names {
+#     rewrite ^ https://www.marktai.com/codenames;
+# }
+# 
+# location /codenames {
+# 	location /codenames {
+# 		alias /home/mtai/repos/codenames-website;
+# 		expires 1d;
+# 		add_header Cache-Control "public";
+# 		index /codenames/pages/global/index.html;
+# 	}
+# 
+# 	location /codenames/api/ {
+# 		location /codenames/api/auth/ {
+# 			proxy_pass http://127.0.0.1:8043/;
+# 			proxy_http_version 1.1;
+# 			proxy_set_header Upgrade $http_upgrade;
+# 			proxy_set_header Connection $connection_upgrade;
+# 		}
+# 		
+# 		location /codenames/api/ {
+# 			proxy_pass http://127.0.0.1:8101/;
+# 			proxy_http_version 1.1;
+# 			proxy_set_header Upgrade $http_upgrade;
+# 			proxy_set_header Connection $connection_upgrade;
+# 		}
+# 	}
+# }

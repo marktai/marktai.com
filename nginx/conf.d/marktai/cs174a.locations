@@ -1,0 +1,23 @@
+location /cs174a {
+	location /cs174a/project1 {
+		alias /home/mtai/schook/174a/CS-174A-Project1;
+		expires 1d;
+		add_header Cache-Control "public";
+		
+		location = /cs174a/project1/ {
+			rewrite ^ https://www.marktai.com/cs174a/project1/template/WebGL_Template/index.html;
+		}
+	}
+
+	location /cs174a/project2 {
+		alias /home/mtai/schook/174a/CS-174A-Project2;
+		expires 1d;
+		add_header Cache-Control "public";
+		
+		location = /cs174a/project2/ {
+			rewrite ^ https://www.marktai.com/cs174a/project2/templates/WebGL_Template/index.html;
+		}
+	}
+
+}
+

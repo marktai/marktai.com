@@ -1,0 +1,40 @@
+
+.pdf, .notes {
+				width: 100%;
+				font-size: 14px;
+}
+
+/* I have no idea why it works this way :( */
+
+@media (min-width: 769px) {
+				.pdf, .notes {
+							 	height: 100vh;
+				}
+}
+
+@media (max-width: 768px) {
+				.pdf {
+							 	height: 85vh;
+				}
+
+				.notes {
+								height: 10vh;
+				}
+}
+
+.navbar-fixed-top {
+	display: none;
+}
+
+.navbar-fixed-top.is-visible {
+	display: block;
+}
+
+footer {
+	display: none;
+}
+
+:focus {
+  outline-color: transparent;
+  outline-style: none;
+}

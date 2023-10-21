@@ -1,0 +1,64 @@
+location = /t9-website {
+    rewrite ^ https://www.marktai.com/meta-tic-tac-toe;
+}
+
+location = /T9-website {
+    rewrite ^ https://www.marktai.com/meta-tic-tac-toe;
+}
+
+location = /tic-tac-toe {
+    rewrite ^ https://www.marktai.com/meta-tic-tac-toe;
+}
+
+location = /metatictactoe {
+    rewrite ^ https://www.marktai.com/meta-tic-tac-toe;
+}
+
+location = /meta_tic_tac_toe {
+    rewrite ^ https://www.marktai.com/meta-tic-tac-toe;
+}
+
+location /meta-tic-tac-toe {
+	location /meta-tic-tac-toe {
+		alias /home/mtai/repos/T9-Website;
+		expires 1d;
+		add_header Cache-Control "public";
+		index /meta-tic-tac-toe/pages/global/index.html;
+	}
+
+	location /meta-tic-tac-toe/api/ {
+		proxy_pass https://www.marktai.com/t9/;
+		proxy_http_version 1.1;
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection $connection_upgrade;
+	}
+}
+
+
+location /T9/ {
+	location = /T9/ {
+		rewrite ^ https://www.marktai.com/meta-tic-tac-toe;
+	}
+	
+    proxy_pass https://www.marktai.com/t9/;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection $connection_upgrade;
+}
+
+location /t9/auth/ {
+	proxy_pass http://127.0.0.1:8043/;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection $connection_upgrade;
+}
+
+location /t9/ {
+	location = /t9/ {
+		rewrite ^ https://www.marktai.com/meta-tic-tac-toe;
+	}
+    proxy_pass http://127.0.0.1:8081/;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection $connection_upgrade;
+}

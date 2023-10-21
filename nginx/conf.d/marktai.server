@@ -1,0 +1,207 @@
+
+# HTTP
+server {
+    if ($host = www.marktai.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    # Listen on ipv4
+    listen 80 default_server;
+    # Listen on ipv6.
+    # Note: this setting listens on both ipv4 and ipv6 with Nginx release
+    #       shipped in some Linux/BSD distributions.
+    #listen [::]:80;
+    server_name www.marktai.com marktai.com marktai.co;
+    rewrite ^ https://www.marktai.com$request_uri?;
+
+
+}
+
+
+# HTTP
+server {
+    # Listen on ipv4
+    listen 80;
+    # Listen on ipv6.
+    # Note: this setting listens on both ipv4 and ipv6 with Nginx release
+    #       shipped in some Linux/BSD distributions.
+    #listen [::]:80;
+    server_name marktai.me;
+	location / {
+		rewrite ^ https://www.marktai.com/#/about;
+	}
+	location ~ /* {
+	    rewrite ^ https://www.marktai.com$request_uri?;
+	}
+}
+
+
+# HTTP
+server {
+    # Listen on ipv4
+    listen 80;
+    # Listen on ipv6.
+    # Note: this setting listens on both ipv4 and ipv6 with Nginx release
+    #       shipped in some Linux/BSD distributions.
+    #listen [::]:80;
+    server_name mtai.io *.mtai.io;
+    location ~ /* {
+	rewrite ^ https://www.marktai.com$request_uri?;
+    }
+}
+server {
+    listen 80;
+    server_name 52.11.108.65;
+    return 444;
+}    
+
+server {
+    listen 80;
+    server_name mail.marktai.com;
+    rewrite ^ https://www.marktai.com/mail$request_uri?;
+}
+
+server {
+    listen 80;
+    server_name resume.marktai.com;
+    rewrite ^ https://www.marktai.com/download/Mark_Tai_Resume.pdf;
+}
+
+server {
+    listen 80;
+    server_name justone.marktai.com;
+    rewrite ^ https://www.marktai.com/download/me/justone.html;
+}
+
+server {
+    listen 80;
+    server_name where.is.marktai.com;
+    rewrite ^ https://www.marktai.com/#where_is;
+}
+
+server {
+    listen 80;
+    server_name picnic.marktai.com;
+    rewrite ^ https://www.marktai.com/download/me/IMG_8470.jpg;
+}
+
+
+server {
+    listen 80;
+    server_name wordle.marktai.com speakeasy.marktai.com;
+    rewrite ^ http://nossl.marktai.com/download/wordle;
+}
+
+server {
+    listen 80;
+    server_name participation.marktai.com youtried.marktai.com trophy.marktai.com;
+    rewrite ^ https://www.marktai.com/download/me/very%20important%20trophy.png;
+}
+
+server {
+    listen 80;
+    server_name s.marktai.com;
+    location ~ /* {
+	rewrite ^ https://www.marktai.com/s/$request_uri?;
+    }
+}
+
+server {
+	listen 80;
+	server_name admin.marktai.com mailadmin.marktai.com adminmail.marktai.com;
+    rewrite ^ https://www.marktai.com/iredadmin$request_uri?;
+}
+		
+
+server {
+    listen 80;
+    server_name ~^(?<subdomain>\w+)\.marktai\.com;
+    rewrite ^ https://www.marktai.com/$subdomain$request_uri?;
+}
+
+# HTTPS
+server {
+    # Listen on ipv4
+    listen 443 ssl;
+    # Listen on ipv6.
+    # Note: this setting listens on both ipv4 and ipv6 with Nginx release
+    #       shipped in some Linux/BSD distributions.
+    listen [::]:443 ssl;
+    server_name www.marktai.com marktai.com ; 
+
+    ssl on;
+    ssl_certificate /etc/letsencrypt/live/www.marktai.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/www.marktai.com/privkey.pem; # managed by Certbot
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+
+    # Fix 'The Logjam Attack'.
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA;
+    ssl_prefer_server_ciphers on;
+    ssl_dhparam /etc/ssl/dhparams.pem;
+    ssl_session_cache shared:SSL:10m;
+
+
+    gzip            on;
+    gzip_min_length 1000;
+    gzip_proxied    any;
+    gzip_types      text/plain text/css  application/x-javascript; #text/html implied
+    
+	error_page 404 /custom_404.html;
+	location @404Page {
+		rewrite  ^ https://www.marktai.com/#404#$request_uri;
+		return 404;
+	} 
+    # Deny all attempts to access hidden files such as .htaccess.
+    location ~ /\. { deny all; }
+
+	location ~ /(\.vimrc$|\.zshrc) {
+		alias /home/mtai/repos/marktai.com/download;
+	}
+
+	location ~ (.go$|.toml$) {
+		deny all;
+	}
+
+
+    include /etc/nginx/conf.d/marktai/*.locations;
+
+}
+
+# HTTP
+server {
+    # Listen on ipv4
+    listen 80;
+    # Listen on ipv6.
+    # Note: this setting listens on both ipv4 and ipv6 with Nginx release
+    #       shipped in some Linux/BSD distributions.
+    server_name nossl.marktai.com new.marktai.com *.marktai.com; 
+
+
+
+    gzip            on;
+    gzip_min_length 1000;
+    gzip_proxied    any;
+    gzip_types      text/plain text/css  application/x-javascript; #text/html implied
+    
+	error_page 404 /custom_404.html;
+	location @404Page {
+		rewrite  ^ https://www.marktai.com/#404#$request_uri;
+		return 404;
+	} 
+    # Deny all attempts to access hidden files such as .htaccess.
+    location ~ /\. { deny all; }
+
+	location ~ /(\.vimrc$|\.zshrc) {
+		alias /home/mtai/repos/marktai.com/download;
+	}
+
+	location ~ (.go$|.toml$) {
+		deny all;
+	}
+
+
+    include /etc/nginx/conf.d/marktai/*.locations;
+
+}
+

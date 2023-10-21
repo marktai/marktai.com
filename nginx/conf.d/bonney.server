@@ -1,0 +1,34 @@
+
+server {              
+        listen 80;    
+        server_name bonneyruan.com *.bonneyruan.com bonney.design *.bonney.design bonney.marktai.com;    
+        gzip off;     
+
+
+        location / {  
+                proxy_pass https://bonneyruan.github.io;                                  
+                proxy_http_version 1.1;      
+                proxy_set_header Upgrade $http_upgrade;                                   
+                proxy_set_header Connection $connection_upgrade;                          
+        }             
+
+        location ~ ^/hangouts/?$ {
+                rewrite ^ https://hangouts.google.com/call/y7cHzVuijAV0T4i7SWJuAAEE;
+        }
+        
+        location /s/ {
+                proxy_pass https://www.marktai.com/s/;
+                proxy_http_version 1.1;      
+                proxy_set_header Upgrade $http_upgrade;                                   
+                proxy_set_header Connection $connection_upgrade;                          
+        }
+}                     
+
+server {
+        listen 80;
+        server_name hangouts.bonneyruan.com;
+        location / {
+                rewrite ^ http://www.bonneyruan.com/hangouts/;
+        }
+
+}

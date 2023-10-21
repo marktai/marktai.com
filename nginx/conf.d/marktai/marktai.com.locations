@@ -1,0 +1,58 @@
+# Handling noisy favicon.ico messages
+location ~ /favicon.(ico|png)$ {
+	expires 1M;
+	add_header Cache-Control "public";
+	access_log off; 
+	log_not_found off; 
+	alias /home/mtai/repos/marktai.com/img/favicon.png;
+}
+
+location = /sitemap.xml {
+	alias /home/mtai/repos/marktai.com/crawler/sitemap.xml;
+}
+
+location = /robots.txt {
+	alias /home/mtai/repos/marktai.com/crawler/robots.txt;
+}
+
+
+location / {
+	expires 1d;
+	add_header Cache-Control "public";
+	root /home/mtai/repos/marktai.com;
+        include /etc/nginx/mime.types;
+	location ~ ^/$ {
+		index /pages/global/index.html;
+	}
+}
+ 
+location /download {
+	autoindex on;
+	autoindex_exact_size off;
+	alias /home/mtai/repos/marktai.com/upload;
+	include /etc/nginx/conf.d/cors.conf;
+        include /etc/nginx/mime.types;
+	location ~ .pdf$ {
+	    add_header Cache-Control "public";
+	    expires 7d;
+	}
+} 
+
+location /img {
+	autoindex on;
+	autoindex_exact_size off;
+    alias /home/mtai/repos/marktai.com/img;
+	expires 1M;
+	add_header Cache-Control "public";
+	
+	include /etc/nginx/conf.d/cors.conf;
+            include /etc/nginx/mime.types;
+}
+
+location /api/ {
+    proxy_pass http://backend/;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection $connection_upgrade;
+	proxy_redirect default;
+}

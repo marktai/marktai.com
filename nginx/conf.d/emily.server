@@ -1,0 +1,35 @@
+
+server {
+	listen 80;
+	server_name emilyyamane.site www.emilyyamane.site;
+	
+	root /home/mtai/repos/emily-birthday/;
+	location / {
+		index /pages/global/index.html;
+	}
+
+	location /mail {
+		rewrite ^ https://www.marktai.com/mail;
+	}
+
+	location /resume {
+		rewrite ^ http://emilyyamane.site/download/Emily%20Yamane%20-%20Technical%20Resume.pdf;
+	}
+
+	location /download {
+		autoindex on;
+		autoindex_exact_size off;
+		alias /home/mtai/upload/53614/;
+		include /etc/nginx/conf.d/cors.conf;
+	}
+}
+
+server {
+	listen 80;
+	
+	server_name resume.emilyyamane.site;
+	
+	location / {
+		rewrite ^ http://emilyyamane.site/download/Emily%20Yamane%20-%20Technical%20Resume.pdf;
+	}
+}

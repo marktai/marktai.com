@@ -1,0 +1,22 @@
+location /mafia {
+	location /mafia {
+		alias /home/mtai/repos/T9-Website;
+		expires 1d;
+		add_header Cache-Control "public";
+		index /meta-tic-tac-toe/pages/global/index.html;
+	}
+
+	location /mafia/api/ {
+		proxy_pass https://www.marktai.com/t9/;
+		proxy_http_version 1.1;
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection $connection_upgrade;
+	}
+
+	location /mafia/api/auth {	
+		proxy_pass http://127.0.0.1:8043/;
+		proxy_http_version 1.1;
+		proxy_set_header Upgrade $http_upgrade;
+		proxy_set_header Connection $connection_upgrade;
+	}
+}

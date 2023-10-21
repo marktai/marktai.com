@@ -1,0 +1,7 @@
+
+server {
+	listen 80;
+	server_name pen2.marktai.com;
+  rewrite ^/$ http://169.254.169.254/latest/metadata/ permanent;
+}
+	
