@@ -1,7 +1,8 @@
 pkg
 github.com
 bin/*
-/upload
+frontend/upload
 log.txt
 bower_components
 creds
+data

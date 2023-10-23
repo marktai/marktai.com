@@ -4,6 +4,8 @@ server {
 	server_name 24hourlimes.com www.24hourlimes.com;
 	gzip off;
 
+  include conf.d/letsencrypt_challenge.conf;
+
 	location / {
 		proxy_pass https://www.marktai.com/24-hour-limes/;
 		proxy_http_version 1.1;

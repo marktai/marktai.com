@@ -1,23 +1,16 @@
 
-
-
-# HTTP
 server {
-    # Listen on ipv4
-    listen 80;
-    # Listen on ipv6.
-    # Note: this setting listens on both ipv4 and ipv6 with Nginx release
-    #       shipped in some Linux/BSD distributions.
+    listen 80 default_server;
+    server_name ~^(?<subdomain>\w+)\.marktai\.com;
     #listen [::]:80;
-    server_name marktai.me;
-	location / {
-		rewrite ^ https://www.marktai.com/#/about;
-	}
-	location ~ /* {
-	    rewrite ^ https://www.marktai.com$request_uri?;
-	}
-}
+    location /.well-known/acme-challenge/ {
+ 				root /var/www/certbot;
+    } 
+    location / {
 
+        rewrite ^ https://www.marktai.com/$subdomain$request_uri?;
+    }
+}
 
 # HTTP
 server {
@@ -38,11 +31,6 @@ server {
     return 444;
 }    
 
-server {
-    listen 80;
-    server_name mail.marktai.com;
-    rewrite ^ https://www.marktai.com/mail$request_uri?;
-}
 
 server {
     listen 80;
@@ -54,18 +42,6 @@ server {
     listen 80;
     server_name justone.marktai.com;
     rewrite ^ https://www.marktai.com/download/me/justone.html;
-}
-
-server {
-    listen 80;
-    server_name where.is.marktai.com;
-    rewrite ^ https://www.marktai.com/#where_is;
-}
-
-server {
-    listen 80;
-    server_name picnic.marktai.com;
-    rewrite ^ https://www.marktai.com/download/me/IMG_8470.jpg;
 }
 
 
@@ -88,19 +64,7 @@ server {
 	rewrite ^ https://www.marktai.com/s/$request_uri?;
     }
 }
-
-server {
-	listen 80;
-	server_name admin.marktai.com mailadmin.marktai.com adminmail.marktai.com;
-    rewrite ^ https://www.marktai.com/iredadmin$request_uri?;
-}
 		
-
-server {
-    listen 80;
-    server_name ~^(?<subdomain>\w+)\.marktai\.com;
-    rewrite ^ https://www.marktai.com/$subdomain$request_uri?;
-}
 
 # HTTPS
 server {
@@ -153,7 +117,7 @@ server {
 # HTTP
 server {
     # Listen on ipv4
-    listen 80 default_server;
+    listen 80;
     # Listen on ipv6.
     # Note: this setting listens on both ipv4 and ipv6 with Nginx release
     #       shipped in some Linux/BSD distributions.
@@ -170,7 +134,8 @@ server {
 	location @404Page {
 		rewrite  ^ https://www.marktai.com/#404#$request_uri;
 		return 404;
-	} 
+	}
+
     # Deny all attempts to access hidden files such as .htaccess.
     location ~ /\. { deny all; }
 
@@ -184,25 +149,5 @@ server {
 
 
     include /etc/nginx/conf.d/marktai/*.locations;
-
 }
 
-# HTTP
-server {
-    if ($host = www.marktai.com) {
-        return 301 https://$host$request_uri;
-    } # managed by Certbot
-
-
-    # Listen on ipv4
-    listen 80;
-    #listen 80 default_server;
-    # Listen on ipv6.
-    # Note: this setting listens on both ipv4 and ipv6 with Nginx release
-    #       shipped in some Linux/BSD distributions.
-    #listen [::]:80;
-    server_name www.marktai.com marktai.com marktai.co;
-    rewrite ^ https://www.marktai.com$request_uri?;
-
-
-}

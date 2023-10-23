@@ -4,7 +4,7 @@ server {
 
 
         location / {  
-                proxy_pass http://localhost:7080/;                                  
+                proxy_pass http://172.17.0.1:7080/;                                  
                 proxy_http_version 1.1;      
                 proxy_set_header Upgrade $http_upgrade;                                   
                 proxy_set_header Connection $connection_upgrade;
@@ -17,13 +17,19 @@ server {
               proxy_redirect off;
         }             
 
-    listen 443 ssl; # managed by Certbot
-    ssl_certificate /etc/letsencrypt/live/clover.marktai.com/fullchain.pem; # managed by Certbot
-    ssl_certificate_key /etc/letsencrypt/live/clover.marktai.com/privkey.pem; # managed by Certbot
-    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
-    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
-
+      listen 443 ssl; # managed by Certbot
+      ssl_certificate /etc/letsencrypt/live/clover.marktai.com/fullchain.pem; # managed by Certbot
+      ssl_certificate_key /etc/letsencrypt/live/clover.marktai.com/privkey.pem; # managed by Certbot
+      include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+      ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+# 
 }                     
+
+server {
+				server_name clover.marktai.com;
+				listen 80;
+				include conf.d/letsencrypt_challenge.conf;
+}
 
 
 server {
@@ -32,17 +38,4 @@ server {
     location ~ /* {
 	rewrite ^ http:/clover.marktai.com/games/$request_uri?;
     }
-}
-
-server {
-    if ($host = clover.marktai.com) {
-        return 301 https://$host$request_uri;
-    } # managed by Certbot
-
-              
-        listen 80;    
-        server_name clover.marktai.com;
-    return 404; # managed by Certbot
-
-
 }

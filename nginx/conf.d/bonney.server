@@ -1,9 +1,10 @@
 
 server {              
-        listen 80;    
-        server_name bonneyruan.com *.bonneyruan.com bonney.design *.bonney.design bonney.marktai.com;    
+        listen 443 ssl;    
+        server_name bonneyruan.com; #  *.bonneyruan.com bonney.design *.bonney.design bonney.marktai.com millends.com www.millends.com 
         gzip off;     
 
+				include conf.d/letsencrypt_challenge.conf;
 
         location / {  
                 proxy_pass https://bonneyruan.github.io;                                  
@@ -22,7 +23,11 @@ server {
                 proxy_set_header Upgrade $http_upgrade;                                   
                 proxy_set_header Connection $connection_upgrade;                          
         }
-}                     
+        ssl_certificate /etc/letsencrypt/live/bonneyruan.com/fullchain.pem; # managed by Certbot
+        ssl_certificate_key /etc/letsencrypt/live/bonneyruan.com/privkey.pem; # managed by Certbot
+        include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+        ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+}                      
 
 server {
         listen 80;
@@ -31,4 +36,15 @@ server {
                 rewrite ^ http://www.bonneyruan.com/hangouts/;
         }
 
+}
+server {              
+        listen 80;    
+        server_name bonneyruan.com *.bonneyruan.com bonney.design *.bonney.design;
+        gzip off;     
+
+				include conf.d/letsencrypt_challenge.conf;
+
+				location / {
+								rewrite ^ https://bonneyruan.com$request_uri;
+				}
 }

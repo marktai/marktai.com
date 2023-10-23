@@ -36,11 +36,14 @@ location /meta-tic-tac-toe {
 
 
 location /T9/ {
-	location = /T9/ {
-		rewrite ^ https://www.marktai.com/meta-tic-tac-toe;
-	}
 	
-    proxy_pass http://172.17.0.1/t9/;
+    proxy_pass http://172.17.0.1/t9;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection $connection_upgrade;
+}
+location /T9/auth/ {
+	proxy_pass http://172.17.0.1:8043/;
     proxy_http_version 1.1;
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection $connection_upgrade;

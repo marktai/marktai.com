@@ -1,0 +1,30 @@
+
+server {              
+        listen 443 ssl;    
+        server_name millends.com; 
+        gzip off;     
+
+				include conf.d/letsencrypt_challenge.conf;
+
+        location / {  
+                proxy_pass https://bonneyruan.github.io;                                  
+                proxy_http_version 1.1;      
+                proxy_set_header Upgrade $http_upgrade;                                   
+                proxy_set_header Connection $connection_upgrade;                          
+        }             
+        ssl_certificate /etc/letsencrypt/live/millends.com/fullchain.pem; # managed by Certbot
+        ssl_certificate_key /etc/letsencrypt/live/millends.com/privkey.pem; # managed by Certbot
+        include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+        ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+}                      
+server {              
+        listen 80;    
+        server_name millends.com *.millends.com;
+        gzip off;     
+
+				include conf.d/letsencrypt_challenge.conf;
+
+				location / {
+								rewrite ^ https://millends.com$request_uri;
+				}
+}
