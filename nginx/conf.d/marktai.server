@@ -1,22 +1,4 @@
 
-# HTTP
-server {
-    if ($host = www.marktai.com) {
-        return 301 https://$host$request_uri;
-    } # managed by Certbot
-
-
-    # Listen on ipv4
-    listen 80 default_server;
-    # Listen on ipv6.
-    # Note: this setting listens on both ipv4 and ipv6 with Nginx release
-    #       shipped in some Linux/BSD distributions.
-    #listen [::]:80;
-    server_name www.marktai.com marktai.com marktai.co;
-    rewrite ^ https://www.marktai.com$request_uri?;
-
-
-}
 
 
 # HTTP
@@ -171,11 +153,11 @@ server {
 # HTTP
 server {
     # Listen on ipv4
-    listen 80;
+    listen 80 default_server;
     # Listen on ipv6.
     # Note: this setting listens on both ipv4 and ipv6 with Nginx release
     #       shipped in some Linux/BSD distributions.
-    server_name nossl.marktai.com new.marktai.com *.marktai.com; 
+    server_name nossl.marktai.com new.marktai.com; 
 
 
 
@@ -205,3 +187,22 @@ server {
 
 }
 
+# HTTP
+server {
+    if ($host = www.marktai.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    # Listen on ipv4
+    listen 80;
+    #listen 80 default_server;
+    # Listen on ipv6.
+    # Note: this setting listens on both ipv4 and ipv6 with Nginx release
+    #       shipped in some Linux/BSD distributions.
+    #listen [::]:80;
+    server_name www.marktai.com marktai.com marktai.co;
+    rewrite ^ https://www.marktai.com$request_uri?;
+
+
+}
