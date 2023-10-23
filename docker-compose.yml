@@ -2,11 +2,11 @@ version: '3.3'
 
 services:
   db:
-    image: mysql:5.7
+    image: postgres:14.2-alpine
     environment:
-      MYSQL_ALLOW_EMPTY_PASSWORD: true 
+      POSTGRES_HOST_AUTH_METHOD: trust
     volumes:
-      - database:/var/lib/mysql
+      - database:/var/lib/postgresql/data
     restart: always
   backend:
     image: marktai/backend:latest

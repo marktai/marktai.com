@@ -169,6 +169,7 @@ func getShortlink(w http.ResponseWriter, r *http.Request) {
 		WriteError(w, err, 400)
 		return
 	}
+	log.Println(link)
 	http.Redirect(w, r, link, 302)
 
 }

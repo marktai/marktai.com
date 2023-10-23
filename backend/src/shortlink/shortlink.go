@@ -11,9 +11,9 @@ import (
 
 // checks if a id already exists in the database
 func checkIDConflict(id string) (bool, error) {
-	collision := 1
-	err := db.Db.QueryRow("SELECT EXISTS(SELECT 1 FROM links WHERE id=?)", id).Scan(&collision)
-	return collision != 0, err
+	collision := false
+	err := db.Db.QueryRow("SELECT EXISTS(SELECT 1 FROM links WHERE id=$1)", id).Scan(&collision)
+	return collision != false, err
 }
 
 // gets a unique id for a new game
@@ -25,7 +25,7 @@ func getUniqueID() (string, error) {
 	var idString string
 
 	conflict := true
-	err := db.Db.QueryRow("SELECT count, scale, addConst FROM count WHERE type='links'").Scan(&count, &scale, &addConst)
+	err := db.Db.QueryRow("SELECT count, scale, add_const FROM count WHERE type='links'").Scan(&count, &scale, &addConst)
 	if err != nil {
 		return "", err
 	}
@@ -44,7 +44,7 @@ func getUniqueID() (string, error) {
 		}
 	}
 
-	updateCount, err := db.Db.Prepare("UPDATE count SET count=? WHERE type='links'")
+	updateCount, err := db.Db.Prepare("UPDATE count SET count=$1 WHERE type='links'")
 	if err != nil {
 		return idString, err
 	}
@@ -69,7 +69,7 @@ func Add(link string) (string, error) {
 		return "", err
 	}
 
-	addLink, err := db.Db.Prepare("INSERT INTO links VALUES(?, ?)")
+	addLink, err := db.Db.Prepare("INSERT INTO links VALUES($1, $2)")
 	if err != nil {
 		return "", err
 	}
@@ -95,7 +95,7 @@ func Get(id string) (string, error) {
 	var link string
 
 	//TODO: handle NULLS
-	err = db.Db.QueryRow("SELECT link FROM links WHERE id=?", id).Scan(&link)
+	err = db.Db.QueryRow("SELECT link FROM links WHERE id=$1", id).Scan(&link)
 	if err != nil {
 		if err == sql.ErrNoRows {
 			return "", errors.New("Link not found")

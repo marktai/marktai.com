@@ -2,7 +2,8 @@ package db
 
 import (
 	"database/sql"
-	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/lib/pq"
+
 	"log"
 )
 
@@ -14,8 +15,8 @@ var (
 func Open() {
 	closeChan = make(chan bool)
 	var err error
-	Db, err = sql.Open("mysql",
-		"root:@tcp(db:3306)/shortlink")
+	Db, err = sql.Open("postgres",
+		"host=db port=5432 user=postgres password=postgres dbname=shortlink sslmode=disable")
 
 	if err != nil {
 		log.Fatal(err)
