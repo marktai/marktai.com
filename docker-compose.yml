@@ -5,16 +5,17 @@ services:
     image: postgres:14.2-alpine
     environment:
       POSTGRES_HOST_AUTH_METHOD: trust
+    network_mode: host
     volumes:
       - database:/var/lib/postgresql/data
     restart: always
   backend:
     image: marktai/backend:latest
     build: ./backend
+    network_mode: host
     volumes:
       - ./posts:/app/posts
-    ports:
-      - "8080:8080"
+      - ./frontend/upload:/app/upload
     depends_on:
       - db
     restart: always
@@ -30,13 +31,15 @@ services:
   nginx:
     image: marktai/nginx:latest
     build: ./nginx
+
+    network_mode: host
     volumes:
       - ./frontend/:/home/mtai/repos/marktai.com/
       - ./data/certbot/conf:/etc/letsencrypt
       - ./data/certbot/www:/var/www/certbot
-    ports:
-      - "80:80"
-      - "443:443"
+    # ports:
+    #   - "80:80"
+    #   - "443:443"
     depends_on:
       - backend
     restart: always

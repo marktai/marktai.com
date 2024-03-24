@@ -16,7 +16,7 @@ func Open() {
 	closeChan = make(chan bool)
 	var err error
 	Db, err = sql.Open("postgres",
-		"host=db port=5432 user=postgres password=postgres dbname=shortlink sslmode=disable")
+		"host=127.0.0.1 port=5432 user=postgres password=postgres dbname=shortlink sslmode=disable")
 
 	if err != nil {
 		log.Fatal(err)

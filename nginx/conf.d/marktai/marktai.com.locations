@@ -26,17 +26,17 @@ location / {
 	}
 }
  
-location /download {
-	autoindex on;
-	autoindex_exact_size off;
-	alias /home/mtai/repos/marktai.com/upload;
-	include /etc/nginx/conf.d/cors.conf;
-        include /etc/nginx/mime.types;
-	location ~ .pdf$ {
-	    add_header Cache-Control "public";
-	    expires 7d;
-	}
-} 
+# location /download {
+# 	autoindex on;
+# 	autoindex_exact_size off;
+# 	alias /home/mtai/repos/marktai.com/upload;
+# 	include /etc/nginx/conf.d/cors.conf;
+#         include /etc/nginx/mime.types;
+# 	location ~ .pdf$ {
+# 	    add_header Cache-Control "public";
+# 	    expires 7d;
+# 	}
+# } 
 
 location /img {
 	autoindex on;

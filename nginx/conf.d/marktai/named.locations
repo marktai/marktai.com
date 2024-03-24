@@ -21,6 +21,10 @@ location ~ ^/github(.com)?$ {
 	rewrite ^ https://github.com/marktai;
 }
 
+location ~ ^/m/?$ {
+  rewrite ^ https://mail.google.com/mail/u/mark@marktai.com;
+}
+
 
 
 location ~ ^/curveball/?$ { 
@@ -32,7 +36,7 @@ location ~ ^/hangouts/?$ {
 }
 
 location ~ ^/meet/?$ {
-	rewrite ^ https://meet.google.com/vfp-bixt-qvk;
+	rewrite ^ https://meet.google.com/rnw-zyfg-dmy?authuser=mark@marktai.com;
 }
 
 location ~ ^/codenames/?$ {
@@ -178,4 +182,12 @@ location ~ ^/slack/?$ {
 
 location ~ ^/family-acapella/?$ {
 	rewrite ^ https://www.marktai.com/#/posts#One,%20two,%20you%20know%20what%20to%20do;
+}
+
+location ~ ^/resume/?$ {
+    rewrite ^ https://www.marktai.com/download/Mark_Tai_Resume.pdf;
+}
+
+location ~ ^/(justone|slate)/?$ {
+    rewrite ^ https://www.marktai.com/download/me/justone.html;
 }

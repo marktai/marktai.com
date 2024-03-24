@@ -8,7 +8,7 @@ import (
 	"strconv"
 )
 
-var AuthHost = "http://172.17.0.1:8043"
+var AuthHost = "http://localhost:8043"
 
 func extractStringFromHeader(r *http.Request, key string) (string, error) {
 	strSlice, ok := r.Header[key]

@@ -45,6 +45,10 @@ server {
 				include conf.d/letsencrypt_challenge.conf;
 
 				location / {
-								rewrite ^ https://bonneyruan.com$request_uri;
+                proxy_pass https://bonneyruan.github.io;                                  
+                proxy_http_version 1.1;      
+                proxy_set_header Upgrade $http_upgrade;                                   
+                proxy_set_header Connection $connection_upgrade;                          
+								#rewrite ^ https://bonneyruan.com$request_uri;
 				}
 }

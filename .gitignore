@@ -6,3 +6,5 @@ log.txt
 bower_components
 creds
 data
+dataold
+*.bak

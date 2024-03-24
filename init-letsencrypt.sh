@@ -34,7 +34,7 @@ path="/etc/letsencrypt/live/$domains"
 for domain in "${domains[@]}"; do
   path="/etc/letsencrypt/live/$domain"
   mkdir -p "$data_path/conf/live/$domain"
-  docker compose run --rm --entrypoint "\
+  docker-compose run --rm --entrypoint "\
     openssl req -x509 -nodes -newkey rsa:$rsa_key_size -days 1\
       -keyout '$path/privkey.pem' \
       -out '$path/fullchain.pem' \
@@ -44,15 +44,15 @@ done
 
 
 echo "### Starting nginx ..."
-docker compose up --build --force-recreate -d nginx
+docker-compose up --build --force-recreate -d nginx
 sleep 5
 echo
 
 
 echo "### Requesting Let's Encrypt certificate for $domains ..."
 for domain in "${domains[@]}"; do
-  echo "### Deleting dummy certificate for $domains ..."
-  docker compose run --rm --entrypoint "\
+  echo "### Deleting dummy certificate for $domain ..."
+  docker-compose run --rm --entrypoint "\
     rm -Rf /etc/letsencrypt/live/$domain && \
     rm -Rf /etc/letsencrypt/archive/$domain && \
     rm -Rf /etc/letsencrypt/renewal/$domain.conf" certbot
@@ -67,7 +67,7 @@ for domain in "${domains[@]}"; do
   # Enable staging mode if needed
   if [ $staging != "0" ]; then staging_arg="--staging"; fi
 
-  docker compose run --rm --entrypoint "\
+  docker-compose run --rm --entrypoint "\
     certbot certonly --webroot -w /var/www/certbot \
       $staging_arg \
       $email_arg \
@@ -80,4 +80,4 @@ done
 
 
 echo "### Reloading nginx ..."
-docker compose exec nginx nginx -s reload
+docker-compose exec nginx nginx -s reload
