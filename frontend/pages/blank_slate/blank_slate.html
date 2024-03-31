@@ -1,0 +1,47 @@
+<!-- Page Header -->
+<header class="intro-header" style="background-image: url('/download/me/blank_slate_bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading">
+                    <h1>Blank Slate</h1>
+                    <hr class="small">
+		    <span class="subheading"><a style="color:white;" href='https://theop.games/products/blank-slate'>Original board game here</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+			<div class="row">
+				<div class="col-md-6">
+				    <div>
+					<div>
+					    <label>Prompt</label>
+					    <h1 style="font-size:60px;">{{prompts[prompt_index]}}</h1>
+					    <button ng-click="update_prompt_index(1)" class="btn btn-default">Next Prompt</button>
+					</div>
+				    </div>
+				</div>
+				<div class="col-md-6">
+					<div>
+					    <input ng-enter="add_player()" ng-model="player_to_add" class = "form-control" placeholder="Player name" required></input>
+					    <button ng-click="add_player()" class="btn btn-default">Add Player</button>
+					</div>
+					<div class="form-horizontal row">
+					    <div ng-repeat="(player, score) in players" class="col-md-6">
+						<h2>{{player}}</h2>
+						<input ng-model="players[player]"></input>
+						<button ng-click="update_player(player, 1)" class="btn btn-default">Add 1</button>
+						<button ng-click="update_player(player, 3)" class="btn btn-default">Add 3</button>
+					    </div>
+					</div>
+				</div>
+			</div>
+        </div>
+    </div>
+</div>

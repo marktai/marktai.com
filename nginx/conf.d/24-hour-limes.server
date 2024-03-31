@@ -1,7 +1,7 @@
 
 server {
 	listen 80;
-	server_name 24hourlimes.com www.24hourlimes.com;
+	server_name 24hourlimes.com www.24hourlimes.com twentyfourhourlimes.com www.24hourlimes.com *.24hourlimes.com *.twentyfourhourlimes.com;
 	gzip off;
 
   include conf.d/letsencrypt_challenge.conf;

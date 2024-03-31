@@ -154,6 +154,9 @@ server {
     ssl_prefer_server_ciphers on;
     ssl_dhparam /etc/ssl/dhparams.pem;
     ssl_session_cache shared:SSL:10m;
+    if ($subdomain ~ "nossl") {
+return 404;
+}
     location /.well-known/acme-challenge/ {
  				root /var/www/certbot;
     } 

@@ -191,3 +191,7 @@ location ~ ^/resume/?$ {
 location ~ ^/(justone|slate)/?$ {
     rewrite ^ https://www.marktai.com/download/me/justone.html;
 }
+
+location ~ ^/(blank[\s_]?(s|S)late)/?$ {
+    rewrite ^ https://www.marktai.com/#/blankSlate;
+}

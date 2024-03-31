@@ -95,6 +95,15 @@ marktai.config(function($routeProvider, $locationProvider) {
       controller : "MarkieverseCtl"
     })
 
+    .when('/blank_slate', {
+      templateUrl : './pages/blank_slate/blank_slate.html',
+      controller : "BlankSlateCtl"
+    })
+
+    .when('/blankSlate', {
+      templateUrl : './pages/blank_slate/blank_slate.html',
+      controller : "BlankSlateCtl"
+    })
 
     // old url
 	.when('/login', {
