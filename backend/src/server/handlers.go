@@ -191,7 +191,7 @@ func upload(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	r.ParseMultipartForm(32 << 20)
+	r.ParseMultipartForm(512 << 20) // 512 MiB
 	file, handler, err := r.FormFile("file")
 	if err != nil {
 		WriteError(w, err, 500)
