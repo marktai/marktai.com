@@ -1,0 +1,15 @@
+title = "New Ukelele!"
+ignore = false
+subtitle = "Quick little song with my mom"
+author = "Mark Tai"
+image = "https://www.marktai.com/download/54689/Oliver-Creole-Jazz-Band-Chicago-1923.jpg"
+created = 2024-04-15T09:00:00+02:00
+modified = 2024-04-15T09:00:00+02:00
+content = [
+                "<video controls autoplay name='media' width='100%'><source src='https://www.marktai.com/download/me/music/tiny_bubbles.mp4' type='video/mp4'>Your browser does not support this video</video>",
+
+								
+								"I happened to buy a ukelele within a week of my mom, and we decided to learn Tiny Bubbles together! We aren't great yet, but hopefully with tons of practice we'll be able to do much more exciting and interesting songs!",
+
+]
+
