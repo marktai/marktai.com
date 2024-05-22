@@ -160,7 +160,11 @@ location ~ ^/24-hour-limes/?$ {
 }
 
 location ~ ^/diving/?$ {
-	rewrite ^ https://www.marktai.com/download/me/diving;
+	rewrite ^ https://www.marktai.com/#diving;
+}
+
+location ~ ^/dive[\s\.-]?(with)?/?$ {
+	rewrite ^ https://www.marktai.com/#diving;
 }
 
 location ~ ^/schedule/?$ {

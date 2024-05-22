@@ -90,6 +90,11 @@ marktai.config(function($routeProvider, $locationProvider) {
       controller : "InterviewingCtl"
     })
 
+    .when('/diving', {
+      templateUrl : './pages/diving/diving.html',
+      controller : "DivingCtl"
+    })
+
     .when('/index', {
       templateUrl : './pages/markieverse/markieverse.html',
       controller : "MarkieverseCtl"
