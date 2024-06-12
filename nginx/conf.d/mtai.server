@@ -1,4 +1,3 @@
-
 # HTTP
 server {
     # Listen on ipv4
@@ -6,61 +5,25 @@ server {
     # Listen on ipv6.
     # Note: this setting listens on both ipv4 and ipv6 with Nginx release
     #       shipped in some Linux/BSD distributions.
-    server_name nossl.marktai.com new.marktai.com 52.11.108.65; 
-
-
-
-    gzip            on;
-    gzip_min_length 1000;
-    gzip_proxied    any;
-    gzip_types      text/plain text/css  application/x-javascript; #text/html implied
-    
-	error_page 404 /custom_404.html;
-	location @404Page {
-		rewrite  ^ https://www.marktai.com/#404#$request_uri;
-		return 404;
-	}
-    location /.well-known/acme-challenge/ {
- 				root /var/www/certbot;
-    } 
-
-    # Deny all attempts to access hidden files such as .htaccess.
-    location ~ /\. { deny all; }
-
-	location ~ /(\.vimrc$|\.zshrc) {
-		alias /home/mtai/repos/marktai.com/download;
-	}
-
-	location ~ (.go$|.toml$) {
-		deny all;
-	}
-
-
-    include /etc/nginx/conf.d/marktai/*.locations;
-}
-server {
-    listen 80 default_server;
-    server_name ~^(?<subdomain>\w+)\.marktai\.com;
     #listen [::]:80;
-    location /.well-known/acme-challenge/ {
- 				root /var/www/certbot;
-    } 
+    server_name mtai.io www.mtai.io;
+    include conf.d/letsencrypt_challenge.conf;
+    
     location / {
-
-        rewrite ^ https://www.marktai.com/$subdomain$request_uri?;
+    	rewrite ^ https://mtai.io$request_uri?;
     }
 }
+
 server {
     listen 80;
-    server_name s.marktai.com;
-    location ~ /$ {
-  rewrite ^ https://www.marktai.com/#shortlink;
-}
-    location ~ /* {
-	rewrite ^ https://www.marktai.com/s/$request_uri?;
+    server_name ~^(?<subdomain>\w+)\.mtai\.io;
+    #listen [::]:80;
+    include conf.d/letsencrypt_challenge.conf;
+    location / {
+
+        rewrite ^ http://mtai.io/$subdomain$request_uri?;
     }
 }
-		
 
 # HTTPS
 server {
@@ -70,10 +33,10 @@ server {
     # Note: this setting listens on both ipv4 and ipv6 with Nginx release
     #       shipped in some Linux/BSD distributions.
     listen [::]:443 ssl;
-    server_name www.marktai.com; 
+    server_name mtai.io; 
 
-    ssl_certificate /etc/letsencrypt/live/www.marktai.com/fullchain.pem; # managed by Certbot
-    ssl_certificate_key /etc/letsencrypt/live/www.marktai.com/privkey.pem; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/mtai.io/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/mtai.io/privkey.pem; # managed by Certbot
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 
     # Fix 'The Logjam Attack'.
@@ -87,42 +50,24 @@ server {
     gzip_min_length 1000;
     gzip_proxied    any;
     gzip_types      text/plain text/css  application/x-javascript; #text/html implied
-    
-	error_page 404 /custom_404.html;
-	location @404Page {
-		rewrite  ^ https://www.marktai.com/#404#$request_uri;
-		return 404;
-	} 
-    location /.well-known/acme-challenge/ {
- 				root /var/www/certbot;
-    } 
-    # Deny all attempts to access hidden files such as .htaccess.
-    location ~ /\. { deny all; }
-
-	location ~ /(\.vimrc$|\.zshrc) {
-		alias /home/mtai/repos/marktai.com/download;
-	}
-
-	location ~ (.go$|.toml$) {
-		deny all;
-	}
-
-
-    include /etc/nginx/conf.d/marktai/*.locations;
-
+    location / {  
+            proxy_pass https://www.marktai.com;                                  
+            proxy_http_version 1.1;      
+            proxy_set_header Upgrade $http_upgrade;                                   
+            proxy_set_header Connection $connection_upgrade;                          
+    }             
 }
 
-
 server {
-    listen 443 ssl default_server;
-    server_name ~^(?<subdomain>\w+)\.marktai\.com;
+    listen 443 ssl;
+    server_name ~^(?<subdomain>\w+)\.mtai\.io;
     # Listen on ipv6.
     # Note: this setting listens on both ipv4 and ipv6 with Nginx release
     #       shipped in some Linux/BSD distributions.
     listen [::]:443 ssl;
 
-    ssl_certificate /etc/letsencrypt/live/marktai.com/fullchain.pem; # managed by Certbot
-    ssl_certificate_key /etc/letsencrypt/live/marktai.com/privkey.pem; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/wildcard.mtai.io/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/wildcard.mtai.io/privkey.pem; # managed by Certbot
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 
     # Fix 'The Logjam Attack'.
@@ -137,6 +82,6 @@ return 404;
  				root /var/www/certbot;
     } 
     location / {
-        rewrite ^ https://www.marktai.com/$subdomain/$request_uri?;
+        rewrite ^ https://mtai.io/$subdomain/$request_uri?;
     }
 }

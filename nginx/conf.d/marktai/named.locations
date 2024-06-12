@@ -72,13 +72,17 @@ location ~ ^/dots/?$ {
 }
 
 location ~ ^/music/?$ {
-	rewrite ^ https://www.marktai.com/download/me/music/;
+	rewrite ^ https://www.marktai.com/#/posts#Jazzy%20Time%20with%20Mark;
 }
 
 location ~ ^/mootropolis/?$ {
 	#rewrite ^ https://www.figma.com/file/tusfaXEL2YVVAI4TvsslZo/Cocktail-Board-Game-Menu?node-id=0%3A1;
 	# rewrite ^ https://www.marktai.com/download/menu.pdf;
 	rewrite ^ https://www.marktai.com/#/mootropolis;
+}
+
+location ~ ^/(board)?[-_\s]?games?/?$ {
+  rewrite ^ https://www.marktai.com/mootropolis;
 }
 
 location ~ ^/menu/?$ {
@@ -156,7 +160,7 @@ location ~ ^/perm/?$ {
 }
 
 location ~ ^/24-hour-limes/?$ {
-	rewrite ^ http://menu.marktai.com;
+	rewrite ^ https://menu.marktai.com;
 }
 
 location ~ ^/diving/?$ {
@@ -192,10 +196,30 @@ location ~ ^/resume/?$ {
     rewrite ^ https://www.marktai.com/download/Mark_Tai_Resume.pdf;
 }
 
+location ~ ^/(jazz)?-?_?chords?/?$ {
+    rewrite ^ http://chords.marktai.com;
+}
+
 location ~ ^/(justone|slate)/?$ {
     rewrite ^ https://www.marktai.com/download/me/justone.html;
 }
 
 location ~ ^/(blank[\s_]?(s|S)late)/?$ {
     rewrite ^ https://www.marktai.com/#/blankSlate;
+}
+
+location ~ ^/casino[\s_\-]?(r|R)ules/?$ {
+    rewrite ^ https://docs.google.com/document/d/1qRSLBCpJ_jK0SVDWbkkV-GcR9bHb_l7k_TwVkNOOB-Y;
+}
+
+location ~ ^/(charity|casino|charity_casino|charity-casino)/?$ {
+    rewrite ^ https://partiful.com/e/s70K4M5uB3NoqxCjyL0M;
+}
+
+location ~ ^/[aeiou]t[aeiou]n[aeiou]rary/?$ {
+    rewrite ^ https://calendar.google.com/calendar/embed?src=c_819818c8dc2d6a15e8f6090aec437c7d6255764eb527e72927005cae3d2e523a%40group.calendar.google.com&ctz=America%2FLos_Angeles;
+}
+
+location ~ ^/travel/?$ {
+    rewrite ^ https://www.marktai.com/#/posts#Examining%20How%20I%20Travel;
 }

@@ -6,6 +6,6 @@ image = "https://www.marktai.com/download/54689/turtle%20(1).jpg"
 created = 2024-05-22T09:00:00+02:00
 modified = 2024-05-22T09:00:00+02:00
 content = [
-                "<script>window.location.href = 'https://www.marktai.com/#/diving'</script>"
+                "<script>window.location.href = '#/diving'</script>"
 ]
 

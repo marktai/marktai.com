@@ -1,4 +1,4 @@
-let defaultPage = () => window.location.hostname === '52.11.108.65' ? 'index' : 'home';
+let defaultPage = () => window.location.hostname === '52.11.108.65' || window.location.hostname === 'mtai.io' ? 'index' : window.location.hostname === '24hlimes.com' ? 'menu' : 'home';
 
 var marktai = new angular.module("marktai", ["ngTouch","ngResource", 'ngRoute', "ngSanitize", 'ngFileUpload', "ngStorage"]);
 
