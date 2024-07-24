@@ -75,6 +75,10 @@ location ~ ^/music/?$ {
 	rewrite ^ https://www.marktai.com/#/posts#Jazzy%20Time%20with%20Mark;
 }
 
+location ~ ^/sheet[-_\s]?music/?$ {
+	rewrite ^ https://www.marktai.com/download/music/;
+}
+
 location ~ ^/mootropolis/?$ {
 	#rewrite ^ https://www.figma.com/file/tusfaXEL2YVVAI4TvsslZo/Cocktail-Board-Game-Menu?node-id=0%3A1;
 	# rewrite ^ https://www.marktai.com/download/menu.pdf;
@@ -82,7 +86,8 @@ location ~ ^/mootropolis/?$ {
 }
 
 location ~ ^/(board)?[-_\s]?games?/?$ {
-  rewrite ^ https://www.marktai.com/mootropolis;
+  rewrite ^ https://docs.google.com/document/d/1H15fxfinxo-sc3lZBKZwNqvmJK0dKC8guwLZmPLcvqo;
+  # rewrite ^ https://www.marktai.com/mootropolis;
 }
 
 location ~ ^/menu/?$ {
@@ -175,10 +180,21 @@ location ~ ^/schedule/?$ {
 	rewrite ^ https://koalendar.com/e/meet-with-mark-tai;
 }
 
-location ~ ^/schedule[-\s_]meeting/?$ {
+location ~ ^/schedule[-\s_]?meeting/?$ {
 	rewrite ^ https://koalendar.com/e/meet-with-mark-tai;
 }
             
+location ~ ^/meet[-\s_]?with/?$ {
+	rewrite ^ https://koalendar.com/e/meet-with-mark-tai;
+}
+            
+location ~ ^/special[-\s_]?(schedule|meet)?/?$ {
+	rewrite ^ https://koalendar.com/e/meet-with-mark-special;
+}
+
+location ~ ^/(interview)?[-\s_]?coaching/?$ {
+	rewrite ^ https://calendar.app.google/wFcdLrn5gVrtXxGH9;
+}
 
 location ~ ^/clocktower/?$ {
 	rewrite ^ https://docs.google.com/document/d/1beiRzKeuoXST8Ogsd0Ds_shWuNoEjSV2LzrfKIGQgWw/edit;
@@ -212,9 +228,15 @@ location ~ ^/casino[\s_\-]?(r|R)ules/?$ {
     rewrite ^ https://docs.google.com/document/d/1qRSLBCpJ_jK0SVDWbkkV-GcR9bHb_l7k_TwVkNOOB-Y;
 }
 
-location ~ ^/(charity|casino|charity_casino|charity-casino)/?$ {
+location ~ ^/(casino|charity_casino|charity-casino)/?$ {
     rewrite ^ https://partiful.com/e/s70K4M5uB3NoqxCjyL0M;
+    #rewrite ^ https://casino.marktai.com/;
 }
+
+location ~ ^/charity/?$ {
+    rewrite ^ https://casino.marktai.com/;
+    #rewrite ^ https://forms.gle/QeMPbmpA5xKDQ5yD7;
+} 
 
 location ~ ^/[aeiou]t[aeiou]n[aeiou]rary/?$ {
     rewrite ^ https://calendar.google.com/calendar/embed?src=c_819818c8dc2d6a15e8f6090aec437c7d6255764eb527e72927005cae3d2e523a%40group.calendar.google.com&ctz=America%2FLos_Angeles;
@@ -222,4 +244,16 @@ location ~ ^/[aeiou]t[aeiou]n[aeiou]rary/?$ {
 
 location ~ ^/travel/?$ {
     rewrite ^ https://www.marktai.com/#/posts#Examining%20How%20I%20Travel;
+}
+
+location ~ ^/(sb|sb_?glory_?tour|santa_?barbara)/?$ {
+    rewrite ^ https://splitlimes.marktai.com/groups/yBbHZzr4Mz8y0ysybTcr7;
+}
+
+location ~ ^/(business)?[\s_-]?card/?$ {
+    rewrite ^ https://www.marktai.com/download/business_card.png;
+}
+
+location ~ ^/casino[\s_-]?(cocktails?|drinks?)/?$ {
+    rewrite ^ https://download.marktai.com/casino_cocktails.png;
 }

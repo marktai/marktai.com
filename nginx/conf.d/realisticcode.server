@@ -1,0 +1,93 @@
+
+server {    
+        server_name verygoodcodingproblems.com *.verygoodcodingproblems.com boardgamecode.com *.boardgamecode.com www.realisticcode.com realisticcode.com;
+    listen 80;
+
+
+    location / {
+        rewrite ^ https://realisticcode.com//$request_uri?;
+    }
+}
+
+server {    
+    server_name ~^(?<subdomain>\w+)\.realisticcode\.com;
+    listen 80;
+
+
+    location / {
+        rewrite ^ https://realisticcode.com/$subdomain/$request_uri?;
+    }
+}
+
+server {    
+    server_name ~^(?<subdomain>\w+)\.verygoodcodingproblems\.com;
+    listen 80;
+
+
+    location / {
+        rewrite ^ https://realisticcode.com/$subdomain/$request_uri?;
+    }
+}
+
+server {    
+    server_name ~^(?<subdomain>\w+)\.boardgamecode\.com;
+    listen 80;
+
+
+    location / {
+        rewrite ^ https://realisticcode.com/$subdomain/$request_uri?;
+    }
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name realisticcode.com;
+    # Listen on ipv6.
+    # Note: this setting listens on both ipv4 and ipv6 with Nginx release
+    #       shipped in some Linux/BSD distributions.
+
+    ssl_certificate /etc/letsencrypt/live/realisticcode.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/realisticcode.com/privkey.pem; # managed by Certbot
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+
+    # Fix 'The Logjam Attack'.
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA;
+    ssl_prefer_server_ciphers on;
+    ssl_dhparam /etc/ssl/dhparams.pem;
+    ssl_session_cache shared:SSL:10m;
+				location ~ /pre[-_\s]?work/? {
+								rewrite ^ https://docs.google.com/document/d/17JNPWfwoZ_3zgErUQgGx-0swDjPrtsBAIkynHVU_DUo/edit#heading=h.2h8yo6qxcp1f;
+				}
+    location / {
+    	rewrite ^ https://docs.google.com/document/d/1woqW0nZE8X1U77IGEU-nfRJ8mEeIBlaQGQFmI1ZvTIM/edit;
+    }
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name ~^(?<subdomain>\w+)\.realisticcode\.com;
+    # Listen on ipv6.
+    # Note: this setting listens on both ipv4 and ipv6 with Nginx release
+    #       shipped in some Linux/BSD distributions.
+
+    ssl_certificate /etc/letsencrypt/live/wildcard.realisticcode.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/wildcard.realisticcode.com/privkey.pem; # managed by Certbot
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+
+    # Fix 'The Logjam Attack'.
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA;
+    ssl_prefer_server_ciphers on;
+    ssl_dhparam /etc/ssl/dhparams.pem;
+    ssl_session_cache shared:SSL:10m;
+    if ($subdomain ~ "nossl") {
+return 404;
+}
+    location /.well-known/acme-challenge/ {
+ 				root /var/www/certbot;
+    } 
+    location / {
+        rewrite ^ https://realisticcode.com/$subdomain/$request_uri?;
+    }
+}
