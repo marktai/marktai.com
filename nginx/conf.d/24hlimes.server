@@ -1,4 +1,3 @@
-
 server {
 	listen 80;
 	server_name 24hourlimes.com www.24hourlimes.com twentyfourhourlimes.com *.24hourlimes.com *.twentyfourhourlimes.com 24hlimes.com *.24hlimes.com;
@@ -10,70 +9,6 @@ server {
 								rewrite ^ https://24hlimes.com/#/menu;
 				}
     
-    location / {
-    	rewrite ^ https://24hlimes.com$request_uri?;
-    }
-}
-
-# HTTPS
-server {
-    # Listen on ipv4
-    listen 443 ssl;
-    # Listen on ipv6.
-    # Note: this setting listens on both ipv4 and ipv6 with Nginx release
-    #       shipped in some Linux/BSD distributions.
-    listen [::]:443 ssl;
-    server_name 24hlimes.com; 
-
-    ssl_certificate /etc/letsencrypt/live/24hlimes.com/fullchain.pem; # managed by Certbot
-    ssl_certificate_key /etc/letsencrypt/live/24hlimes.com/privkey.pem; # managed by Certbot
-    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-
-    # Fix 'The Logjam Attack'.
-    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA;
-    ssl_prefer_server_ciphers on;
-    ssl_dhparam /etc/ssl/dhparams.pem;
-    ssl_session_cache shared:SSL:10m;
-
-
-    gzip            on;
-    gzip_min_length 1000;
-    gzip_proxied    any;
-    gzip_types      text/plain text/css  application/x-javascript; #text/html implied
-
-					location / {
-						proxy_pass https://www.marktai.com/;
-						proxy_http_version 1.1;
-						proxy_set_header Upgrade $http_upgrade;
-						proxy_set_header Connection $connection_upgrade;
-					}
-}
-
-# HTTPS
-server {
-    # Listen on ipv4
-    listen 443 ssl;
-    # Listen on ipv6.
-    # Note: this setting listens on both ipv4 and ipv6 with Nginx release
-    #       shipped in some Linux/BSD distributions.
-    listen [::]:443 ssl;
-    server_name 24hourlimes.com; 
-
-    ssl_certificate /etc/letsencrypt/live/24hourlimes.com/fullchain.pem; # managed by Certbot
-    ssl_certificate_key /etc/letsencrypt/live/24hourlimes.com/privkey.pem; # managed by Certbot
-    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-
-    # Fix 'The Logjam Attack'.
-    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA;
-    ssl_prefer_server_ciphers on;
-    ssl_dhparam /etc/ssl/dhparams.pem;
-    ssl_session_cache shared:SSL:10m;
-
-
-    gzip            on;
-    gzip_min_length 1000;
-    gzip_proxied    any;
-    gzip_types      text/plain text/css  application/x-javascript; #text/html implied
     location / {
     	rewrite ^ https://24hlimes.com$request_uri?;
     }
@@ -107,4 +42,65 @@ server {
     location / {
     	rewrite ^ https://24hlimes.com$request_uri?;
     }
+}
+
+
+# HTTPS
+server {
+    # Listen on ipv4
+    listen 443 ssl;
+    # Listen on ipv6.
+    # Note: this setting listens on both ipv4 and ipv6 with Nginx release
+    #       shipped in some Linux/BSD distributions.
+    listen [::]:443 ssl;
+    server_name 24hourlimes.com; 
+
+    ssl_certificate /etc/letsencrypt/live/24hourlimes.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/24hourlimes.com/privkey.pem; # managed by Certbot
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+
+    # Fix 'The Logjam Attack'.
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA;
+    ssl_prefer_server_ciphers on;
+    ssl_dhparam /etc/ssl/dhparams.pem;
+    ssl_session_cache shared:SSL:10m;
+
+
+    gzip            on;
+    gzip_min_length 1000;
+    gzip_proxied    any;
+    gzip_types      text/plain text/css  application/x-javascript; #text/html implied
+    location / {
+    	rewrite ^ https://24hlimes.com$request_uri?;
+    }
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443 ssl;
+    server_name 24hlimes.com;
+    # Listen on ipv6.
+    # Note: this setting listens on both ipv4 and ipv6 with Nginx release
+    #       shipped in some Linux/BSD distributions.
+
+    ssl_certificate /etc/letsencrypt/live/24hlimes.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/24hlimes.com/privkey.pem; # managed by Certbot
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+
+    # Fix 'The Logjam Attack'.
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA256:DHE-RSA-AES256-SHA256:DHE-DSS-AES256-SHA:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA;
+    ssl_prefer_server_ciphers on;
+    ssl_dhparam /etc/ssl/dhparams.pem;
+    ssl_session_cache shared:SSL:10m;
+				location / {
+
+						include /etc/nginx/mime.types;
+						gzip            on;
+						gzip_min_length 100;
+						gzip_proxied    any;
+						gzip_types      text/plain text/css  application/x-javascript application/javascript; #text/html implied
+						root /home/mtai/repos/marktai.com/upload/24hlimes/out;
+						error_page 404 /index.html;
+						autoindex on;
+				}
 }

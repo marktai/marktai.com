@@ -79,12 +79,6 @@ location ~ ^/sheet[-_\s]?music/?$ {
 	rewrite ^ https://www.marktai.com/download/music/;
 }
 
-location ~ ^/mootropolis/?$ {
-	#rewrite ^ https://www.figma.com/file/tusfaXEL2YVVAI4TvsslZo/Cocktail-Board-Game-Menu?node-id=0%3A1;
-	# rewrite ^ https://www.marktai.com/download/menu.pdf;
-	rewrite ^ https://www.marktai.com/#/mootropolis;
-}
-
 location ~ ^/(board)?[-_\s]?games?/?$ {
   rewrite ^ https://docs.google.com/document/d/1H15fxfinxo-sc3lZBKZwNqvmJK0dKC8guwLZmPLcvqo;
   # rewrite ^ https://www.marktai.com/mootropolis;
@@ -142,6 +136,10 @@ location ~ ^/burger/?$ {
 
 location ~ ^/mantu/?$ {
 	rewrite ^ https://www.marktai.com/download/me/mantu.html;
+}
+
+location ~ ^/mantu[-\s_]?dinner/?$ {
+	rewrite ^ https://docs.google.com/document/d/1sQCOoa_Ia6Zvzf3HbrRLSLfhpVUhQaWKL7fDa8AuexE/edit?tab=t.0;
 }
 
 location ~ ^/pork[-\s_]?shoulder/?$ {
@@ -256,4 +254,12 @@ location ~ ^/(business)?[\s_-]?card/?$ {
 
 location ~ ^/casino[\s_-]?(cocktails?|drinks?)/?$ {
     rewrite ^ https://download.marktai.com/casino_cocktails.png;
+}
+
+location ~ ^/(not)?.?drowning/?$ {
+				rewrite ^ https://www.marktai.com/download/me/not_drowning_kid.mp4;
+}
+
+location ~ ^/(entry|address|directions?)/?$ {
+				rewrite ^ https://www.marktai.com/download/entry/;
 }
