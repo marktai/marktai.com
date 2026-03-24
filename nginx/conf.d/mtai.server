@@ -35,8 +35,8 @@ server {
     listen [::]:443 ssl;
     server_name mtai.io; 
 
-    ssl_certificate /etc/letsencrypt/live/mtai.io/fullchain.pem; # managed by Certbot
-    ssl_certificate_key /etc/letsencrypt/live/mtai.io/privkey.pem; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/wildcard.mtai.io/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/wildcard.mtai.io/privkey.pem;
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 
     # Fix 'The Logjam Attack'.

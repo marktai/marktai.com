@@ -21,7 +21,11 @@ location / {
 	add_header Cache-Control "public";
 	root /home/mtai/repos/marktai.com;
         include /etc/nginx/mime.types;
-	location ~ ^/$ {
+	location / {
+	    rewrite  ^ https://blog.marktai.com/;
+    
+	}
+	location ~ ^/.$ {
 		index /pages/global/index.html;
 	}
 }

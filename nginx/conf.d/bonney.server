@@ -53,11 +53,49 @@ server {
                 proxy_set_header Upgrade $http_upgrade;                                   
                 proxy_set_header Connection $connection_upgrade;                          
         }
-        ssl_certificate /etc/letsencrypt/live/www.bonneyruan.com/fullchain.pem; # managed by Certbot
-        ssl_certificate_key /etc/letsencrypt/live/www.bonneyruan.com/privkey.pem; # managed by Certbot
+        ssl_certificate /etc/letsencrypt/live/bonneyruan.com/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/bonneyruan.com/privkey.pem;
         include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
         ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
 }
+server {
+        listen 443 ssl;
+        server_name bonney.design;
+        gzip off;
+
+        include conf.d/letsencrypt_challenge.conf;
+
+        location / {
+                proxy_pass https://bonneyruan.github.io;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection $connection_upgrade;
+        }
+        ssl_certificate /etc/letsencrypt/live/bonney.design/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/bonney.design/privkey.pem;
+        include /etc/letsencrypt/options-ssl-nginx.conf;
+        ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+}
+
+server {
+        listen 443 ssl;
+        server_name www.bonney.design;
+        gzip off;
+
+        include conf.d/letsencrypt_challenge.conf;
+
+        location / {
+                proxy_pass https://bonneyruan.github.io;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection $connection_upgrade;
+        }
+        ssl_certificate /etc/letsencrypt/live/bonney.design/fullchain.pem;
+        ssl_certificate_key /etc/letsencrypt/live/bonney.design/privkey.pem;
+        include /etc/letsencrypt/options-ssl-nginx.conf;
+        ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+}
+
 server {
         listen 80;
         server_name hangouts.bonneyruan.com;

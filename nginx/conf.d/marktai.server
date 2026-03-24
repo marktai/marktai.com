@@ -72,8 +72,8 @@ server {
     listen [::]:443 ssl;
     server_name www.marktai.com; 
 
-    ssl_certificate /etc/letsencrypt/live/www.marktai.com/fullchain.pem; # managed by Certbot
-    ssl_certificate_key /etc/letsencrypt/live/www.marktai.com/privkey.pem; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/marktai.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/marktai.com/privkey.pem;
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 
     # Fix 'The Logjam Attack'.
@@ -121,8 +121,8 @@ server {
     #       shipped in some Linux/BSD distributions.
     listen [::]:443 ssl;
 
-    ssl_certificate /etc/letsencrypt/live/marktai.com-0001/fullchain.pem; # managed by Certbot
-    ssl_certificate_key /etc/letsencrypt/live/marktai.com-0001/privkey.pem; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/marktai.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/marktai.com/privkey.pem;
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 
     # Fix 'The Logjam Attack'.

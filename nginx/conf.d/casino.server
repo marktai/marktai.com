@@ -42,7 +42,7 @@ server {
     ssl_dhparam /etc/ssl/dhparams.pem;
     ssl_session_cache shared:SSL:10m;
 				location / {
-								rewrite ^ https://www.marktai.com/#/posts#Charity%20Casino%20Night!;
+								rewrite ^ https://blog.marktai.com/blog/casino;
 				}
 				location /leaderboard {
 								rewrite ^ https://casino-leaderboard.marktai.com;

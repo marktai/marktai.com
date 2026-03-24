@@ -47,8 +47,8 @@ server {
     # Note: this setting listens on both ipv4 and ipv6 with Nginx release
     #       shipped in some Linux/BSD distributions.
 
-    ssl_certificate /etc/letsencrypt/live/realisticcode.com/fullchain.pem; # managed by Certbot
-    ssl_certificate_key /etc/letsencrypt/live/realisticcode.com/privkey.pem; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/wildcard.realisticcode.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/wildcard.realisticcode.com/privkey.pem;
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 
     # Fix 'The Logjam Attack'.

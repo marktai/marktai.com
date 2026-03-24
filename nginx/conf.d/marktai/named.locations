@@ -48,7 +48,7 @@ location ~ ^/upload/?$ {
 }
 
 location ~ ^/interview(ing)?/?$ {
-	rewrite ^ https://www.marktai.com/#interviewing/;
+	rewrite ^ https://blog.marktai.com/blog/interviewing;
 }
 
 location ~ ^/bomb/?$ {
@@ -72,7 +72,7 @@ location ~ ^/dots/?$ {
 }
 
 location ~ ^/music/?$ {
-	rewrite ^ https://www.marktai.com/#/posts#Jazzy%20Time%20with%20Mark;
+	rewrite ^ https://blog.marktai.com/blog/music;
 }
 
 location ~ ^/sheet[-_\s]?music/?$ {
@@ -87,7 +87,7 @@ location ~ ^/(board)?[-_\s]?games?/?$ {
 location ~ ^/menu/?$ {
 	#rewrite ^ https://www.figma.com/file/tusfaXEL2YVVAI4TvsslZo/Cocktail-Board-Game-Menu?node-id=0%3A1;
 	# rewrite ^ https://www.marktai.com/download/menu.pdf;
-	rewrite ^ https://www.marktai.com/#/menu;
+	rewrite ^ https://24hourlimes.com;
 }
 
 
@@ -167,11 +167,11 @@ location ~ ^/24-hour-limes/?$ {
 }
 
 location ~ ^/diving/?$ {
-	rewrite ^ https://www.marktai.com/#diving;
+	rewrite ^ https://blog.marktai.com/blog/scuba_course;
 }
 
 location ~ ^/dive[\s\.-]?(with)?/?$ {
-	rewrite ^ https://www.marktai.com/#diving;
+	rewrite ^ https://blog.marktai.com/blog/scuba_course;
 }
 
 location ~ ^/schedule/?$ {
@@ -241,7 +241,7 @@ location ~ ^/[aeiou]t[aeiou]n[aeiou]rary/?$ {
 }
 
 location ~ ^/travel/?$ {
-    rewrite ^ https://www.marktai.com/#/posts#Examining%20How%20I%20Travel;
+    rewrite ^ https://blog.marktai.com/blog/travel_retro;
 }
 
 location ~ ^/(sb|sb_?glory_?tour|santa_?barbara)/?$ {
@@ -262,4 +262,8 @@ location ~ ^/(not)?.?drowning/?$ {
 
 location ~ ^/(entry|address|directions?)/?$ {
 				rewrite ^ https://www.marktai.com/download/entry/;
+}
+
+location ~ ^/(dinners?|events?)/?$ {
+				rewrite ^ https://docs.google.com/spreadsheets/d/1Pe7vnTlLAyzBuOn7HjEibHVjZ2g-tv1BDtVV4RJWUXU/;
 }
