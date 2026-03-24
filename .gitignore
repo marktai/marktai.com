@@ -5,6 +5,7 @@ frontend/upload
 log.txt
 bower_components
 creds
+acme/.env
 data
 dataold
 data_copy
